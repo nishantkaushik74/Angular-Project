@@ -1,0 +1,151 @@
+<c-card class="mb-4">
+  <c-card-body>
+    <c-header-nav style="background-color:rgb(142, 158, 173);height:auto; padding: 2px 2px 2px 2px;">
+      <h1 style="text-align: center; color:rgb(255, 255, 255); font-family: 'Times New Roman', Times, serif;">Questions
+      </h1>
+
+      <button type="button" class="btn btn-link" style="margin-left: auto;" data-toggle="modal" data-target="#exampleModalAdd"><i class="fas fa-plus">Add Questions</i>
+      </button>
+    </c-header-nav>
+  </c-card-body>
+  <c-card-body>
+    <table class="table table-hover" style="border: 5px;">
+      <thead class="thead-light" style="font-family: 'Times New Roman';background-color: rgb(212, 211, 211);">
+        <tr>
+          <th scope="col">Sr.no</th>
+          <th scope="col">Questions</th>
+          <th scope="col">Options</th>
+          <th scope="col">Active</th>
+
+        </tr>
+      </thead>
+      <tbody>
+          <!-- // *ngFor="let Question of QuestionList; let i = index" -->
+          <tr> 
+          <th scope="row">1</th>
+
+          <td field="Question" title="Question">What is HTML?</td>
+          <td field="options" title="subject-code">
+            <ul>
+              <ol type="none">
+                <li><input type="radio" name="option1" id="option1">HTML is a Markup Language.</li>
+                <li><input type="radio" name="option1" id="option2">HTML is a programming Language.</li>
+                <li><input type="radio" name="option1" id="option3">HTML is a scripting Language.</li>
+                <li><input type="radio" name="option1" id="option4">HTML is a High level Language</li>
+              </ol>
+            </ul>
+          </td>
+          <td>
+
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalEditRecord"><i
+                class="fas fa-pen"></i>
+              Edit
+            </button>&nbsp;
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalDelete"><i
+                class="fas fa-trash"></i>
+              Delete
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </c-card-body>
+</c-card>
+
+<!-- Edit Dialogue box -->
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModalEditRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Record</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="formUserData">
+                  <div class="form-group">
+                    <label for="Questions">Question</label>
+                  <input type="text" placeholder="Questions" class="form-control"formControlName="Questions"/>
+                  <label for="Options">Options</label>
+                  <input type="text" placeholder="Option1" class="form-control" formControlName="Option1"/><br>
+                  <input type="text" placeholder="Option2" class="form-control" formControlName="Option2"/><br>
+                  <input type="text" placeholder="Option3" class="form-control" formControlName="Option3"/><br>
+                  <input type="text" placeholder="Option4" class="form-control" formControlName="Option4"/><br>
+                </div>
+                 </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="editRecord()">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add Dialogue box -->
+       <!-- Modal -->
+   <div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Subject</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formUserData">
+            <div class="form-group">
+              <label for="Questions">Question</label>
+            <input type="text" placeholder="Questions" class="form-control"formControlName="Questions"/>
+            <label for="Options">Options</label>
+            <input type="text" placeholder="Option1" class="form-control" formControlName="Option1"/><br>
+            <input type="text" placeholder="Option2" class="form-control" formControlName="Option2"/><br>
+            <input type="text" placeholder="Option3" class="form-control" formControlName="Option3"/><br>
+            <input type="text" placeholder="Option4" class="form-control" formControlName="Option4"/><br>
+          </div>
+           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="add()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+     
+  <!-- Delete Dialogue box -->
+       <!-- Modal -->
+       <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formUserData">
+                <div class="form-group">
+                  <label for="Questions">Question</label>
+                <input type="text" placeholder="Questions" class="form-control"formControlName="Questions"/>
+                <label for="Options">Options</label>
+                <input type="text" placeholder="Option1" class="form-control" formControlName="Option1"/><br>
+                <input type="text" placeholder="Option2" class="form-control" formControlName="Option2"/><br>
+                <input type="text" placeholder="Option3" class="form-control" formControlName="Option3"/><br>
+                <input type="text" placeholder="Option4" class="form-control" formControlName="Option4"/><br>
+              </div>
+               </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="add()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ 
