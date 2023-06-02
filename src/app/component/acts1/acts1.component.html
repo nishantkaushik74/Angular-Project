@@ -5,20 +5,24 @@
     </button>
   </div>
   <br />
-
   <div>
     <div *ngFor="let item of data1">
-      <app-card >
-        <h2 style="margin:10px;">{{ item.id }}. {{ item.name_of_act }}</h2>
+      <app-card>
+        <div class="card_div">
+          <h2 style="margin: 10px">{{ item.id }}. {{ item.name_of_act }}</h2>
+          <div>
+            <i class="fa-solid fa-pen-to-square" (click)="updateAct(item)" ></i>
+            <i class="fa-solid fa-trash" (click)="deleteAct(item)"></i>
+          </div>
+        </div>
       </app-card>
-      <br>
+      <br />
     </div>
 
     <ng-container *ngIf="isCardOpen">
       <app-modal
         class="card-container"
         (formDataEvent)="handleFormData($event)"
-        [data]="parentData"
         (hideChildEvent)="hideChild()"
       >
       </app-modal>

@@ -89,7 +89,7 @@ export class SignUPService {
   }
 
   async getTableData(name_of_table: string): Promise<any> {
-    const { data, error } = await this.supabase.from("Act").select('*')
+    const { data, error } = await this.supabase.from(name_of_table).select('*')
     if (error) {
       throw new Error('An error occurred while fetching user information');
     }
@@ -97,17 +97,28 @@ export class SignUPService {
       return data;
     }
   }
-
-
   async insertData(name_of_table: string, formData: any): Promise<any> {
-    console.log("🚀 ~ file: sign-up.service.ts:103 ~ SignUPService ~ insertData ~ formData:", formData)
-
-    const { error } = await this.supabase.from("Act").insert({ name_of_act: formData, userid: this.userIdString.user.id })
-    console.log("🚀 ~ file: sign-up.service.ts:106 ~ SignUPService ~ insertData ~ error:", error)
-
-
+    console.log("🚀 ~ file: sign-up.service.ts:101 ~ SignUPService ~ insertData ~ formData:", formData)
+    const { error } = await this.supabase.
+    from(name_of_table).
+    insert({ 
+      userid: this.userIdString.user.id,
+      name_of_act: formData.name_of_act, 
+      subject_section:formData.name_of_section,
+      condition:formData.subsection,
+      subsection_name:formData.subSectionName,
+      data:formData.data,
+     })
   }
 
+
+
+  async deleteRow(name_of_table: string, formData: any): Promise<any> {
+    const { error } = await this.supabase
+    .from(name_of_table)
+    .delete()
+    .eq('id', formData.id)
+  }
 }
 
 

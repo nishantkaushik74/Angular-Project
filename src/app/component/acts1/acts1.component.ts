@@ -1,4 +1,5 @@
-import { Component,ChangeDetectorRef  } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { log } from 'console';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 @Component({
@@ -7,45 +8,43 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
   styleUrls: ['./acts1.component.scss']
 })
 export class Acts1Component {
-
   isCardOpen = false;
-  parentData = {}
-  data1 : any;
+  data1: any;
 
   constructor(
     private _apiService: SignUPService,
     private cdr: ChangeDetectorRef
   ) { }
-
-  async ngOnInit(){
-    
+  async ngOnInit() {
     try {
       const data = await this._apiService.getTableData("Act");
       this.data1 = data;
-      
+
     } catch (error) {
-    console.log("🚀 ~ file: acts1.component.ts:20 ~ Acts1Component ~ ngOnInit ~ error:", error)
+      console.log("🚀 ~ file: acts1.component.ts:20 ~ Acts1Component ~ ngOnInit ~ error:", error)
     }
   }
-
-
   addActHandler() {
     this.isCardOpen = true;
-    this.parentData = {
-      question: "Please enter name of the act ?",
-      button1: "Enter",
-    }
+
   }
-  //changes
   async handleFormData(formData: any) {
-    
-    try {
-      const data =await this._apiService.insertData("Act",formData.actName)
-    } catch (error) {
-    }
+    try { const data = await this._apiService.insertData("Act", formData) } catch (error) { }
+    this.hideChild()
     this.ngOnInit()
   }
   hideChild(): void {
     this.isCardOpen = false;
+  }
+  async deleteAct(item: any) {
+    try {
+      const data = await this._apiService.deleteRow("Act", item); 
+      console.log(data);
+    } catch (error) { }
+    this.ngOnInit()
+  }
+  updateAct(item: any) {
+    console.log('Updating item:', item);
+    
   }
 }
