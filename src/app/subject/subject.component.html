@@ -1,0 +1,140 @@
+<c-card class="mb-4">
+    <c-card-body>
+        <c-header-nav style="background-color:rgb(142, 158, 173);height:auto; padding: 2px 2px 2px 2px;"> <h1 style="text-align: center; color:rgb(255, 255, 255); font-family: 'Times New Roman', Times, serif;">Subject List</h1>
+            
+          <button type="button" class="btn btn-link" style="margin-left: auto;" data-toggle="modal" data-target="#exampleModalAdd"><i class="fas fa-plus">Add Subject</i>
+          </button>
+        </c-header-nav> 
+     </c-card-body>
+     <c-card-body>
+        <table class="table table-hover" style="border: 5px;" *ngIf="subjectData && subjectData.length > 0" >
+            <thead class="thead-light" style="font-family: 'Times New Roman';background-color: rgb(212, 211, 211);">
+              <tr>
+                <th scope="col">Sr.no </th>
+                <th scope="col">Subject Name</th>
+                <th scope="col">Subject code</th>
+                <th scope="col">Active</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor="let details of subjectData">
+                <!-- <th scope="row">1</th> -->
+                <td>{{details.id}}</td>
+                <td><a>{{details.subName}}</a></td>
+                <td>{{details.subCode}}</td>
+
+                <td>
+                    <button type="button" class="btn btn-secondary" (click)="onEditRecord(details)"data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-pen"></i>
+                        Edit
+                      </button>&nbsp;
+                      <button type="button"  class="btn btn-secondary" (click)="deleteSubject(details)"><i class="fas fa-trash"></i>
+                        Delete
+                      </button>
+                    
+                </td>
+              </tr>
+              </tbody>
+        </table>
+     </c-card-body>
+     </c-card>   
+
+<!-- Edit Dialogue box -->
+     <!-- Modal -->
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Edit Record</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="userForm">
+              <div class="form-group">
+                <input type="number" placeholder="Id" class="form-control"formControlName="Id"/>
+                </div>
+                <div class="form-group">
+                <input type="text" placeholder="Subject Name" class="form-control"formControlName="subName"/>
+                </div>
+                <div class="form-group">
+                <input type="text" placeholder="subjectCode" class="form-control" formControlName="subCode"/>
+                </div>
+               </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="update()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <!-- Add Dialogue box -->
+     <!-- Modal -->
+       <div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="userForm">
+            <!-- <div class="form-group">
+              <input type="number" placeholder="Id" class="form-control"formControlName="Id"/>
+              </div> -->
+              <div class="form-group">
+              <input type="text" placeholder="SubjectName" class="form-control"formControlName="subName"/>
+              </div>
+              <div class="form-group">
+              <input type="text" placeholder="subjectId" class="form-control" formControlName="subCode"/>
+              </div>
+             </form>
+            </div>
+      <div class="modal-footer">
+        <button type="button"id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="postSubjectDetails()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+  <!-- Delete Dialogue box -->
+     <!-- Modal -->
+     <!-- <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="userForm">
+                <div class="form-group">
+                  <input type="number" placeholder="Id" class="form-control"formControlName="Id"/>
+                  </div>
+                  <div class="form-group">
+                  <input type="text" placeholder="Subject Name" class="form-control"formControlName="subName"/>
+                  </div>
+                  <div class="form-group">
+                  <input type="text" placeholder="subject Id" class="form-control" formControlName="subCode"/>
+                  </div>
+                 </form>
+          </div>
+          <div class="modal-footer" >
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="deleteSubject(details)">Delete</button>  
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+  

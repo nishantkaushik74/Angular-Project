@@ -1,0 +1,28 @@
+<div>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="addActHandler()">
+      Add Acts
+    </button>
+  </div>
+  <br />
+
+  <div>
+    <div *ngFor="let item of data1">
+      <app-card >
+        <h2 style="margin:10px;">{{ item.id }}. {{ item.name_of_act }}</h2>
+      </app-card>
+      <br>
+    </div>
+
+    <ng-container *ngIf="isCardOpen">
+      <app-modal
+        class="card-container"
+        (formDataEvent)="handleFormData($event)"
+        [data]="parentData"
+        (hideChildEvent)="hideChild()"
+      >
+      </app-modal>
+    </ng-container>
+  </div>
+  <br />
+</div>

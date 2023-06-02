@@ -1,0 +1,13 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <button type="button" class="btn-close" (click)="closeBox()"></button>
+    <app-card>
+      <form cForm #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
+        <h3>{{ data.question }}</h3>
+        <input type="text" ngModel required id="actName" name="actName" />
+        <button class="btn btn-dark" type="submit">{{ data.button1 }}</button>
+      </form>
+    </app-card>
+    <ng-content></ng-content>
+  </div>
+</div>

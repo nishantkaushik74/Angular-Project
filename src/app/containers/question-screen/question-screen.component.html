@@ -1,0 +1,12 @@
+<h2>Answer Screen</h2>
+<div class="question-container" *ngFor="let data of postquestion">
+  <h5>
+    <p><b> Question : </b>{{data.question}}</p>
+  </h5>
+  <textarea name="" id="" cols="140" rows="4" placeholder="Type Reply here" class="answer-textarea"
+    [(ngModel)]="modelAnswer.answer"></textarea>
+  <br><br>
+  <button class="btn btn-primary" (click)="post()">Answer</button>
+  <a routerLink="/comment" class="back-link" style="float: right;">Back</a>
+</div>
+<!-- <router-outlet></router-outlet> -->
