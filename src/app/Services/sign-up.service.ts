@@ -3,6 +3,7 @@ import { SupabaseClient, AuthChangeEvent, PostgrestResponse, PostgrestSingleResp
 import { SignUpModel } from '../Model/signUp';
 import { v4 as uuidv4 } from 'uuid';
 import { userInfo } from 'os';
+import { log } from 'console';
 
 
 @Injectable({
@@ -88,36 +89,66 @@ export class SignUPService {
     }
   }
 
-  async getTableData(name_of_table: string): Promise<any> {
-    const { data, error } = await this.supabase.from(name_of_table).select('*')
-    if (error) {
-      throw new Error('An error occurred while fetching user information');
+  async getTableData(name_of_table: string, actname: any): Promise<any> {
+    if (!actname || actname === null || actname === "null") {
+      console.log("Working");
+
+      const { data, error } = await this.supabase
+        .from(name_of_table)
+        .select('*')
+        .is('parent_id', actname);
+      if (error) {
+        console.log("🚀 ~ file: sign-up.service.ts:99 ~ SignUPService ~ getTableData ~ error:", error)
+        // throw new Error(error);
+      }
+      if (data) {
+        return data;
+      }
     }
-    if (data) {
-      return data;
+    if (actname) {
+      // console.log("Working2");
+      const { data, error } = await this.supabase
+        .from(name_of_table)
+        .select('*')
+        .eq('parent_id', 1)
+        .eq('name_of_act', actname);
+      if (data) {
+        return data;
+      }
+      if (error) {
+        console.log(error.message)
+      }
     }
   }
-  async insertData(name_of_table: string, formData: any): Promise<any> {
-    console.log("🚀 ~ file: sign-up.service.ts:101 ~ SignUPService ~ insertData ~ formData:", formData)
-    const { error } = await this.supabase.
-    from(name_of_table).
-    insert({ 
-      userid: this.userIdString.user.id,
-      name_of_act: formData.name_of_act, 
-      subject_section:formData.name_of_section,
-      condition:formData.subsection,
-      subsection_name:formData.subSectionName,
-      data:formData.data,
-     })
+  async insertData(name_of_table: string, formData: any, subject_section: any): Promise<any> {
+
+
+    if (formData && subject_section === null) {
+      console.log("Working");
+      const { error } = await this.supabase.
+        from(name_of_table).
+        insert({
+          userid: this.userIdString.user.id,
+          name_of_act: formData.data,
+        })
+    }
+    if (subject_section && formData === null) {
+      const { error } = await this.supabase.
+        from(name_of_table).
+        insert({
+          userid: this.userIdString.user.id,
+          name_of_act: subject_section.actName,
+          subject_section: subject_section.data,
+          parent_id: 1
+        })
+    }
+
   }
-
-
-
   async deleteRow(name_of_table: string, formData: any): Promise<any> {
     const { error } = await this.supabase
-    .from(name_of_table)
-    .delete()
-    .eq('id', formData.id)
+      .from(name_of_table)
+      .delete()
+      .eq('id', formData.id)
   }
 }
 

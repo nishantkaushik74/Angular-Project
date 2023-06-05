@@ -28,10 +28,8 @@ export class QuestionScreenComponent {
   router: any;
 
   constructor(private _questionscreen: QuestionScreenService, private route: ActivatedRoute) {
-    debugger;
     (async () => {
       try {
-        debugger;
         let id = '';
         this.route.params.subscribe(params => {
           id = params['id'];
@@ -54,7 +52,6 @@ export class QuestionScreenComponent {
   }
 
   post() {
-    debugger;
     const userData = JSON.parse(localStorage.getItem('user')!) as any;
     this.modelAnswer.userid = userData.user.id;
     this.modelAnswer.id = uuidv4();

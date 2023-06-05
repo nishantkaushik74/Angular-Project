@@ -65,6 +65,7 @@ import { environment } from '../environments/environment';
 import { Acts1Component } from './component/acts1/acts1.component';
 import { CardComponent } from './component/card/card.component';
 import { ModalComponent } from './component/modal/modal.component';
+import { SubjectSectionComponent } from './component/subject-section/subject-section.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -91,7 +92,8 @@ const APP_CONTAINERS = [
     ProfileComponent,
     Acts1Component,
     CardComponent,
-    ModalComponent
+    ModalComponent,
+    SubjectSectionComponent
   ],
   imports: [
     BrowserModule,

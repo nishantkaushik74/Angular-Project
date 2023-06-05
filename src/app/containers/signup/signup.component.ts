@@ -46,7 +46,6 @@ export class SignupComponent {
   
     this._apiService.signUp(this.formsignup.value)
       .then((data) => {
-        debugger;
         console.log('Sign up successful!', data);
         localStorage.setItem('userinformation',JSON.stringify(data));
         alert('Sign up successful!');

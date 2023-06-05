@@ -15,6 +15,7 @@ import { ActsComponent } from 'src/app/containers/default-layout/acts/acts.compo
 import { AuthGuard } from 'src/app/containers/login/auth.guard';
 import { ProfileComponent } from './component/profile/profile.component';
 import { Acts1Component } from './component/acts1/acts1.component';
+import { SubjectSectionComponent } from './component/subject-section/subject-section.component';
 const routes: Routes = [
   {
     path: '',
@@ -38,10 +39,16 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
-      { component: ProfileComponent,
-         path: 'profile', 
-         canActivate: [AuthGuard] 
-        },
+      {
+        component: ProfileComponent,
+        path: 'profile',
+        canActivate: [AuthGuard]
+      },
+      {
+        component: SubjectSectionComponent,
+        path: `gst/act/:id/:name`,
+        // canActivate: [AuthGuard]
+      },
 
       {
         path: 'theme',

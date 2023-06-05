@@ -7,7 +7,8 @@ import { NgForm } from '@angular/forms';
 })
 export class ModalComponent {
   subsection: boolean = false;
-  @Input() FormData: any;
+  @Input() formData: any;
+  @Input() headings: any;
   @Output() hideChildEvent = new EventEmitter<void>();
   @Output() formDataEvent = new EventEmitter<any>();
   actName = "";
@@ -17,5 +18,7 @@ export class ModalComponent {
 }
   closeBox() {    
     this.hideChildEvent.emit();
+    console.log("🚀 ~ file: modal.component.ts:12 ~ ModalComponent ~ headings:", this.headings)
+
   }
 }

@@ -26,7 +26,6 @@ export class SubjectComponent  implements OnInit
 constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceService){debugger;
   
 //  this._Service.getAllSubject().subscribe({next:(sub)=>{
-//   debugger;
 //   this.subject=sub;
 //   console.log(sub);
 //  },
@@ -36,7 +35,6 @@ constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceServi
 //   });
 }
   ngOnInit(): void {
-    debugger;
     this.userForm=this.formBuilder.group({
       Id:[''],
       subCode: [''],
@@ -46,7 +44,6 @@ constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceServi
   }
 
  postSubjectDetails(){
-  debugger;
    this.SubjectModelObj.Id=0 ;
    this.SubjectModelObj.subName=this.userForm.value.subName;
    this.SubjectModelObj.subCode=this.userForm.value.subCode ;
@@ -67,11 +64,8 @@ constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceServi
 }
 
 getAllSubject(){
-  debugger;
   this._Service.getSubject().subscribe({next:(res)=>{
-    debugger;
       this.subjectData=res;
-      debugger
       console.log(res);
      },
     error:(Response)=>{
@@ -80,7 +74,6 @@ getAllSubject(){
   });
 }
 deleteSubject(details:any){
-  debugger;
 this._Service.deleteSubject(details.id).subscribe({next:(res)=>{
   console.log(res);
   alert("Something went wrong");
@@ -100,7 +93,6 @@ this._Service.deleteSubject(details.id).subscribe({next:(res)=>{
    this.userForm.controls['subCode'].setValue(details.subCode);
  }
 update(){
-  debugger;
   this.SubjectModelObj.Id=this.userForm.value.Id ;
   this.SubjectModelObj.subName=this.userForm.value.subName;
   this.SubjectModelObj.subCode=this.userForm.value.subCode ;

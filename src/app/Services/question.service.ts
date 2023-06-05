@@ -15,7 +15,6 @@ export class QuestionService {
   //  userId!: string;
  
   // async getQuestions(): Promise<any> {
-  //   debugger
   //   const { data = [], error } = await this.supabaseClient.from('Questions').select('*');
   //   if (error) {
   //     console.log(error);
@@ -24,7 +23,6 @@ export class QuestionService {
   //   }
   // }
   async postQuestion(model: any): Promise<any> {
-    debugger;
    
     // const user = this.supabaseClient.auth.users();
     const { data, error } = await this.supabaseClient

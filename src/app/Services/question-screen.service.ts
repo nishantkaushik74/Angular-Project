@@ -13,7 +13,6 @@ export class QuestionScreenService {
    myuuid = uuidv4();
  
   async postAnswers(modelAnswer: any): Promise<any> {
-    debugger;
    
     // const user = this.supabaseClient.auth.users();
     const { data, error } = await this.supabaseClient

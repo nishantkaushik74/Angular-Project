@@ -15,7 +15,6 @@ export class SubjectServiceService {
 
 
   postSubject(data:any){
-    debugger;
     return this.http.post(this.baseUrl + 'api/Subject/SaveSubject',data)
     .pipe(map((res:any)=>{
       return res;
@@ -29,7 +28,6 @@ export class SubjectServiceService {
     }));
   }
   updateSubject(data:any,Id:number){
-    debugger;
     var _data={"Id":Id,"subName":data.subName,"subCode":data.subCode};
     return this.http.put(this.baseUrl+'api/Subject/UpdateSubject',_data)
     .pipe(map((res:any)=>{

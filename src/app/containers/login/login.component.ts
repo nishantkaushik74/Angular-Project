@@ -33,7 +33,6 @@ export class LoginComponent {
   }
 
   async login() {
-    debugger;
     try {
       const { data, error } = await this.loginService.loginData(this.loginModel);
       if (data && data.session) {
