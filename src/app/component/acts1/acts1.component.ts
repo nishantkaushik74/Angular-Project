@@ -10,7 +10,7 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 export class Acts1Component {
   isCardOpen = false;
   data1: any;
-
+  updateActData: any;
   constructor(
     private _apiService: SignUPService,
     private cdr: ChangeDetectorRef
@@ -38,13 +38,13 @@ export class Acts1Component {
   }
   async deleteAct(item: any) {
     try {
-      const data = await this._apiService.deleteRow("Act", item); 
+      const data = await this._apiService.deleteRow("Act", item);
       console.log(data);
     } catch (error) { }
     this.ngOnInit()
   }
   updateAct(item: any) {
-    console.log('Updating item:', item);
-    
+    this.isCardOpen = true;
+    this.updateActData=item
   }
 }

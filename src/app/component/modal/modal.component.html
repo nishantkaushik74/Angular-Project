@@ -6,20 +6,38 @@
         <h3>Mention the act details</h3>
         <label for="actName">Name of the act ?</label>
         <input type="text" ngModel required id="actName" name="name_of_act" />
-        
+
         <label for="name_of_section">Name of the section in the act ?</label>
-        <input type="text" ngModel required id="name_of_section" name="name_of_section" />
-        
-        <label for="subsection">Subsection: Tick if act has a sub section</label>
-        <input type="checkbox" [(ngModel)]="subsection" id="subsection" name="subsection" />
-        
+        <input
+          type="text"
+          ngModel
+          required
+          id="name_of_section"
+          name="name_of_section"
+        />
+
+        <label for="subsection"
+          >Subsection: Tick if act has a sub section</label
+        >
+        <input
+          type="checkbox"
+          [(ngModel)]="subsection"
+          id="subsection"
+          name="subsection"
+        />
+
         <label for="subSectionName">If there is any subsection? </label>
-        <input type="text" ngModel required id="subSectionName" name="subSectionName" />
-        
+        <input
+          type="text"
+          ngModel
+          required
+          id="subSectionName"
+          name="subSectionName"
+        />
+
         <label for="data">Information you want to provide in subsection?</label>
         <input type="text" ngModel required id="data" name="data" />
-
-        <button class="btn btn-dark" type="submit" [disabled]="!act1question.valid">Enter</button>
+        <button>Enter</button>
       </form>
     </app-card>
     <ng-content></ng-content>

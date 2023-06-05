@@ -7,10 +7,11 @@ import { NgForm } from '@angular/forms';
 })
 export class ModalComponent {
   subsection: boolean = false;
-  @Input() data: any;
+  @Input() FormData: any;
   @Output() hideChildEvent = new EventEmitter<void>();
   @Output() formDataEvent = new EventEmitter<any>();
   actName = "";
+
   onsubmit(form: NgForm) {
     this.formDataEvent.emit(form.value);
 }
