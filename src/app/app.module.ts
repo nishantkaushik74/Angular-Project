@@ -61,7 +61,6 @@ import { AnswerScreenComponent } from './containers/answer-screen/answer-screen.
 import { ActsComponent } from './containers/default-layout/acts/acts.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { createClient } from '@supabase/supabase-js';
-import { environment } from '../environments/environment';
 import { Acts1Component } from './component/acts1/acts1.component';
 import { CardComponent } from './component/card/card.component';
 import { ModalComponent } from './component/modal/modal.component';
@@ -128,7 +127,6 @@ const APP_CONTAINERS = [
       provide: LocationStrategy,
       useClass: HashLocationStrategy,
     },
-    { provide: 'SUPABASE_CLIENT', useFactory: () => createClient(environment.supabaseUrl, environment.supabaseKey)},
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
