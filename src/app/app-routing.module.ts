@@ -16,6 +16,7 @@ import { AuthGuard } from 'src/app/containers/login/auth.guard';
 import { ProfileComponent } from './component/profile/profile.component';
 import { Acts1Component } from './component/acts1/acts1.component';
 import { SubjectSectionComponent } from './component/subject-section/subject-section.component';
+import { SelectSubsectionComponent } from './component/select-subsection/select-subsection.component';
 const routes: Routes = [
   {
     path: '',
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         component: SubjectSectionComponent,
         path: `gst/act/:id/:name`,
+        // canActivate: [AuthGuard]
+      },      {
+        component: SelectSubsectionComponent,
+        path: `gst/act/subSelect/:id/:name/:name2`,
         // canActivate: [AuthGuard]
       },
 

@@ -65,6 +65,8 @@ import { Acts1Component } from './component/acts1/acts1.component';
 import { CardComponent } from './component/card/card.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { SubjectSectionComponent } from './component/subject-section/subject-section.component';
+import { SelectSubsectionComponent } from './component/select-subsection/select-subsection.component';
+import { FormDisplayComponent } from './component/form-display/form-display.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -92,7 +94,9 @@ const APP_CONTAINERS = [
     Acts1Component,
     CardComponent,
     ModalComponent,
-    SubjectSectionComponent
+    SubjectSectionComponent,
+    SelectSubsectionComponent,
+    FormDisplayComponent
   ],
   imports: [
     BrowserModule,

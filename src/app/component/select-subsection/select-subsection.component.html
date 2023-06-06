@@ -1,0 +1,43 @@
+<div>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="addSubjectSection()">
+      <h3 >Add Sub Select Section</h3>
+    </button>
+  </div>
+  <br />
+  <ng-container *ngIf="isNameField">
+    <app-modal
+      (hideChildEvent)="hideChild()"
+      [headings]="headings"
+      (formDataEvent)="handleFormData($event)"
+    >
+      <h2>Working</h2> 
+    </app-modal>
+  </ng-container>
+  <ng-container *ngIf="isCardOpen">
+    <app-form-display
+    (hideChildEvent)="hideChild()"
+    [data] = "formToggle"
+    [items]="items"
+    >
+    </app-form-display>
+  </ng-container>
+  <div *ngFor="let item of data">
+    <app-card>
+      <div class="card_div">
+        <div class="routing">
+          <h2 style="margin: 10px">
+            {{ item.id }}. {{ item.subsection_name }}
+          </h2>
+        </div>
+        <div class="icons" >
+          <div >View Doc <i class="fa-sharp fa-solid fa-file" (click)="edit_Add_view_toggle(0,item)"></i></div>
+          <div >Add Data to Doc <i class="fa-sharp fa-solid fa-file" (click)="edit_Add_view_toggle(1,item)"></i></div>
+
+        </div>
+      </div>
+    </app-card>
+    <br />
+  </div>
+</div>
+  

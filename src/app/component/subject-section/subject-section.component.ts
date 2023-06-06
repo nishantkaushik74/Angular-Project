@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 export class SubjectSectionComponent {
   data:any;
   actName: any;
+  actID:any
   isCardOpen = false;
   subject_section: any;
   headings = {
@@ -18,14 +19,17 @@ export class SubjectSectionComponent {
   }
   constructor(
     private route: ActivatedRoute,
-    private _apiService: SignUPService
+    private _apiService: SignUPService,
+    private router: Router
+
   ) { }
   async ngOnInit() {
     const actId = this.route.snapshot.paramMap.get('id');
     const actname = this.route.snapshot.paramMap.get('name');
     this.actName = actname
+    this.actID=actId;
     try {
-      const subject = await this._apiService.getTableData("Act", actname);
+      const subject = await this._apiService.getTableData("Act", actname,0,"a");
       this.data=subject
     } catch (error) {
     }
@@ -45,5 +49,10 @@ export class SubjectSectionComponent {
     } catch (error) { }
     this.hideChild()
     this.ngOnInit()
+  }
+  routeSubSelectSection(item:any){
+  // console.log("🚀 ~ file: subject-section.component.ts:54 ~ SubjectSectionComponent ~ routeSubSelectSection ~ item:", item)
+
+    this.router.navigate(['gst/act/subSelect',item.id,item.name_of_act,item.subject_section]);
   }
 }

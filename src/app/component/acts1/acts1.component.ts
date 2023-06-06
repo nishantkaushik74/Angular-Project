@@ -24,7 +24,7 @@ export class Acts1Component {
   ) { }
   async ngOnInit() {
     try {
-      const data = await this._apiService.getTableData("Act",null);
+      const data = await this._apiService.getTableData("Act",null,0,"a");
       this.data1 = data;
     } catch (error) {
       console.log("🚀 ~ file: acts1.component.ts:20 ~ Acts1Component ~ ngOnInit ~ error:", error)
