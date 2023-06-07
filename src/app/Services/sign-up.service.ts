@@ -163,15 +163,21 @@ export class SignUPService {
     }
 
   }
-  async updateData(value: any, data: any): Promise<any> {
-    const { error } = await this.supabase
-      .from('Act')
-      .update({ data: value.data})
-      .eq('id', data.id)
-      .eq('name_of_act', data.name_of_act)
-      .eq('subject_section', data.subject_section)
+  async insertFinalData(data: any, subject: any, number: number): Promise<any> {
+    const { error } = await this.supabase.
+      from("Act").
+      insert({
+        userid: this.userIdString.user.id,
+        name_of_act: subject.actname,
+        subject_section: subject.subject_section_name,
+        subsection_name: data.Name_of_sub_select,
+        parent_id: number,
+        data: data.data
+      })
+
   }
   async getFinalData(subject: any): Promise<any> {
+    console.log("🚀 ~ file: sign-up.service.ts:183 ~ SignUPService ~ getFinalData ~ subject:", subject)
     const { data, error } = await this.supabase
       .from('Act')
       .select('*')

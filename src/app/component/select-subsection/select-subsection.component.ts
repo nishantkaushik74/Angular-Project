@@ -19,6 +19,7 @@ export class SelectSubsectionComponent {
     heading1: "Sub-section Names",
     heading2: "Name of the Sub-section fo the select section? "
   }
+  dataPassed: any;
   items: any;
   Sub_subject_section: any;
   constructor(
@@ -33,10 +34,13 @@ export class SelectSubsectionComponent {
     this.subject_Section_Name = subject_section_name
     this.actName = actname
     this.actID = actId;
+    this.dataPassed = {
+      "actId": actId, "actname": actname, "subject_section_name": subject_section_name
+    }
+
     try {
       const subject = await this._apiService.getTableData("Act", actname, 2, subject_section_name);
       this.data = subject
-
     } catch (error) {
     }
   }
@@ -48,6 +52,7 @@ export class SelectSubsectionComponent {
   hideChild(): void {
     this.isCardOpen = false;
     this.isNameField = false
+    this.ngOnInit()
 
   }
 
@@ -66,5 +71,10 @@ export class SelectSubsectionComponent {
   }
   addSubjectSection() {
     this.isNameField = true
+  }
+  refreshFunction(data:any):void{
+    console.log("🚀 ~ file: select-subsection.component.ts:76 ~ SelectSubsectionComponent ~ refreshFunction ~ data:", data)
+    console.log("working");
+    this.ngOnInit()
   }
 }

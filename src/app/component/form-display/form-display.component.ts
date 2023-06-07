@@ -14,7 +14,9 @@ export class FormDisplayComponent {
   subjectData: string = '';
   @Input() data: any;
   @Input() items: any;
+  @Input() dataPassed: any;
 
+  @Output() refreshFunction = new EventEmitter<void>();
   @Output() hideChildEvent = new EventEmitter<void>();
   constructor(
     private route: ActivatedRoute,
@@ -22,24 +24,24 @@ export class FormDisplayComponent {
     private router: Router
   ) { }
   async ngOnInit() {
-    console.log("🚀 ~ file: form-display.component.ts:40 ~ FormDisplayComponent ~ onsubmit ~ this.item:", this.items)
+    console.log("🚀 ~ file: form-display.component.ts:29 ~ FormDisplayComponent ~ ngOnInit ~ this.items:", this.items)
 
     try {
       const subject = await this._apiService.getFinalData(this.items);
       this.variant = subject
-
-
     } catch (error) {
       console.log(error);
-
     }
   }
   closeBox() {
     this.hideChildEvent.emit();
   }
   onsubmit(DataSubmit: any) {
-    const inputData = this._apiService.updateData(DataSubmit.value, this.items)
+    
+    const inputData = this._apiService.insertFinalData(DataSubmit.value,this.dataPassed,2)
     this.closeBox()
     this.ngOnInit()
+    this.refreshFunction.emit(DataSubmit);
+
   }
 }

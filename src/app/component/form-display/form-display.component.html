@@ -19,10 +19,16 @@
       <form #DataSubmit="ngForm" (ngSubmit)="onsubmit(DataSubmit)">
         <div class="pdf-containerE">
           <div class="pdf-page">
-            <h4>
-              Edit Sub Section ({{ items.subsection_name }}) of Select Section
-              ({{ items.subject_section }})
-            </h4>
+            <label for="actName">Enter Name of the Sub select Section? </label>
+            <input
+              type="text"
+              ngModel
+              required
+              id="actName"
+              name="Name_of_sub_select"
+            />
+            <h4>Enter the Data here !!</h4>
+
             <textarea
               class="pdf-textfield"
               [(ngModel)]="pdfContent"

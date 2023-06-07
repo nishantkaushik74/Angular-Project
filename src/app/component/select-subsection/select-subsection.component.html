@@ -1,6 +1,6 @@
 <div>
   <div>
-    <button type="button" class="btn btn-primary" (click)="addSubjectSection()">
+    <button type="button" class="btn btn-primary" (click)="edit_Add_view_toggle(1,null)">
       <h3 >Add Sub Select Section</h3>
     </button>
   </div>
@@ -10,6 +10,8 @@
       (hideChildEvent)="hideChild()"
       [headings]="headings"
       (formDataEvent)="handleFormData($event)"
+      (refreshFunction)="refreshFunction($event)"
+
     >
       <h2>Working</h2> 
     </app-modal>
@@ -19,6 +21,7 @@
     (hideChildEvent)="hideChild()"
     [data] = "formToggle"
     [items]="items"
+    [dataPassed]="dataPassed"
     >
     
     </app-form-display>
@@ -33,8 +36,7 @@
         </div>
         <div class="icons" >
           <div >View Doc <i class="fa-sharp fa-solid fa-file" (click)="edit_Add_view_toggle(0,item)"></i></div>
-          <div >Add Data to Doc <i class="fa-sharp fa-solid fa-file" (click)="edit_Add_view_toggle(1,item)"></i></div>
-
+          <!-- <div >Add Data to Doc <i class="fa-sharp fa-solid fa-file" (click)="edit_Add_view_toggle(1,item)"></i></div> -->
         </div>
       </div>
     </app-card>
