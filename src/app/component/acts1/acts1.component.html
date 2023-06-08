@@ -1,36 +1,28 @@
 <div>
   <div>
-    <button type="button" class="btn btn-primary" (click)="addActHandler()">
+    <button type="button" class="btn btn-primary" (click)="openModal()">
       Add Acts
     </button>
   </div>
-  <br />
   <div>
-    <div *ngFor="let item of data1">
-      <app-card>
-        <div class="card_div">
-          <div (click)="displaySubject_section(item)">
-            <h2 style="margin: 10px">{{ item.id }}. {{ item.name_of_act }}</h2>
-          </div>
-          <div class="deleteIcon">
-            <!-- <i class="fa-solid fa-pen-to-square" (click)="updateAct(item)"></i> -->
-            <i class="fa-solid fa-trash" (click)="deleteAct(item)"></i>
-          </div>
-        </div>
-      </app-card>
-      <br />
-    </div>
-
-    <ng-container *ngIf="isCardOpen">
+    <ng-container *ngIf="isModalOpen">
       <app-modal
         class="card-container"
-        (formDataEvent)="handleFormData($event)"
-        (hideChildEvent)="hideChild()"
-        [formData]="updateActData"
-        [headings]="headings"
+        (closeModal)="closeModal()"
+        (receiveData)="receiveData($event)"
+        [data]="data"
       >
       </app-modal>
     </ng-container>
+  </div>
+  <br />
+  <div *ngFor="let act of ActData">
+    <app-card (click)="roteToSubjectSelect(act)">
+      <div class="card_div">
+        <h2>{{ act.Name }}</h2>
+      </div>
+    </app-card>
+    <br />
   </div>
   <br />
 </div>

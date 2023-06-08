@@ -64,9 +64,9 @@ import { createClient } from '@supabase/supabase-js';
 import { Acts1Component } from './component/acts1/acts1.component';
 import { CardComponent } from './component/card/card.component';
 import { ModalComponent } from './component/modal/modal.component';
-import { SubjectSectionComponent } from './component/subject-section/subject-section.component';
-import { SelectSubsectionComponent } from './component/select-subsection/select-subsection.component';
-import { FormDisplayComponent } from './component/form-display/form-display.component';
+import { SectionComponent } from './component/section/section.component';
+import { SubSectionComponent } from './component/sub-section/sub-section.component';
+import { DocDisplayComponent } from './component/doc-display/doc-display.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -94,9 +94,9 @@ const APP_CONTAINERS = [
     Acts1Component,
     CardComponent,
     ModalComponent,
-    SubjectSectionComponent,
-    SelectSubsectionComponent,
-    FormDisplayComponent
+    SectionComponent,
+    SubSectionComponent,
+    DocDisplayComponent,
   ],
   imports: [
     BrowserModule,

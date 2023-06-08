@@ -1,6 +1,5 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { log } from 'console';
+import { Component } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 @Component({
@@ -9,52 +8,48 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
   styleUrls: ['./acts1.component.scss']
 })
 export class Acts1Component {
-  isCardOpen = false;
-  data1: any;
-  updateActData: any;
-  headings={
-    heading1:"Acts Names",
-    heading2:"Name of the act ?",
-    
+  //openAndClose 
+  data = {
+    h1: "Add Act",
+    h2: "Name the Act you want to add?"
   }
+  isModalOpen = false;
+  openModal() { this.isModalOpen = true }
+  closeModal() { this.isModalOpen = false }
+  //Other variables declared
+  ModuleInfoTable: any;
+  ModulesTable: any;
+  ActData: any;
+  //Constructor
   constructor(
-    private _apiService: SignUPService,
-    private cdr: ChangeDetectorRef,
-    private router: Router
+    private _apiService: SignUPService, private router: Router
   ) { }
-  async ngOnInit() {
+  //NGonIt Called function
+  async getData() {
     try {
-      const data = await this._apiService.getTableData("Act",null,0,"a");
-      this.data1 = data;
+      this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
+      this.ModulesTable = await this._apiService.getTableData("Modules")
+      this.ActData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null))
     } catch (error) {
-      console.log("🚀 ~ file: acts1.component.ts:20 ~ Acts1Component ~ ngOnInit ~ error:", error)
+      console.log("🚀 ~  error:", error)
     }
   }
-  addActHandler() {
-    this.isCardOpen = true;
+  //ngOnIt
+  ngOnInit() { this.getData() }
+  //Route function Function
+  roteToSubjectSelect(act: any) {
+    this.router.navigate(['gst/act/section/', { id: act.id, name: act.Name, parentID: act.parentid, moduleid: act.moduleid }]);
   }
-  async handleFormData(formData: any) {
+  //receive data from child
+  receiveData(subject: any) {
+    const inputValue = this.ModulesTable[0]
     try {
-      const data = await this._apiService.insertData("Act", formData,null);    
-    } catch (error) { }
-    this.hideChild()
-    this.ngOnInit()
+      const a = this._apiService.updateActTable("ModuleInfo", subject, inputValue)
+    } catch (error) {
+      console.log(error)
+
+    }
+    this.getData()
+    this.closeModal()
   }
-  hideChild(): void {
-    this.isCardOpen = false;
-    this.updateActData = ""
-  }
-  async deleteAct(item: any) {
-    try {
-      const data = await this._apiService.deleteRow("Act", item);
-    } catch (error) { }
-    this.ngOnInit()
-  }
-  displaySubject_section(item:any){
-    this.router.navigate(['gst/act', item.id,item.name_of_act]);
-  }
-  updateAct(item: any) {
-    this.isCardOpen = true;
-    this.updateActData = item
-  } 
 }

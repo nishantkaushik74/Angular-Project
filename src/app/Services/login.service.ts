@@ -27,17 +27,14 @@ export class LoginService {
     if (email && password) {
       return this.supabase.auth.signInWithPassword({ email, password })
         .then(response => {
-          console.log('Authentication successful!');
           this.isAuthenticated = true;
           this.router.navigate(['/comment']);
           return { data: response.data, error: null };
         })
         .catch(error => {
-          console.log('Authentication failed:', error);
           return { data: null, error };
         });
     } else {
-      console.log('Invalid email or password');
       return { data: null, error: 'Invalid email or password' };
     }
   }

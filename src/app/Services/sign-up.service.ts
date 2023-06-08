@@ -88,113 +88,60 @@ export class SignUPService {
       return data;
     }
   }
-
-  async getTableData(name_of_table: string, actname: any, id: number, subject_section_name: any): Promise<any> {
-    if (!actname || actname === null || actname === "null") {
-      // console.log("Working");
-      const { data, error } = await this.supabase
-        .from(name_of_table)
-        .select('*')
-        .is('parent_id', actname);
-      if (error) {
-        console.log("🚀 ~ file: sign-up.service.ts:99 ~ SignUPService ~ getTableData ~ error:", error)
-      }
-      if (data) {
-        return data;
-      }
-    }
-    if (actname && id == 0) {
-      const { data, error } = await this.supabase
-        .from(name_of_table)
-        .select('*')
-        .eq('parent_id', 1)
-        .eq('name_of_act', actname);
-      if (data) {
-        return data;
-      }
-      if (error) {
-        console.log(error.message)
-      }
-    }
-    if (actname && id == 2) {
-      const { data, error } = await this.supabase
-        .from(name_of_table)
-        .select('*')
-        .eq('parent_id', 2)
-        .eq('name_of_act', actname)
-        .eq('subject_section', subject_section_name);
-      if (data) {
-        return data;
-      }
-      if (error) {
-        console.log(error.message)
-      }
-    }
-  }
-  async insertData(name_of_table: string, formData: any, subject_section: any): Promise<any> {
-    if (formData && subject_section === null) {
-      const { error } = await this.supabase.
-        from(name_of_table).
-        insert({
-          userid: this.userIdString.user.id,
-          name_of_act: formData.data,
-        })
-    }
-    if (subject_section && formData === null && subject_section.parent_id !== 2) {
-      const { error } = await this.supabase.
-        from(name_of_table).
-        insert({
-          userid: this.userIdString.user.id,
-          name_of_act: subject_section.actName,
-          subject_section: subject_section.data,
-          parent_id: 1
-        })
-    }
-    if (subject_section && formData === null && subject_section.parent_id == 2) {
-      const { error } = await this.supabase.
-        from(name_of_table).
-        insert({
-          userid: this.userIdString.user.id,
-          name_of_act: subject_section.name_of_act,
-          subject_section: subject_section.subject_Section_Name,
-          subsection_name: subject_section.data,
-          parent_id: subject_section.parent_id
-        })
-    }
-
-  }
-  async insertFinalData(data: any, subject: any, number: number): Promise<any> {
-    const { error } = await this.supabase.
-      from("Act").
-      insert({
-        userid: this.userIdString.user.id,
-        name_of_act: subject.actname,
-        subject_section: subject.subject_section_name,
-        subsection_name: data.Name_of_sub_select,
-        parent_id: number,
-        data: data.data
-      })
-
-  }
-  async getFinalData(subject: any): Promise<any> {
-    console.log("🚀 ~ file: sign-up.service.ts:183 ~ SignUPService ~ getFinalData ~ subject:", subject)
+  async getTableData(tableName: string): Promise<any> {
     const { data, error } = await this.supabase
-      .from('Act')
-      .select('*')
-      .eq('id', subject.id)
-      .eq('name_of_act', subject.name_of_act)
-      .eq('subject_section', subject.subject_section)
-      .eq('subsection_name', subject.subsection_name)
-    if (data) { return data }
-    if (error) { console.log(error.message) }
+      .from(tableName)
+      .select("*")
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
   }
-
-  async deleteRow(name_of_table: string, formData: any): Promise<any> {
-    const { error } = await this.supabase
-      .from(name_of_table)
-      .delete()
-      .eq('id', formData.id)
+  async getTableDataOnParentID(tableName: string, conditionvalues: any): Promise<any> {
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .select()
+      .eq('parentid', conditionvalues.id)
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
+  }
+  async updateActTable(tableName: any, subject: any, inputValue: any): Promise<any> {
+    // console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ inputValue:", inputValue)
+    // console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ subject:", subject.variant)
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .upsert({ moduleid: inputValue.id, Name: subject.variant })
+      .select()
+    if (error) {
+      console.log("🚀 ~ file: sign-up.service.ts:120 ~ SignUPService ~ updateActTable ~ error:", error.message)
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
+  }
+  async updateModuleInfo(tableName: any, subject: any, inputValue: any): Promise<any> {
+    console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ inputValue:", inputValue)
+    console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ subject:", subject)
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .upsert({ moduleid: inputValue.moduleid, Name: subject.variant,parentid:inputValue.id,data:subject.variant2})
+      .select()
+    if (error) {
+      console.log("🚀 ~ file: sign-up.service.ts:120 ~ SignUPService ~ updateActTable ~ error:", error.message)
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
   }
 }
+
 
 

@@ -121,7 +121,6 @@ export class CommentComponent {
         }
       }
       this.newData = data;
-      console.log("🚀 ~ file: comment.component.ts:83 ~ CommentComponent ~ getQuestions ~ this.newData:", this.newData);
     }
     
   };

@@ -36,15 +36,13 @@ export class LoginComponent {
     try {
       const { data, error } = await this.loginService.loginData(this.loginModel);
       if (data && data.session) {
-        console.log('Login successful!', data);
         const token = data.session.access_token; // Extract the token value from the session object
         localStorage.setItem('token', token); // Store the token in local storage
         this.router.navigate(['/comment']); 
-        alert('Login successful!');
+        // alert('Login successful!');
          // Redirect to comments page
       } else if (error) {
         alert('Invalid credentials');
-        console.log(error);
       }
     } catch (error) {
       console.log(error);
@@ -62,11 +60,9 @@ export class LoginComponent {
         password: this.loginModel.password
       });
       if (data) {
-        console.log('Sign up successful!', data);
         alert('Sign up successful! Please login to continue.');
       } else if (error) {
         alert('Sign up failed');
-        console.log(error);
       }
     } catch (error) {
       console.log(error);

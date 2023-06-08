@@ -15,122 +15,34 @@ import { ActsComponent } from 'src/app/containers/default-layout/acts/acts.compo
 import { AuthGuard } from 'src/app/containers/login/auth.guard';
 import { ProfileComponent } from './component/profile/profile.component';
 import { Acts1Component } from './component/acts1/acts1.component';
-import { SubjectSectionComponent } from './component/subject-section/subject-section.component';
-import { SelectSubsectionComponent } from './component/select-subsection/select-subsection.component';
+import { SectionComponent } from './component/section/section.component';
+import { SubSectionComponent } from './component/sub-section/sub-section.component';
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
   { component: LoginComponent, path: 'login' },
-
-
+  { component: Page404Component, path: '404', data: { title: 'Page 404' } },
+  { component: Page500Component, path: '500', data: { title: 'Page 500' } },
+  { component: LoginComponent, path: 'login', data: { title: 'Login Page' } },
   {
-    path: '',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Home'
-    },
+    path: '', component: DefaultLayoutComponent, data: { title: 'Home' },
+    // canActivate: [AuthGuard]
     children: [
-
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
-      },
-      {
-        component: ProfileComponent,
-        path: 'profile',
-        canActivate: [AuthGuard]
-      },
-      {
-        component: SubjectSectionComponent,
-        path: `gst/act/:id/:name`,
-        // canActivate: [AuthGuard]
-      },      {
-        component: SelectSubsectionComponent,
-        path: `gst/act/subSelect/:id/:name/:name2`,
-        // canActivate: [AuthGuard]
-      },
-
-      {
-        path: 'theme',
-        loadChildren: () =>
-          import('./views/theme/theme.module').then((m) => m.ThemeModule),
-      },
-      {
-        path: 'base',
-        loadChildren: () =>
-          import('./views/base/base.module').then((m) => m.BaseModule),
-      },
-      {
-        path: 'buttons',
-        loadChildren: () =>
-          import('./views/buttons/buttons.module').then((m) => m.ButtonsModule),
-      },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./views/forms/forms.module').then((m) => m.CoreUIFormsModule),
-      },
-      {
-        path: 'charts',
-        loadChildren: () =>
-          import('./views/charts/charts.module').then((m) => m.ChartsModule),
-
-      },
-      {
-        path: 'icons',
-        loadChildren: () =>
-          import('./views/icons/icons.module').then((m) => m.IconsModule),
-
-      },
-      { path: 'comment', canActivate: [AuthGuard], component: CommentComponent },
+      { component: ProfileComponent, path: 'profile' },
+      { component: CommentComponent, path: 'comment' },
       { component: SubjectComponent, path: 'subject' },
       { component: AddQuestionsComponent, path: 'add-questions' },
       { component: QuestionComponent, path: 'question' },
-      { path: 'questionScreen/:id', component: QuestionScreenComponent },
-      { path: 'signup/:userid', component: SignupComponent },
-      { path: 'gst/Acts', component: Acts1Component },
-
-      // { path: 'gst/Acts', component: ActsComponent },
-      {
-        path: 'widgets',
-        loadChildren: () =>
-          import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
-      },
-      {
-        path: 'pages',
-        loadChildren: () =>
-          import('./views/pages/pages.module').then((m) => m.PagesModule)
-      },
+      { component: QuestionScreenComponent, path: 'questionScreen/:id' },
+      { component: SignupComponent, path: 'signup/:userid' },
+      { component: Acts1Component, path: 'gst/act' },
+      { component: SectionComponent, path: 'gst/act/section'},
+      { component: SubSectionComponent, path: 'gst/act/section/subsection'},
+      { path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule) },
+      { path: 'pages', loadChildren: () => import('./views/pages/pages.module').then((m) => m.PagesModule) },
     ]
   },
-  {
-    path: '404',
-    component: Page404Component,
-    data: {
-      title: 'Page 404'
-    }
-  },
-  {
-    path: '500',
-    component: Page500Component,
-    data: {
-      title: 'Page 500'
-    }
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
 ];
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
@@ -144,3 +56,41 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
+// {
+//   path: 'dashboard',
+//   loadChildren: () =>
+//     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+// },
+
+// {
+//   path: 'theme',
+//   loadChildren: () =>
+//     import('./views/theme/theme.module').then((m) => m.ThemeModule),
+// },
+// {
+//   path: 'base',
+//   loadChildren: () =>
+//     import('./views/base/base.module').then((m) => m.BaseModule),
+// },
+// {
+//   path: 'buttons',
+//   loadChildren: () =>
+//     import('./views/buttons/buttons.module').then((m) => m.ButtonsModule),
+// },
+// {
+//   path: 'forms',
+//   loadChildren: () =>
+//     import('./views/forms/forms.module').then((m) => m.CoreUIFormsModule),
+// },
+// {
+//   path: 'charts',
+//   loadChildren: () =>
+//     import('./views/charts/charts.module').then((m) => m.ChartsModule),
+
+// },
+// {
+//   path: 'icons',
+//   loadChildren: () =>
+//     import('./views/icons/icons.module').then((m) => m.IconsModule),
+
+// },

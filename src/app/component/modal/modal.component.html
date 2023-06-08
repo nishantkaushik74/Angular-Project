@@ -3,13 +3,21 @@
     <button type="button" class="btn-close" (click)="closeBox()"></button>
     <app-card>
       <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
-        <h3>{{headings.heading1}}</h3>
-        <label for="actName">{{headings.heading2}}</label>
-        <input type="text" 
-        ngModel 
-        required 
-        id="actName" 
-        name="data" />
+        <h3>{{ data.h1 }}</h3>
+        <label for="actName">{{ data.h2 }}</label>
+        <input type="text" ngModel required id="actName" name="variant" />
+        <div *ngIf="receivedData == 1">
+          <h6>{{ data.h3 }}</h6>
+
+          <textarea
+            style="width: 100%; height: 100%"
+            type="text"
+            ngModel
+            required
+            id="actName"
+            name="variant2"
+          ></textarea>
+        </div>
         <button>Enter</button>
       </form>
     </app-card>

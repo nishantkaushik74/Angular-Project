@@ -6,19 +6,29 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-  subsection: boolean = false;
-  @Input() formData: any;
-  @Input() headings: any;
-  @Output() hideChildEvent = new EventEmitter<void>();
-  @Output() formDataEvent = new EventEmitter<any>();
-  actName = "";
+  @Input() receivedData: any;
+  @Input() data: any;
+
+  //openAndClose 
+  @Output() closeModal = new EventEmitter<void>();
+  closeBox() {
+    this.closeModal.emit();
+  }
+  //Other variables declared
+  @Output() receiveData = new EventEmitter<void>();
+
+  //Constructor
+  //ngOnIt
+  ngOnInit() {
+  }
+  //ngOnIt Called function
+
+  //other Function
 
   onsubmit(form: NgForm) {
-    this.formDataEvent.emit(form.value);
-}
-  closeBox() {    
-    this.hideChildEvent.emit();
-    console.log("🚀 ~ file: modal.component.ts:12 ~ ModalComponent ~ headings:", this.headings)
+    console.log("🚀 ~ file: modal.component.ts:23 ~ ModalComponent ~ ngOnIt ~ receivedData:", this.receivedData)
 
+    this.receiveData.emit(form.value)
   }
+
 }
