@@ -1,0 +1,29 @@
+<div>
+    <div>
+      <button type="button" class="btn btn-primary" (click)="openModal()">
+        Add RCM
+      </button>
+    </div>
+    <div>
+      <ng-container *ngIf="isModalOpen">
+        <app-modal
+          class="card-container"
+          (closeModal)="closeModal()"
+          (receiveData)="receiveData($event)"
+          [data]="data"
+        >
+        </app-modal>
+      </ng-container>
+    </div>
+    <br />
+    <div *ngFor="let act of RCMData">
+      <app-card (click)="roteToSubjectSelect(act)">
+        <div class="card_div">
+          <h2>{{ act.Name }}</h2>
+        </div>
+      </app-card>
+      <br />
+    </div>
+    <br />
+  </div>
+  

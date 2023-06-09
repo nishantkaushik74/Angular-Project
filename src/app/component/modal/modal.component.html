@@ -1,7 +1,7 @@
 <div class="modal-overlay">
   <div class="modal-container">
     <button type="button" class="btn-close" (click)="closeBox()"></button>
-    <app-card>
+    <div class="card-container ">
       <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
         <h3>{{ data.h1 }}</h3>
         <label for="actName">{{ data.h2 }}</label>
@@ -10,7 +10,6 @@
           <h6>{{ data.h3 }}</h6>
 
           <textarea
-            style="width: 100%; height: 100%"
             type="text"
             ngModel
             required
@@ -20,7 +19,7 @@
         </div>
         <button>Enter</button>
       </form>
-    </app-card>
+    </div>
     <ng-content></ng-content>
   </div>
 </div>

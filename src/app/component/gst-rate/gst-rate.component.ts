@@ -3,11 +3,11 @@ import { Router, NavigationExtras } from '@angular/router';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 @Component({
-  selector: 'app-acts1',
-  templateUrl: './acts1.component.html',
-  styleUrls: ['./acts1.component.scss']
+  selector: 'app-gst-rate',
+  templateUrl: './gst-rate.component.html',
+  styleUrls: ['./gst-rate.component.scss']
 })
-export class Acts1Component {
+export class GstRateComponent {
   //openAndClose 
   data = {
     h1: "Add Act",
@@ -19,7 +19,7 @@ export class Acts1Component {
   //Other variables declared
   ModuleInfoTable: any;
   ModulesTable: any;
-  ActData: any;
+  GstRateData: any;
   //Constructor
   constructor(
     private _apiService: SignUPService, private router: Router
@@ -29,7 +29,7 @@ export class Acts1Component {
     try {
       this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
       this.ModulesTable = await this._apiService.getTableData("Modules")
-      this.ActData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null &&acts.moduleid==1 ))
+      this.GstRateData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid == 5))
     } catch (error) {
       console.log("🚀 ~  error:", error)
     }
@@ -42,11 +42,12 @@ export class Acts1Component {
   }
   //receive data from child
   receiveData(subject: any) {
-    const inputValue = this.ModulesTable[0]
+    const inputValue = this.ModulesTable[4]
     try {
       const a = this._apiService.updateActTable("ModuleInfo", subject, inputValue)
     } catch (error) {
       console.log(error)
+
     }
     this.getData()
     this.closeModal()

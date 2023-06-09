@@ -17,6 +17,9 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { Acts1Component } from './component/acts1/acts1.component';
 import { SectionComponent } from './component/section/section.component';
 import { SubSectionComponent } from './component/sub-section/sub-section.component';
+import { RulesComponent } from './component/rules/rules.component';
+import { GstRateComponent } from './component/gst-rate/gst-rate.component';
+import { RcmComponent } from './component/rcm/rcm.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
@@ -36,6 +39,11 @@ const routes: Routes = [
       { component: QuestionScreenComponent, path: 'questionScreen/:id' },
       { component: SignupComponent, path: 'signup/:userid' },
       { component: Acts1Component, path: 'gst/act' },
+      { component: RulesComponent, path: 'gst/rules' },
+      { component: GstRateComponent, path: 'gst/gstrateandhsncode' },
+      { component: RcmComponent, path: 'gst/rcm' },
+
+
       { component: SectionComponent, path: 'gst/act/section'},
       { component: SubSectionComponent, path: 'gst/act/section/subsection'},
       { path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule) },

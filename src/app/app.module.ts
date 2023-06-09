@@ -67,6 +67,10 @@ import { ModalComponent } from './component/modal/modal.component';
 import { SectionComponent } from './component/section/section.component';
 import { SubSectionComponent } from './component/sub-section/sub-section.component';
 import { DocDisplayComponent } from './component/doc-display/doc-display.component';
+import { RulesComponent } from './component/rules/rules.component';
+import { CaseLawsComponent } from './component/case-laws/case-laws.component';
+import { GstRateComponent } from './component/gst-rate/gst-rate.component';
+import { RcmComponent } from './component/rcm/rcm.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -97,6 +101,10 @@ const APP_CONTAINERS = [
     SectionComponent,
     SubSectionComponent,
     DocDisplayComponent,
+    RulesComponent,
+    CaseLawsComponent,
+    GstRateComponent,
+    RcmComponent,
   ],
   imports: [
     BrowserModule,

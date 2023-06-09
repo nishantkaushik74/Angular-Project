@@ -15,8 +15,17 @@
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  width: 50%;
-  height: 70%;
+  width: 80%;
+  height: 80%;
+  max-width: 90%;
+  max-height: 90%;
+}
+.card-container {
+
+  border: 0.2px solid black;
+  padding: 20px;
+  border-radius: 8px;
+  color: #000000;
 }
 
 /* Styles for .modal-container */
@@ -32,15 +41,31 @@
   margin-bottom: 10px;
 }
 
-.modal-container .btn-dark {
-  background-color: darkblue;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
+/* Apply box-sizing to include padding and border in the element's total width *//* Apply box-sizing to include padding and border in the element's total width */
+textarea {
+  box-sizing: border-box;
+  width: 100%; /* Adjust the width as needed */
+  height: 300px; /* Adjust the height as needed */
+  padding: 10px; /* Adjust the padding as needed */
+  border: 1px solid #ccc; /* Adjust the border style as needed */
+  font-family: Arial, sans-serif; /* Adjust the font-family as needed */
+  font-size: 14px; /* Adjust the font-size as needed */
+  line-height: 1.5; /* Adjust the line-height as needed */
+  resize: vertical; /* Allow vertical resizing of the textarea */
 }
+
+/* Apply additional styles for focus and hover effects */
+textarea:focus {
+  outline: none;
+  border-color: #2196F3; /* Adjust the color as needed */
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.7); /* Adjust the shadow as needed */
+}
+
+textarea:hover {
+  border-color: #999; /* Adjust the color as needed */
+}
+
+
 
 /* Two columns layout */
 
