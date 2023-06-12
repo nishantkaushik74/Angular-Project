@@ -19,6 +19,8 @@
     <div *ngFor="let act of GstRateData">
       <app-card (click)="roteToSubjectSelect(act)">
         <div class="card_div">
+          <h2>{{act.sno}}</h2>
+
           <h2>{{ act.Name }}</h2>
         </div>
       </app-card>

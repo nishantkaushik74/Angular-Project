@@ -30,7 +30,10 @@ export class RcmComponent {
     try {
       this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
       this.ModulesTable = await this._apiService.getTableData("Modules")
-      this.RCMData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid === 9))
+      this.RCMData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid === 9)).map((act: any, index: number) => {
+        act['sno'] = index + 1;
+        return act;
+      })
     } catch (error) {
       console.log("🚀 ~  error:", error)
     }
