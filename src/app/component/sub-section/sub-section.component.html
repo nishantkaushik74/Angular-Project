@@ -28,13 +28,16 @@
   <div *ngFor="let section of ModuleInfoTable">
     <app-card>
       <div class="card_div">
-        <h2>{{section.sno}}.</h2>
+        <div class="card_div2">
+          <h2>{{ section.sno }}.</h2>
 
-        <h2>
-          <ng-container *ngFor="let value of section.Name.split(',')">
-            {{ value }}<br />
-          </ng-container>
-        </h2>
+          <h2>
+            <ng-container *ngFor="let value of section.Name.split(',')">
+              {{ value }}<br />
+            </ng-container>
+          </h2>
+        </div>
+
         <div
           *ngIf="section.data"
           class="icon-container"

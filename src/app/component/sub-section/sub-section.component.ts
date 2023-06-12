@@ -27,7 +27,7 @@ export class SubSectionComponent {
   dataToSend = 1;
   data = {
     h1: "Add Sub Section",
-    h2: "Name the Sub Section you want to add?",
+    h2: "Name the Sub Section you want to add ?",
     h3: "Sub Section details"
   }
   Docdata: any

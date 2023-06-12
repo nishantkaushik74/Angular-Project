@@ -6,6 +6,8 @@ import { navItems } from './_nav';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html',
+  styleUrls: ['./default-layout.component.css']
+
 })
 export class DefaultLayoutComponent {
   modules: any;
@@ -36,6 +38,15 @@ export class DefaultLayoutComponent {
   }
 
 
+  handleItemClick(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    // Add your custom logic here for handling the item click
+    // This code will prevent the sidebar from shrinking on item click
+
+    console.log('Item clicked');
+  }
 
   public perfectScrollbarConfig = {
     suppressScrollX: true,

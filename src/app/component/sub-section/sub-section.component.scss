@@ -1,14 +1,6 @@
-.icon-container {
-  font-size: 2rem;
-  margin-right: 5rem; /* Adjust the font size as needed */
-}
-
-.fa-solid.fa-file {
-  font-size: 2rem; /* Adjust the icon size as needed */
-}
 .card_div {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -17,23 +9,13 @@
   align-self: flex-start;
   cursor: pointer;
 }
-
-.card_div i {
-  align-self: center;
-  justify-self: center;
-  margin: 10px;
+.card_div2 {
+  display: flex;
 }
-
-.icon-container {
-  // font-size: 2rem;
-  // margin-right: 5rem; /* Adjust the font size as needed */
-  // justify-self: end;
-  // align-self: center;
-  position: absolute;
-  top: 10px; 
-  right: 10px;
-}
-
 .fa-solid.fa-file {
   font-size: 2rem; /* Adjust the icon size as needed */
+}
+.icon-container {
+  padding: 10px;
+  cursor: pointer;
 }

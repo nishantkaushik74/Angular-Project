@@ -11,7 +11,7 @@ export class CaseLawsComponent {
   //openAndClose 
   data = {
     h1: "Add Act",
-    h2: "Name the Act you want to add?"
+    h2: "Name the Act you want to add ?"
   }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }
