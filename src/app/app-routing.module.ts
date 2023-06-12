@@ -29,26 +29,51 @@ const routes: Routes = [
   { component: LoginComponent, path: 'login', data: { title: 'Login Page' } },
   {
     path: '', component: DefaultLayoutComponent, data: { title: 'Home' },
-    // canActivate: [AuthGuard]
     children: [
-      { component: ProfileComponent, path: 'profile' },
-      { component: CommentComponent, path: 'comment' },
-      { component: QuestionScreenComponent, path: 'questionScreen/:id' },
-      { component: QuestionComponent, path: 'question' },
+      {
+        component: ProfileComponent, path: 'profile', canActivate: [AuthGuard]
+      },
+      {
+        component: CommentComponent, path: 'comment', canActivate: [AuthGuard]
+      },
+      {
+        component: QuestionScreenComponent, path: 'questionScreen/:id', canActivate: [AuthGuard]
+      },
+      {
+        component: QuestionComponent, path: 'question', canActivate: [AuthGuard]
+      },
 
       // { component: SubjectComponent, path: 'subject' },
       // { component: AddQuestionsComponent, path: 'add-questions' },
-      { component: SignupComponent, path: 'signup/:userid' },
-      { component: Acts1Component, path: 'gst/act' },
-      { component: RulesComponent, path: 'gst/rules' },
-      { component: GstRateComponent, path: 'gst/gstrateandhsncode' },
-      { component: RcmComponent, path: 'gst/rcm' },
+      {
+        component: SignupComponent, path: 'signup/:userid', canActivate: [AuthGuard]
+      },
+      {
+        component: Acts1Component, path: 'gst/act', canActivate: [AuthGuard]
+      },
+      {
+        component: RulesComponent, path: 'gst/rules', canActivate: [AuthGuard]
+      },
+      {
+        component: GstRateComponent, path: 'gst/gstrateandhsncode', canActivate: [AuthGuard]
+      },
+      {
+        component: RcmComponent, path: 'gst/rcm', canActivate: [AuthGuard]
+      },
 
 
-      { component: SectionComponent, path: 'gst/act/section' },
-      { component: SubSectionComponent, path: 'gst/act/section/subsection' },
-      { path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule) },
-      { path: 'pages', loadChildren: () => import('./views/pages/pages.module').then((m) => m.PagesModule) },
+      {
+        component: SectionComponent, path: 'gst/act/section', canActivate: [AuthGuard]
+      },
+      {
+        component: SubSectionComponent, path: 'gst/act/section/subsection', canActivate: [AuthGuard]
+      },
+      {
+        path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]
+      },
+      {
+        path: 'pages', loadChildren: () => import('./views/pages/pages.module').then((m) => m.PagesModule), canActivate: [AuthGuard]
+      },
     ]
   },
 ];

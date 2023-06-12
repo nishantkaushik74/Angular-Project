@@ -5,14 +5,14 @@ import { map, take } from 'rxjs/operators';
 import { LoginService } from 'src/app/Services/login.service';
 
 
- 
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private LoginService: LoginService, private router: Router) {}
+  constructor(private LoginService: LoginService, private router: Router) { }
 
   canActivate(): boolean {
     if (this.LoginService.isAuthenticated) {
@@ -21,5 +21,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/login']); // User is not authenticated, redirect to login page
       return false;
     }
+
+
   }
 }
