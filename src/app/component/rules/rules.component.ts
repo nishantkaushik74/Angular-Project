@@ -29,7 +29,10 @@ export class RulesComponent {
     try {
       this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
       this.ModulesTable = await this._apiService.getTableData("Modules")
-      this.RulesData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid==2))
+      this.RulesData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid==2)).map((act: any, index: number) => {
+        act['sno'] = index + 1;
+        return act;
+      })
     } catch (error) {
       console.log("🚀 ~  error:", error)
     }

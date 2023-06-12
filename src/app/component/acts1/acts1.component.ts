@@ -29,10 +29,14 @@ export class Acts1Component {
     try {
       this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
       this.ModulesTable = await this._apiService.getTableData("Modules")
-      this.ActData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null &&acts.moduleid==1 ))
+      this.ActData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid == 1)).map((act: any, index: number) => {
+        act['sno'] = index + 1;
+        return act;
+      })
     } catch (error) {
       console.log("🚀 ~  error:", error)
     }
+    console.log("🚀 ~ file: acts1.component.ts:33 ~ Acts1Component ~ getData ~ this.ActData:", this.ActData)
   }
   //ngOnIt
   ngOnInit() { this.getData() }

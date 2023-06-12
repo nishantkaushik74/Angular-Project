@@ -26,14 +26,12 @@ export class DefaultLayoutComponent {
         // this.j = { name: this.modules[i].description, url: `gst/${this.modules[i].description.toLowerCase()}` }
         this.j = { name: this.modules[i].name, url: `gst/${this.modules[i].description.toLowerCase().replace(/\s+/g, '')}` }
 
-        console.log("🚀 ~ file: default-layout.component.ts:29 ~ DefaultLayoutComponent ~ getTableData ~ j:", this.j)
         this.Navbar.push(this.j)
       }
       this.navItems[3].children=[...this.Navbar]
     } catch (error) {
       console.log('Error:', error);
     }
-    console.log("🚀 ~ file: default-layout.component.ts:15 ~ DefaultLayoutComponent ~ navItems:", navItems[3])
 
   }
 
