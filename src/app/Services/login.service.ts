@@ -38,4 +38,14 @@ export class LoginService {
       return Promise.resolve({ data: null, error: 'Invalid email or password' });
     }
   }
+  async logout(): Promise<{ error: string | null }> {
+    try {
+      await this.supabase.auth.signOut();
+      return { error: null };
+    } catch (error) {
+      return { error: (error as Error).message };
+
+    }
+  }
+  
 }
