@@ -15,7 +15,7 @@ export class SectionComponent {
   closeModal() { this.isModalOpen = false }
   openDisplayDoc(data: any) {
     this.isDocDisplayOpen = true
-    this.Docdata=data
+    this.Docdata = data
   }
   closeDisplayDoc() {
     this.isDocDisplayOpen = false
@@ -29,7 +29,7 @@ export class SectionComponent {
   //Other variables declared
   URLdata: any;
   ModuleInfoTable: any;
-  Docdata:any
+  Docdata: any
   //Constructor
   constructor(private route: ActivatedRoute, private _apiService: SignUPService, private router: Router) { }
 
@@ -48,6 +48,10 @@ export class SectionComponent {
   async getData() {
     try {
       this.ModuleInfoTable = await this._apiService.getTableDataOnParentID("ModuleInfo", this.URLdata)
+      this.ModuleInfoTable.map((act: any, index: number) => {
+        act['sno'] = index + 1;
+        return act;
+      })
     } catch (error) {
       console.log("🚀 ~  error:", error)
     }

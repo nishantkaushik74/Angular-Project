@@ -31,8 +31,11 @@
       (click)="section.data ? null : roteToSubSection(section)"
     >
       <div class="card_div">
+        <h2>{{section.sno}}.</h2>
+
         <h2>
           <ng-container *ngFor="let value of section.Name.split(',')">
+
             {{ value }}<br />
           </ng-container>
         </h2>

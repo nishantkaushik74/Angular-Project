@@ -50,6 +50,10 @@ export class SubSectionComponent {
   async getData() {
     try {
       this.ModuleInfoTable = await this._apiService.getTableDataOnParentID("ModuleInfo", this.URLdata)
+      this.ModuleInfoTable.map((act: any, index: number) => {
+        act['sno'] = index + 1;
+        return act;
+      })
     } catch (error) {
       console.log("🚀 ~  error:", error)
     }
