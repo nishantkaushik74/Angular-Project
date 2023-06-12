@@ -9,6 +9,7 @@
       name="name"
       [(ngModel)]="ngname"
       value="{{ ngname }}"
+      required
     />
   </div>
 
@@ -20,7 +21,7 @@
       name="mobile"
       [(ngModel)]="ngmobile"
       value="{{ ngmobile }}"
-      minlength="10"
+      pattern="[0-9]{10}"
       required
     />
   </div>
@@ -33,6 +34,8 @@
       name="gstin"
       [(ngModel)]="nggstin"
       value="{{ nggstin }}"
+      pattern="[0-9]{15}"
+
       required
     />
   </div>
@@ -45,6 +48,7 @@
       name="email"
       [(ngModel)]="ngemail"
       value="{{ ngemail }}"
+      required
     />
   </div>
 
@@ -68,6 +72,8 @@
       name="pincode"
       [(ngModel)]="ngpincode"
       value="{{ ngpincode }}"
+      pattern="[0-9]{6}"
+
       required
     />
   </div>
@@ -75,13 +81,7 @@
   <!-- Add more input fields as needed -->
 
   <div>
-    <button type="submit" [disabled]="!profileForm.valid">Save Profile</button>
+    <button type="submit" [disabled]="!profileForm.valid" class="save-profile-button">Save Profile</button>
     <button type="button">Change Password</button>
   </div>
 </form>
-
-<div>
-  <h3>Avatar Image</h3>
-  <img />
-  <!-- Add functionality to upload and display the user's avatar image -->
-</div>

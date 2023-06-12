@@ -41,8 +41,10 @@ export class ProfileComponent {
   onsubmit(form: NgForm) {
     try {
       const data = this._apiService.updatingProfileData(form.value);
+
     } catch (error) {
       alert(error);
     }
+
   }
 }

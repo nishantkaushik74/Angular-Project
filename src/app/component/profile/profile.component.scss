@@ -45,3 +45,11 @@ img {
   max-width: 200px;
   max-height: 200px;
 }
+
+
+.save-profile-button:disabled {
+  /* styles for the button when it is disabled */
+  opacity: 0.5; /* example: reduce opacity */
+  cursor: not-allowed; /* example: change cursor to not-allowed */
+  /* Add any other desired styles */
+}

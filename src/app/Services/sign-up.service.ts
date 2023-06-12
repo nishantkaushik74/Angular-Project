@@ -63,6 +63,7 @@ export class SignUPService {
         pincode: form.pincode,
       })
       .eq('userid', this.userIdString.user.id)
+      alert("Profile Updated Successfully !! ")
 
     if (error) {
       throw error.message; ``
