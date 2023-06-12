@@ -33,10 +33,11 @@ const routes: Routes = [
     children: [
       { component: ProfileComponent, path: 'profile' },
       { component: CommentComponent, path: 'comment' },
-      { component: SubjectComponent, path: 'subject' },
-      { component: AddQuestionsComponent, path: 'add-questions' },
-      { component: QuestionComponent, path: 'question' },
       { component: QuestionScreenComponent, path: 'questionScreen/:id' },
+      { component: QuestionComponent, path: 'question' },
+
+      // { component: SubjectComponent, path: 'subject' },
+      // { component: AddQuestionsComponent, path: 'add-questions' },
       { component: SignupComponent, path: 'signup/:userid' },
       { component: Acts1Component, path: 'gst/act' },
       { component: RulesComponent, path: 'gst/rules' },
@@ -44,8 +45,8 @@ const routes: Routes = [
       { component: RcmComponent, path: 'gst/rcm' },
 
 
-      { component: SectionComponent, path: 'gst/act/section'},
-      { component: SubSectionComponent, path: 'gst/act/section/subsection'},
+      { component: SectionComponent, path: 'gst/act/section' },
+      { component: SubSectionComponent, path: 'gst/act/section/subsection' },
       { path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule) },
       { path: 'pages', loadChildren: () => import('./views/pages/pages.module').then((m) => m.PagesModule) },
     ]

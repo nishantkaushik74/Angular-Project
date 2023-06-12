@@ -22,7 +22,7 @@ export class LoginService {
   }
 
   // Perform login and set isAuthenticated to true
-  loginData(logInModel: SignInModel) {
+  loginData(logInModel: SignInModel): Promise<{ data: any; error: string | null }> {
     const { email, password } = logInModel;
     if (email && password) {
       return this.supabase.auth.signInWithPassword({ email, password })
@@ -35,7 +35,7 @@ export class LoginService {
           return { data: null, error };
         });
     } else {
-      return { data: null, error: 'Invalid email or password' };
+      return Promise.resolve({ data: null, error: 'Invalid email or password' });
     }
   }
 }
