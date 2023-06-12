@@ -24,6 +24,7 @@ export class QuestionComponent {
    constructor(private _question: QuestionService) { }
 
   post() {
+    debugger;
     const userData = JSON.parse(localStorage.getItem("user")!) as any;
      this.model.userid=userData.user.id;
      this.model.id = uuid.v4();
@@ -41,16 +42,5 @@ export class QuestionComponent {
   }
 
 
-//   async ngOnInit() {
-//     // Fetch all comments from the 'comments' table in Supabase
-//     const { data = [], error } = await this.supabaseClient.from('Questions').select('*');
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       // Add the comments to the local array of comments
-//       this.postquestion = data;
-//   }
-
-// }
 
 }

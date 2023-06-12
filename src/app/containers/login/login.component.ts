@@ -12,14 +12,14 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  data1:any;
+  data1: any;
   formLogin: FormGroup;
   loginModel: SignInModel = {
     email: '',
     password: '',
     Id: 0
   };
-  supabaseUrl = 'https://your-supabase-url.supabase.co';
+  supabaseUrl = 'https://gluifbolndyftekyypbl.supabase.co';
   supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdWlmYm9sbmR5ZnRla3l5cGJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODAxNzUyOTQsImV4cCI6MTk5NTc1MTI5NH0.iJ9PgJDflSITsO-1nveTkdQMBb0Fc3iSnRHds2CwmI8';
   supabase = createClient(this.supabaseUrl, this.supabaseKey);
 
@@ -38,9 +38,13 @@ export class LoginComponent {
       if (data && data.session) {
         const token = data.session.access_token; // Extract the token value from the session object
         localStorage.setItem('token', token); // Store the token in local storage
-        this.router.navigate(['/comment']); 
-        // alert('Login successful!');
-         // Redirect to comments page
+        this.router.navigate(['/comment']);
+        localStorage.setItem('user', JSON.stringify(data));
+
+        alert('Login successful!');
+        window.location.href = '/#/comment';
+
+        // Redirect to comments page
       } else if (error) {
         alert('Invalid credentials');
       }
@@ -49,9 +53,9 @@ export class LoginComponent {
       alert('An error occurred during login');
     }
   }
-  
-  
-  
+
+
+
 
   async signUp() {
     try {
