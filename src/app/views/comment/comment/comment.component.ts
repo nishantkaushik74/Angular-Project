@@ -55,41 +55,9 @@ export class CommentComponent {
     this.questions = Questions.data;;
     const Answers = await this.supabaseClient.from('Answers').select('*')
 
-    // if (Profiles["data"] && Questions["data"] && Answers["data"]) {
-
-    //   const data: DataObject[] = [];
-    //   for (let i = 0; i < Questions["data"].length; i++) {
-    //     for (let j = 0; j < Profiles["data"].length; j++) {
-    //       if (Profiles["data"][j]["userid"] == Questions["data"][i]["userid"]) {
-    //         var qFullName = Profiles["data"][j]["fullName"];
-    //         var question = Questions["data"][i]["question"];
-    //         var questionID = Questions["data"][i]["id"];
-    //         var userID = Questions["data"][i]["userid"];
-    //       }
-    //     }
-    //     data.push({ qFullName: qFullName, question: question, questionID: questionID, userID: userID });
-    //   }
-
-    //   for (let l = 0; l < Answers["data"].length; l++) {
-    //     for (let obj of data) {
-    //       if (obj["questionID"] === Answers["data"][l]["questionid"]) {
-    //         const FilterProfile = Profiles["data"].filter((profile) => Answers["data"][l]["userid"] === profile["userid"]).map((profile) => profile["fullName"]);
-    //         obj["answers"] = [
-    //           { name: FilterProfile[0], answer: Answers["data"][l]["answer"] }
-    //         ];
-    //       }
-    //     }
-    //   }
-    //   this.newData = data
-    //   console.log("🚀 ~ file: comment.component.ts:83 ~ CommentComponent ~ getQuestions ~ this.newData:", this.newData)
-    // }
-
-
-
-
     if (Profiles["data"] && Questions["data"] && Answers["data"]) {
       const data: DataObject[] = [];
-    
+
       for (let i = 0; i < Questions["data"].length; i++) {
         for (let j = 0; j < Profiles["data"].length; j++) {
           if (Profiles["data"][j]["userid"] == Questions["data"][i]["userid"]) {
@@ -101,18 +69,18 @@ export class CommentComponent {
         }
         data.push({ qFullName: qFullName, question: question, questionID: questionID, userID: userID });
       }
-    
+
       for (let l = 0; l < Answers["data"].length; l++) {
         for (let obj of data) {
           if (obj["questionID"] === Answers["data"][l]["questionid"]) {
             const FilterProfile = Profiles["data"]
               .filter((profile) => Answers["data"][l]["userid"] === profile["userid"])
               .map((profile) => profile["fullName"]);
-   
+
             if (!obj["answers"]) {
               obj["answers"] = [];
             }
-    
+
             obj["answers"].push({
               name: FilterProfile[0],
               answer: Answers["data"][l]["answer"]
@@ -122,7 +90,7 @@ export class CommentComponent {
       }
       this.newData = data;
     }
-    
+
   };
 
 
