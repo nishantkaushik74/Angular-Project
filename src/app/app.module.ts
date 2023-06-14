@@ -11,6 +11,7 @@ import {
   PerfectScrollbarConfigInterface,
   PerfectScrollbarModule,
 } from 'ngx-perfect-scrollbar';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
 
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -71,6 +72,8 @@ import { RulesComponent } from './component/rules/rules.component';
 import { CaseLawsComponent } from './component/case-laws/case-laws.component';
 import { GstRateComponent } from './component/gst-rate/gst-rate.component';
 import { RcmComponent } from './component/rcm/rcm.component';
+import { DraftReplyComponent } from './component/draft-reply/draft-reply.component';
+import { Card2Component } from './component/Morecomponents/card2/card2.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -105,8 +108,11 @@ const APP_CONTAINERS = [
     CaseLawsComponent,
     GstRateComponent,
     RcmComponent,
+    DraftReplyComponent,
+    Card2Component,
   ],
   imports: [
+    AngularToastifyModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -145,7 +151,7 @@ const APP_CONTAINERS = [
     },
     IconSetService,
     Title,
-
+     ToastService
   ],
   bootstrap: [AppComponent],
 })

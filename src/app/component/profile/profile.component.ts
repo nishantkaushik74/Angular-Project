@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastService } from 'angular-toastify';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class ProfileComponent {
 
   constructor(
     private _apiService: SignUPService,
+    private _toastService: ToastService
   ) { }
   async ngOnInit() {
     try {
@@ -41,7 +43,6 @@ export class ProfileComponent {
   onsubmit(form: NgForm) {
     try {
       const data = this._apiService.updatingProfileData(form.value);
-
     } catch (error) {
       alert(error);
     }

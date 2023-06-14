@@ -20,6 +20,7 @@ import { SubSectionComponent } from './component/sub-section/sub-section.compone
 import { RulesComponent } from './component/rules/rules.component';
 import { GstRateComponent } from './component/gst-rate/gst-rate.component';
 import { RcmComponent } from './component/rcm/rcm.component';
+import { DraftReplyComponent } from './component/draft-reply/draft-reply.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
@@ -29,44 +30,48 @@ const routes: Routes = [
   { component: LoginComponent, path: 'login', data: { title: 'Login Page' } },
   {
     path: '', component: DefaultLayoutComponent, data: { title: 'Home' },
+    // canActivate: [AuthGuard]
     children: [
       {
-        component: ProfileComponent, path: 'profile', canActivate: [AuthGuard]
+        component: ProfileComponent, path: 'profile',
       },
       {
-        component: CommentComponent, path: 'comment', canActivate: [AuthGuard]
+        component: CommentComponent, path: 'comment',
       },
       {
-        component: QuestionScreenComponent, path: 'questionScreen/:id', canActivate: [AuthGuard]
+        component: QuestionScreenComponent, path: 'questionScreen/:id'
       },
       {
-        component: QuestionComponent, path: 'question', canActivate: [AuthGuard]
+        component: QuestionComponent, path: 'question'
       },
 
       // { component: SubjectComponent, path: 'subject' },
       // { component: AddQuestionsComponent, path: 'add-questions' },
       {
-        component: SignupComponent, path: 'signup/:userid', canActivate: [AuthGuard]
+        component: SignupComponent, path: 'signup/:userid'
       },
       {
-        component: Acts1Component, path: 'gst/act', canActivate: [AuthGuard]
+        component: Acts1Component, path: 'gst/act'
       },
       {
-        component: RulesComponent, path: 'gst/rules', canActivate: [AuthGuard]
+        component: RulesComponent, path: 'gst/rules'
       },
       {
-        component: GstRateComponent, path: 'gst/gstrateandhsncode', canActivate: [AuthGuard]
+        component: GstRateComponent, path: 'gst/gstrateandhsncode'
       },
       {
-        component: RcmComponent, path: 'gst/rcm', canActivate: [AuthGuard]
+        component: RcmComponent, path: 'gst/rcm'
       },
 
 
       {
-        component: SectionComponent, path: 'gst/act/section', canActivate: [AuthGuard]
+        component: SectionComponent, path: 'gst/act/section'
       },
       {
-        component: SubSectionComponent, path: 'gst/act/section/subsection', canActivate: [AuthGuard]
+        component: SubSectionComponent, path: 'gst/act/section/subsection'
+      },
+      {
+        component: DraftReplyComponent, path: 'gst/draftreply'
       },
       {
         path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]

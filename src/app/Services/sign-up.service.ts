@@ -4,6 +4,7 @@ import { SignUpModel } from '../Model/signUp';
 import { v4 as uuidv4 } from 'uuid';
 import { userInfo } from 'os';
 import { log } from 'console';
+import { ToastService } from 'angular-toastify';
 
 
 @Injectable({
@@ -11,17 +12,19 @@ import { log } from 'console';
 })
 export class SignUPService {
   userIdString = JSON.parse(localStorage.getItem("sb-gluifbolndyftekyypbl-auth-token") ?? '[]');
-
   private supabase: SupabaseClient;
   supabaseClient: any;
   // userId = JSON.parse(localStorage.getItem("sb-gluifbolndyftekyypbl-auth-token"));
-
-  constructor() {
+  constructor(private _toastService: ToastService) {
     this.supabase = createClient('https://gluifbolndyftekyypbl.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdWlmYm9sbmR5ZnRla3l5cGJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODAxNzUyOTQsImV4cCI6MTk5NTc1MTI5NH0.iJ9PgJDflSITsO-1nveTkdQMBb0Fc3iSnRHds2CwmI8');
   }
+  async showToast() {
+    console.log("working");
+    this._toastService.info('Login successful')
+    console.log("working2");
 
-
+  }
   async signUp(model: SignUpModel): Promise<any> {
     try {
       const { data, error } = await this.supabase.auth.signUp({
@@ -51,10 +54,12 @@ export class SignUPService {
     }
   }
   async updatingProfileData(form: any): Promise<any> {
+    this.showToast()
+
     if (form.email) {
       const { data, error } = await this.supabase.auth.updateUser({ email: form.email })
     }
-    const { error } = await this.supabase.from('Profile')
+    const { data, error } = await this.supabase.from('Profile')
       .update({
         fullName: form.name,
         state: form.state,
@@ -63,10 +68,12 @@ export class SignUPService {
         pincode: form.pincode,
       })
       .eq('userid', this.userIdString.user.id)
-      alert("Profile Updated Successfully !! ")
+
 
     if (error) {
-      throw error.message; ``
+      throw error.message; 
+    }
+    if (error == null) {
     }
   }
   async userInfo(): Promise<any> {
@@ -132,7 +139,7 @@ export class SignUPService {
     console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ subject:", subject)
     const { data, error } = await this.supabase
       .from(tableName)
-      .upsert({ moduleid: inputValue.moduleid, Name: subject.variant,parentid:inputValue.id,data:subject.variant2})
+      .upsert({ moduleid: inputValue.moduleid, Name: subject.variant, parentid: inputValue.id, data: subject.variant2 })
       .select()
     if (error) {
       console.log("🚀 ~ file: sign-up.service.ts:120 ~ SignUPService ~ updateActTable ~ error:", error.message)

@@ -1,0 +1,10 @@
+<button (click)="openModal()">Add Draft Reply</button>
+<div>
+  <ng-container *ngIf="isModalOpen">
+    <app-modal class="card-container" (closeModal)="closeModal()">
+      [data]="data"
+    </app-modal>
+  </ng-container>
+</div>
+<br />
+<app-card2 [data]="data" (receiveData)="receiveData($event)"> </app-card2>

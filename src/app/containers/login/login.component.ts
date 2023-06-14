@@ -35,27 +35,18 @@ export class LoginComponent {
   async login() {
     try {
       const { data, error } = await this.loginService.loginData(this.loginModel);
-      if (data && data.session) {
-        const token = data.session.access_token; // Extract the token value from the session object
+      if (data && data?.session) {
+        const token = await data.session.access_token; // Extract the token value from the session object
+        console.log("🚀 ~ file: login.component.ts:41 ~ LoginComponent ~ login ~ token:", token)
         localStorage.setItem('token', token); // Store the token in local storage
-        this.router.navigate(['/comment']);
         localStorage.setItem('user', JSON.stringify(data));
-
-        alert('Login successful!');
         window.location.href = '/#/comment';
-
-        // Redirect to comments page
       } else if (error) {
-        alert('Invalid credentials');
       }
     } catch (error) {
       console.log(error);
-      alert('An error occurred during login');
     }
   }
-
-
-
 
   async signUp() {
     try {

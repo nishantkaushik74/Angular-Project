@@ -3,6 +3,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { SignInModel } from '../Model/signIn';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastService } from 'angular-toastify';
 
 @Injectable({
   providedIn: 'root'
@@ -14,28 +15,35 @@ export class LoginService {
   public isAuthenticated: boolean = false;
   user = new BehaviorSubject<SignInModel>(null!);
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private _toastService: ToastService
+  ) { }
 
   // Check if the user is authenticated
   isAuthenticated1(): boolean {
     return this.isAuthenticated;
   }
-
+  showToast(a: any) {
+    if (a == 0) { this._toastService.success('Login successful') }
+    else { this._toastService.error(a.message) }
+  }
   // Perform login and set isAuthenticated to true
-  loginData(logInModel: SignInModel): Promise<{ data: any; error: string | null }> {
-    const { email, password } = logInModel;
-    if (email && password) {
-      return this.supabase.auth.signInWithPassword({ email, password })
-        .then(response => {
-          this.isAuthenticated = true;
-          this.router.navigate(['/comment']);
-          return { data: response.data, error: null };
-        })
-        .catch(error => {
-          return { data: null, error };
-        });
-    } else {
-      return Promise.resolve({ data: null, error: 'Invalid email or password' });
+  async loginData(logInModel: any): Promise<any> {
+
+    const { data, error } = await this.supabase.auth.signInWithPassword({ email: logInModel.email, password: logInModel.password })
+
+    if (error) {
+      this.showToast(error)
+      throw new Error(error.message);
+    }
+    if (data) {
+      const token = await data?.session?.access_token;
+      localStorage.setItem('user', JSON.stringify(data));
+      this.isAuthenticated = true;
+      setTimeout(() => {
+        this.router.navigate(['/comment']);
+      }, 1000);
+      this.showToast(0)
+      return data
     }
   }
   async logout(): Promise<{ error: string | null }> {
@@ -47,5 +55,5 @@ export class LoginService {
 
     }
   }
-  
+
 }
