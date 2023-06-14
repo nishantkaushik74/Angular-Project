@@ -74,6 +74,8 @@ import { GstRateComponent } from './component/gst-rate/gst-rate.component';
 import { RcmComponent } from './component/rcm/rcm.component';
 import { DraftReplyComponent } from './component/draft-reply/draft-reply.component';
 import { Card2Component } from './component/Morecomponents/card2/card2.component';
+import { Modal2Component } from './component/Morecomponents/modal2/modal2.component';
+import { CouncilMeetingsComponent } from './component/council-meetings/council-meetings.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -110,6 +112,8 @@ const APP_CONTAINERS = [
     RcmComponent,
     DraftReplyComponent,
     Card2Component,
+    Modal2Component,
+    CouncilMeetingsComponent,
   ],
   imports: [
     AngularToastifyModule,

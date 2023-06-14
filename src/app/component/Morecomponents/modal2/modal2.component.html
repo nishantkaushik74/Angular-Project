@@ -1,0 +1,61 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <button type="button" class="btn-close" (click)="closeBox()"></button>
+    <div class="card-container">
+      <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
+        <h3>{{ data.h1 }}</h3>
+        <label for="actName">{{ data.h2 }}</label>
+        <input
+          type="text"
+          ngModel
+          required
+          id="actName"
+          name="variant"
+          #variant="ngModel"
+        />
+        <!--adding input field-->
+        <input
+        *ngIf="data.date"
+          type="date"
+          ngModel
+          required
+          id="date"
+
+          name="variant3"
+          #variant3="ngModel"
+        />
+
+        <div *ngIf="data.h3" class="text-areaDiv">
+          <h6>{{ data.h3 }}</h6>
+          <textarea
+            type="text"
+            ngModel
+            required
+            id="actName"
+            name="variant2"
+            #variant2="ngModel"
+          ></textarea>
+        </div>
+        <div
+          *ngIf="act1question.invalid && (variant.touched || variant2?.touched)"
+          class="validation-error"
+        >
+          <p *ngIf="variant?.errors?.['required']">
+            The {{ data.h2 }} field is required.
+          </p>
+          <p *ngIf="variant2?.errors?.['required']">
+            The {{ data.h3 }} field is required.
+          </p>
+        </div>
+        <button
+          class="btn btn-primary button2"
+          type="submit"
+          [disabled]="!act1question.valid"
+        >
+          Enter
+        </button>
+      </form>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>

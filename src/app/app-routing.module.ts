@@ -21,6 +21,7 @@ import { RulesComponent } from './component/rules/rules.component';
 import { GstRateComponent } from './component/gst-rate/gst-rate.component';
 import { RcmComponent } from './component/rcm/rcm.component';
 import { DraftReplyComponent } from './component/draft-reply/draft-reply.component';
+import { CouncilMeetingsComponent } from './component/council-meetings/council-meetings.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
@@ -72,6 +73,9 @@ const routes: Routes = [
       },
       {
         component: DraftReplyComponent, path: 'gst/draftreply'
+      },
+      {
+        component: CouncilMeetingsComponent, path: 'gst/councilmeetings'
       },
       {
         path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]

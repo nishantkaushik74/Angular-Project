@@ -1,8 +1,28 @@
-<div class="card" >
+<div>
+  <ng-container *ngFor="let item of CardData">
+    <div class="card" (click)="sendItem(item)">
+      <div class="card-inner">
+        <div>
+          <div class="card-title" *ngIf="item.date">
+            <h3>date:</h3>
+          </div>
+          <div class="card-title">
+            <h3>Subject:</h3>
+          </div>
+        </div>
+        <div>
+          <div class="card-content"  *ngIf="item.date">
+            <h2>{{item.samay}}</h2>
+          </div>
+          <div class="card-content">
+            <h2>{{ item.Name }}</h2>
+          </div>
 
-  <div class="card-inner" >
-    <div class="card-title" (click)="sendItem(data1)"><h3>Subject :</h3></div>
-    <div class="card-content"><h2>working</h2></div>
-    <ng-content></ng-content>
-  </div>
+        </div>
+
+        <ng-content></ng-content>
+      </div>
+    </div>
+    <br />
+  </ng-container>
 </div>
