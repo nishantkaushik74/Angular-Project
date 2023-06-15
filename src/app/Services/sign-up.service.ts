@@ -19,12 +19,9 @@ export class SignUPService {
     this.supabase = createClient('https://gluifbolndyftekyypbl.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdWlmYm9sbmR5ZnRla3l5cGJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODAxNzUyOTQsImV4cCI6MTk5NTc1MTI5NH0.iJ9PgJDflSITsO-1nveTkdQMBb0Fc3iSnRHds2CwmI8');
   }
-  async showToast() {
-    console.log("working");
-    this._toastService.info('Login successful')
-    console.log("working2");
-
-  }
+  // async showToast() {
+  //   //  this._toastService.info('Login successful')
+  // }
   async signUp(model: SignUpModel): Promise<any> {
     try {
       const { data, error } = await this.supabase.auth.signUp({
@@ -54,7 +51,7 @@ export class SignUPService {
     }
   }
   async updatingProfileData(form: any): Promise<any> {
-    this.showToast()
+    // this.showToast()
 
     if (form.email) {
       const { data, error } = await this.supabase.auth.updateUser({ email: form.email })

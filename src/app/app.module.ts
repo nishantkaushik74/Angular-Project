@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -138,7 +137,7 @@ const APP_CONTAINERS = [
     ProgressModule,
     BadgeModule,
     ListGroupModule,
-    CardModule, MatIconModule, ReactiveFormsModule, HttpClientModule
+    CardModule, MatIconModule, ReactiveFormsModule, HttpClientModule,
   ],
   providers: [
     {

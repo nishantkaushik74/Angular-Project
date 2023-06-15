@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  ngname: any="";
-  ngmobile: any="";
-  ngemail: any="";
-  ngstate: any="";
-  ngpincode: any="";
-  nggstin: any="";
-  profileData: any="";
+  ngname: any = "";
+  ngmobile: any = "";
+  ngemail: any = "";
+  ngstate: any = "";
+  ngpincode: any = "";
+  nggstin: any = "";
+  profileData: any = "";
 
   constructor(
     private _apiService: SignUPService,
@@ -25,8 +25,8 @@ export class ProfileComponent implements OnInit {
     private router: Router
   ) { }
 
-  async ngOnInit() {
-    await this.getData();
+  ngOnInit() {
+    this.getData();
   }
 
   async getData() {
@@ -50,11 +50,10 @@ export class ProfileComponent implements OnInit {
       const data = await this._apiService.updatingProfileData(form.value);
       form.resetForm(); // Reset the form to clear the input fields
       await this.getData(); // Update the data after submitting
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/profile']);
-      });
+      this._toastService.success("Profile updated successfully");
     } catch (error) {
-      alert(error);
+      console.error("An error occurred while updating profile:", error);
+      this._toastService.error("Failed to update profile");
     }
   }
 }
