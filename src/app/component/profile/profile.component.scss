@@ -1,3 +1,4 @@
+
 h1 {
   color: #333;
   font-size: 24px;
@@ -52,4 +53,7 @@ img {
   opacity: 0.5; /* example: reduce opacity */
   cursor: not-allowed; /* example: change cursor to not-allowed */
   /* Add any other desired styles */
+}
+.error-message {
+  color: red;
 }

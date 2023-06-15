@@ -71,7 +71,7 @@ export class SignUPService {
 
 
     if (error) {
-      throw error.message; 
+      throw error.message;
     }
     if (error == null) {
     }
@@ -84,8 +84,12 @@ export class SignUPService {
   }
 
   async profileData(): Promise<any> {
+    const userIdString = JSON.parse(localStorage.getItem("sb-gluifbolndyftekyypbl-auth-token") ?? '[]');
+
+    console.log("this.userIdString.user.id", userIdString.user.id);
+
     const { data, error } = await this.supabase.from('Profile').select('*')
-      .eq('userid', this.userIdString.user.id)
+      .eq('userid', userIdString.user.id)
       .single();
 
     if (error) {
