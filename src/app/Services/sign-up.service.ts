@@ -71,7 +71,7 @@ export class SignUPService {
 
 
     if (error) {
-      throw error.message; 
+      throw error.message;
     }
     if (error == null) {
     }
@@ -147,7 +147,7 @@ export class SignUPService {
       return data
     }
   }
-  async getTableDataOnEndPoint(tableName: string,endPoint:any): Promise<any> {
+  async getTableDataOnEndPoint(tableName: string, endPoint: any): Promise<any> {
     const { data, error } = await this.supabase
       .from(tableName)
       .select("*")
@@ -160,11 +160,11 @@ export class SignUPService {
       return data
     }
   }
-  
+
   async updateModuleInfoTable(tableName: any, subject: any, id: any): Promise<any> {
     const { data, error } = await this.supabase
       .from(tableName)
-      .upsert({ moduleid: id, Name: subject.addedValue,data:subject.variant2 })
+      .upsert({ moduleid: id, Name: subject.addedValue, data: subject.variant2 })
       .select()
     if (error) {
       throw new Error(error.message);
@@ -173,12 +173,12 @@ export class SignUPService {
       return data
     }
   }
-  async getModuleInfoTableData(tableName: string,moduleid:any,parentId:any): Promise<any> { 
+  async getModuleInfoTableData(tableName: string, moduleid: any, parentId: any): Promise<any> {
     const { data, error } = await this.supabase
       .from(tableName)
       .select("*")
       .eq('moduleid', moduleid)
-      .is('parentid',parentId)
+      .is('parentid', parentId)
 
     if (error) {
       throw new Error(error.message);
@@ -187,6 +187,21 @@ export class SignUPService {
       return data
     }
   }
+  async UpdatePsswordAuthUser(subject: any): Promise<any> {
+    if (subject.newPassword===subject.confirmPassword) {
+          const { data, error } = await this.supabase.auth.updateUser({ password:subject.confirmPassword })
+          if (error) {
+            console.log("🚀 ~ file: sign-up.service.ts:195 ~ SignUPService ~ UpdatePsswordAuthUser ~ error:", error)
+            throw new Error(error.message);
+          }
+          if (data) {
+            console.log("🚀 ~ file: sign-up.service.ts:198 ~ SignUPService ~ UpdatePsswordAuthUser ~ data:", data)
+            return data
+          }
+    }
+    else alert("Not equal")
+  }
+
 }
 
 
