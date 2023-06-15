@@ -28,6 +28,7 @@ export class DefaultLayoutComponent {
         // this.j = { name: this.modules[i].description, url: `gst/${this.modules[i].description.toLowerCase()}` }
         this.j = { name: this.modules[i].name, url: `gst/${this.modules[i].description.toLowerCase().replace(/\s+/g, '')}` }
 
+        console.log( this.j)
         this.Navbar.push(this.j)
       }
       this.navItems[3].children=[...this.Navbar]

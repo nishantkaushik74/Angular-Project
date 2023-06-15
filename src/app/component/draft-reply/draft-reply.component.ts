@@ -40,6 +40,7 @@ export class DraftReplyComponent {
   ModulesTable: any;
   CardData: any;
   Docdata:any
+  heading={h2:"Subject"}
   //Constructor
   constructor(
     private _apiService: SignUPService,

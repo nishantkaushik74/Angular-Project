@@ -76,6 +76,8 @@ import { DraftReplyComponent } from './component/draft-reply/draft-reply.compone
 import { Card2Component } from './component/Morecomponents/card2/card2.component';
 import { Modal2Component } from './component/Morecomponents/modal2/modal2.component';
 import { CouncilMeetingsComponent } from './component/council-meetings/council-meetings.component';
+import { ArticlesComponent } from './component/articles/articles.component';
+import { FormsComponent } from './component/forms/forms.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -114,6 +116,8 @@ const APP_CONTAINERS = [
     Card2Component,
     Modal2Component,
     CouncilMeetingsComponent,
+    ArticlesComponent,
+    FormsComponent,
   ],
   imports: [
     AngularToastifyModule,

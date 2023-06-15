@@ -6,6 +6,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
+  variant: string = "";
+  variant2: string= "";
   @Input() receivedData: any;
   @Input() data: any;
 

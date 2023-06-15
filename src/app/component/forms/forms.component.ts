@@ -3,13 +3,14 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { log } from 'console';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
+
 @Component({
-  selector: 'app-council-meetings',
-  templateUrl: './council-meetings.component.html',
-  styleUrls: ['./council-meetings.component.scss']
+  selector: 'app-forms',
+  templateUrl: './forms.component.html',
+  styleUrls: ['./forms.component.scss']
 })
-export class CouncilMeetingsComponent {
-  
+export class FormsComponent {
+
   //openAndClose 
   isDocDisplayOpen = false;
   isModalOpen = false
@@ -31,17 +32,19 @@ export class CouncilMeetingsComponent {
 
   //Other variables declared
   data = {
-    h1: "Add council-meetings",
-    h2: "Name the council-meetings you want to add ?",
-    h3: "Council-meetings details",
-    date: true,
+    h1: "Add Form",
+    h2: "Subject of the the form you want to add ?",
+    h3: "Form details",
+    optional:"Name of the form?",
+    date: false,
+    form: true
   }
   endPoint: any;
   ModulesTable: any;
   CardData: any;
   Docdata: any
-  heading={h1:"Date",h2:"Meeting"}
-  //Constructor
+  heading = { h1: "Subject", h2: "Form Name" }
+  //Constructorp
   constructor(
     private _apiService: SignUPService,
     private router: Router,
@@ -54,18 +57,11 @@ export class CouncilMeetingsComponent {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null);
     this.CardData.map((data: any) => {
-      if (data.data == null || data.data == "null" || data.data == undefined) {
-        data["icon"] = false; data["date"] = false;
-        return data
-      }
-      else {
-        data["icon"] = true;
-        data["date"] = true
-        const [date, Name] = data.Name.split(',');
-        data["samay"] = date
-        data["Name"] = Name
-      }
-      console.log("🚀 ~ file: council-meetings.component.ts:56 ~ CouncilMeetingsComponent ~ this.CardData.map ~ data:", data)
+
+        const [Subject, FormName] = data.Name.split(',');
+        data["Subject"] = FormName
+        data["Name"] =  Subject
+
 
     })
   }

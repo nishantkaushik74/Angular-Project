@@ -14,16 +14,29 @@
           #variant="ngModel"
         />
         <!--adding input field-->
+        <label for="date" *ngIf="data.date">Date</label>
+
         <input
-        *ngIf="data.date"
+          *ngIf="data.date"
           type="date"
           ngModel
           required
           id="date"
-
           name="variant3"
           #variant3="ngModel"
         />
+        <div *ngIf="data.form">
+          <label for="formName">Name of from : </label>
+          <br />
+          <input
+            type="formName"
+            ngModel
+            required
+            id="formName"
+            name="variant3"
+            #variant3="ngModel"
+          />
+        </div>
 
         <div *ngIf="data.h3" class="text-areaDiv">
           <h6>{{ data.h3 }}</h6>
@@ -47,6 +60,7 @@
             The {{ data.h3 }} field is required.
           </p>
         </div>
+
         <button
           class="btn btn-primary button2"
           type="submit"

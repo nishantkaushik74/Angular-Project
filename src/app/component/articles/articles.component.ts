@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { log } from 'console';
 import { SignUPService } from 'src/app/Services/sign-up.service';
-
 @Component({
-  selector: 'app-council-meetings',
-  templateUrl: './council-meetings.component.html',
-  styleUrls: ['./council-meetings.component.scss']
+  selector: 'app-articles',
+  templateUrl: './articles.component.html',
+  styleUrls: ['./articles.component.scss']
 })
-export class CouncilMeetingsComponent {
-  
+export class ArticlesComponent {
+
   //openAndClose 
   isDocDisplayOpen = false;
   isModalOpen = false
@@ -31,16 +30,19 @@ export class CouncilMeetingsComponent {
 
   //Other variables declared
   data = {
-    h1: "Add council-meetings",
-    h2: "Name the council-meetings you want to add ?",
-    h3: "Council-meetings details",
+    h1: "Add articles",
+    h2: "Name the articles you want to add ?",
+    h3: "Articles details",
     date: true,
+    title:" Subject"
+
   }
   endPoint: any;
   ModulesTable: any;
   CardData: any;
-  Docdata: any
-  heading={h1:"Date",h2:"Meeting"}
+  Docdata: any;
+  heading={h1:"Date",h2:"Subject"}
+
   //Constructor
   constructor(
     private _apiService: SignUPService,
@@ -52,7 +54,8 @@ export class CouncilMeetingsComponent {
   //NGonIt Called function
   async getData() {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
-    this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null);
+    this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
+    console.log("🚀 ~ file: council-meetings.component.ts:54 ~ CouncilMeetingsComponent ~ getData ~ this.CardData:", this.CardData)
     this.CardData.map((data: any) => {
       if (data.data == null || data.data == "null" || data.data == undefined) {
         data["icon"] = false; data["date"] = false;
@@ -92,5 +95,4 @@ export class CouncilMeetingsComponent {
     }
     catch (error) { console.log(error) }
   }
-
 }

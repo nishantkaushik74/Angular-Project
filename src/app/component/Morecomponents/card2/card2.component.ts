@@ -12,6 +12,8 @@ export class Card2Component {
 
   //Other variables declared
   @Input() CardData: any;
+  @Input() heading: any;
+
   @Output() receiveCardData = new EventEmitter<void>();
 
   //Constructor
@@ -25,7 +27,7 @@ export class Card2Component {
   //receive data from child
   ngOnChanges() {
     if (this.CardData) {
-      // Data is available, do something with it
+      console.log("🚀 ~ file: card2.component.ts:15 ~ Card2Component ~ CardData:", this.CardData)
     }
   }
   sendItem(data: any) {
