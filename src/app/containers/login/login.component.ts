@@ -46,6 +46,7 @@ export class LoginComponent {
     } catch (error) {
       console.log(error);
     }
+    
   }
 
   async signUp() {
