@@ -11,6 +11,5 @@ export class DocDisplayComponent {
 @Input() Docdata:any
   closeBox(){
     this.closeDisplayDoc.emit();
-
   }
 }

@@ -11,6 +11,10 @@ import { ToastService } from 'angular-toastify';
   providedIn: 'root'
 })
 export class SignUPService {
+  UpdatePsswordAuthUser(formvalue: any) {
+    throw new Error('Method not implemented.');
+  }
+  
   userIdString = JSON.parse(localStorage.getItem("sb-gluifbolndyftekyypbl-auth-token") ?? '[]');
   private supabase: SupabaseClient;
   supabaseClient: any;
@@ -121,8 +125,6 @@ export class SignUPService {
     }
   }
   async updateActTable(tableName: any, subject: any, inputValue: any): Promise<any> {
-    // console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ inputValue:", inputValue)
-    // console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ subject:", subject.variant)
     const { data, error } = await this.supabase
       .from(tableName)
       .upsert({ moduleid: inputValue.id, Name: subject.variant })
@@ -150,6 +152,7 @@ export class SignUPService {
       return data
     }
   }
+  
 }
 
 

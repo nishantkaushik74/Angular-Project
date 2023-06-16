@@ -36,7 +36,6 @@ export class Acts1Component {
     } catch (error) {
       console.log("🚀 ~  error:", error)
     }
-    console.log("🚀 ~ file: acts1.component.ts:33 ~ Acts1Component ~ getData ~ this.ActData:", this.ActData)
   }
   //ngOnIt
   ngOnInit() { this.getData() }

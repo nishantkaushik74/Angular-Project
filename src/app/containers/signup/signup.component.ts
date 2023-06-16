@@ -5,6 +5,7 @@ import { SignUPService } from '../../Services/sign-up.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -18,8 +19,9 @@ export class SignupComponent {
     private formBuilder: FormBuilder,
     private _apiService: SignUPService,
     private routerA: Router,
-    private toastService: ToastService
-  ) {}
+    private _toastService: ToastService
+  ) { }
+
 
   ngOnInit(): void {
     this.formsignup = this.formBuilder.group({
@@ -31,25 +33,29 @@ export class SignupComponent {
 
   addData() {
     if (this.formsignup.invalid) {
-      this.toastService.error('Invalid data. Please fill in all fields correctly.');
+      this._toastService.error('Invalid data. Please fill in all fields correctly.');
       return;
     }
-
-    this._apiService
-      .signUp(this.formsignup.value)
-      .then((data) => {
-        console.log('Sign up successful!', data);
-        localStorage.setItem('userinformation', JSON.stringify(data));
-        this.toastService.success('Sign up successful!');
-        this.routerA.navigateByUrl('/login');
-      })
-      .catch(error => {
-        console.log(error);
-        this.toastService.error('Error occurred while signing up. Please try again later.');
-      });
+    else {
+      this._apiService
+        .signUp(this.formsignup.value)
+        .then((data) => {
+          console.log('Sign up successful!', data);
+          localStorage.setItem('userinformation', JSON.stringify(data));
+          this._toastService.success('Sign up successful!');
+          setTimeout(() => {
+            
+            this.routerA.navigateByUrl('/login');
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log('Error occurred while signing up. Please try again later.');
+        });
+    }
   }
 
   storeUserId(userId: string) {
-    this.routerA.navigate(['/comment'], { queryParams: { userid: userId }});
+    this.routerA.navigate(['/comment'], { queryParams: { userid: userId } });
   }
 }

@@ -30,6 +30,7 @@ export class RulesComponent {
       this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
       this.ModulesTable = await this._apiService.getTableData("Modules")
       this.RulesData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid==2)).map((act: any, index: number) => {
+        console.log("🚀 ~ file: rules.component.ts:33 ~ RulesComponent ~ this.RulesData=this.ModuleInfoTable.filter ~ acts:", act)
         act['sno'] = index + 1;
         return act;
       })

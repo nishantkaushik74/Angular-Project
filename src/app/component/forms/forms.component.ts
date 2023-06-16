@@ -3,12 +3,14 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { log } from 'console';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
+
 @Component({
-  selector: 'app-draft-reply',
-  templateUrl: './draft-reply.component.html',
-  styleUrls: ['./draft-reply.component.scss']
+  selector: 'app-forms',
+  templateUrl: './forms.component.html',
+  styleUrls: ['./forms.component.scss']
 })
-export class DraftReplyComponent {
+export class FormsComponent {
+
   //openAndClose 
   isDocDisplayOpen = false;
   isModalOpen = false
@@ -24,24 +26,25 @@ export class DraftReplyComponent {
   openDisplayDoc(data: any) {
     this.isDocDisplayOpen = true
     this.Docdata = data;
-    console.log(data);
-    
   }
 
 
 
   //Other variables declared
   data = {
-    h1: "Add Draft",
-    h2: "Name the Draft you want to add ?",
-    h3: "Draft details",
+    h1: "Add Form",
+    h2: "Subject of the the form you want to add ?",
+    h3: "Form details",
+    optional:"Name of the form?",
+    date: false,
+    form: true
   }
   endPoint: any;
   ModulesTable: any;
   CardData: any;
-  Docdata:any
-  heading={h2:"Subject"}
-  //Constructor
+  Docdata: any
+  heading = { h1: "Subject", h2: "Form Name" }
+  //Constructorp
   constructor(
     private _apiService: SignUPService,
     private router: Router,
@@ -52,13 +55,13 @@ export class DraftReplyComponent {
   //NGonIt Called function
   async getData() {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
-    this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
+    this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null);
     this.CardData.map((data: any) => {
-      if (data.data == null || data.data == "null" || data.data == undefined) {
-        data["icon"] = false; data["date"] = false
-        return data
-      }
-      else data["icon"] = true; data["date"] = false
+
+        const [Subject, FormName] = data.Name.split(',');
+        data["Subject"] = FormName
+        data["Name"] =  Subject
+
 
     })
   }
@@ -69,11 +72,15 @@ export class DraftReplyComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    console.log("🚀 ~ file: draft-reply.component.ts:71 ~ DraftReplyComponent ~ receiveCardData ~ subject:", subject)
+    console.log("🚀 ~ file: council-meetings.component.ts:78 ~ CouncilMeetingsComponent ~ receiveCardData ~ subject:", subject)
     this.openDisplayDoc(subject.data)
   }
 
   receiveData(subject: any) {
+
+    const variantText = subject.variant;
+    const variant3Text = subject.variant3;
+    subject["addedValue"] = variant3Text + "," + variantText
     try {
       const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()

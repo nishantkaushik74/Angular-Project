@@ -40,12 +40,9 @@ export class DefaultLayoutComponent {
 
   handleItemClick(event: Event) {
     event.stopPropagation();
-    event.preventDefault();
-    
+    event.preventDefault();    
     // Add your custom logic here for handling the item click
     // This code will prevent the sidebar from shrinking on item click
-
-    console.log('Item clicked');
   }
 
   public perfectScrollbarConfig = {
