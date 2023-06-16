@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignUPService } from 'src/app/Services/sign-up.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sub-section',
@@ -33,7 +34,11 @@ export class SubSectionComponent {
   Docdata: any
 
   //Constructor
-  constructor(private route: ActivatedRoute, private _apiService: SignUPService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private _apiService: SignUPService,
+    private router: Router,
+    private location: Location) { }
   //ngOnIt
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -69,5 +74,8 @@ export class SubSectionComponent {
     this.ngOnInit()
     this.getData()
     this.closeModal()
+  }
+  goBack(): void {
+    this.location.back();
   }
 }

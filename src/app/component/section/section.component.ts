@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignUPService } from 'src/app/Services/sign-up.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-section',
@@ -31,7 +32,11 @@ export class SectionComponent {
   ModuleInfoTable: any;
   Docdata: any
   //Constructor
-  constructor(private route: ActivatedRoute, private _apiService: SignUPService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private _apiService: SignUPService,
+    private router: Router,
+    private location: Location) { }
 
   //ngOnIt
   ngOnInit() {
@@ -79,5 +84,7 @@ export class SectionComponent {
     this.getData()
     this.closeModal()
   }
-
+  goBack(): void {
+    this.location.back();
+  }
 }
