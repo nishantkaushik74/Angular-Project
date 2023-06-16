@@ -1,29 +1,23 @@
+<button class="btn btn-primary" (click)="openModal()">Add Articles  </button>
 <div>
-    <div>
-      <button type="button" class="btn btn-primary" (click)="openModal()">
-        Add Acts
-      </button>
-    </div>
-    <div>
-      <ng-container *ngIf="isModalOpen">
-        <app-modal
-          class="card-container"
-          (closeModal)="closeModal()"
-          (receiveData)="receiveData($event)"
-          [data]="data"
-        >
-        </app-modal>
-      </ng-container>
-    </div>
-    <br />
-    <div *ngFor="let act of CaseLawsData">
-      <app-card (click)="roteToSubjectSelect(act)">
-        <div class="card_div">
-          <h2>{{ act.Name }}</h2>
-        </div>
-      </app-card>
-      <br />
-    </div>
-    <br />
-  </div>
-  
+  <ng-container *ngIf="isDocDisplayOpen">
+    <app-doc-display
+      (closeDisplayDoc)="closeDisplayDoc()"
+      [Docdata]="Docdata"
+    ></app-doc-display>
+  </ng-container>
+</div>
+<div>
+  <ng-container *ngIf="isModalOpen">
+    <app-modal3
+      class="card-container"
+      (closeModal)="closeModal()"
+      (receiveData)="receiveData($event)"
+      [data]="data"
+    >
+    </app-modal3>
+  </ng-container>
+</div>
+<br />
+<app-card3 [CardData]="CardData" [heading]="heading" (receiveCardData)="receiveCardData($event)">
+</app-card3>

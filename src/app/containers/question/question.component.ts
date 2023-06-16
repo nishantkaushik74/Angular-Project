@@ -24,7 +24,7 @@ export class QuestionComponent {
   constructor(private _question: QuestionService) { }
 
   post() {
-    debugger;
+    ;
     const userData = JSON.parse(localStorage.getItem("user")!) as any;
     this.model.userid = userData.user.id;
     this.model.id = uuid.v4();

@@ -78,6 +78,8 @@ import { CouncilMeetingsComponent } from './component/council-meetings/council-m
 import { ArticlesComponent } from './component/articles/articles.component';
 import { FormsComponent } from './component/forms/forms.component';
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
+import { Modal3Component } from './component/Morecomponents/modal3/modal3.component';
+import { Card3Component } from './component/Morecomponents/card3/card3.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -119,6 +121,8 @@ const APP_CONTAINERS = [
     ArticlesComponent,
     FormsComponent,
     ChangePasswordComponent,
+    Modal3Component,
+    Card3Component,
   ],
   imports: [
     AngularToastifyModule,
