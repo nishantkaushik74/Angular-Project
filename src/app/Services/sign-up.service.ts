@@ -14,7 +14,7 @@ export class SignUPService {
   UpdatePsswordAuthUser(formvalue: any) {
     throw new Error('Method not implemented.');
   }
-  
+
   userIdString = JSON.parse(localStorage.getItem("sb-gluifbolndyftekyypbl-auth-token") ?? '[]');
   private supabase: SupabaseClient;
   supabaseClient: any;
