@@ -24,10 +24,8 @@ import { DraftReplyComponent } from './component/draft-reply/draft-reply.compone
 import { CouncilMeetingsComponent } from './component/council-meetings/council-meetings.component';
 import { ArticlesComponent } from './component/articles/articles.component';
 import { FormsComponent } from './component/forms/forms.component';
-<<<<<<< HEAD
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
-=======
->>>>>>> NewBranch
+import { CaseLawsComponent } from './component/case-laws/case-laws.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
@@ -90,12 +88,18 @@ const routes: Routes = [
         component: FormsComponent, path: 'gst/forms'
       },
       {
-<<<<<<< HEAD
         component: ChangePasswordComponent, path: 'changepassword'
       },
       {
-=======
->>>>>>> NewBranch
+        component: CaseLawsComponent, path: 'gst/caselaws'
+      },
+      {
+        component: ChangePasswordComponent, path: 'changepassword'
+      },
+      {
+        component: CaseLawsComponent, path: 'gst/caselaws'
+      },
+      {
         path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]
       },
       {

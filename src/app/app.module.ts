@@ -77,10 +77,6 @@ import { Modal2Component } from './component/Morecomponents/modal2/modal2.compon
 import { CouncilMeetingsComponent } from './component/council-meetings/council-meetings.component';
 import { ArticlesComponent } from './component/articles/articles.component';
 import { FormsComponent } from './component/forms/forms.component';
-<<<<<<< HEAD
-import { ChangePasswordComponent } from './component/change-password/change-password.component';
-=======
->>>>>>> NewBranch
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -121,10 +117,6 @@ const APP_CONTAINERS = [
     CouncilMeetingsComponent,
     ArticlesComponent,
     FormsComponent,
-<<<<<<< HEAD
-    ChangePasswordComponent,
-=======
->>>>>>> NewBranch
   ],
   imports: [
     AngularToastifyModule,
