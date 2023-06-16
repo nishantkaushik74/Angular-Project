@@ -25,6 +25,7 @@ import { CouncilMeetingsComponent } from './component/council-meetings/council-m
 import { ArticlesComponent } from './component/articles/articles.component';
 import { FormsComponent } from './component/forms/forms.component';
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
+import { CaseLawsComponent } from './component/case-laws/case-laws.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
@@ -88,6 +89,9 @@ const routes: Routes = [
       },
       {
         component: ChangePasswordComponent, path: 'changepassword'
+      },
+      {
+        component: CaseLawsComponent, path: 'gst/caselaws'
       },
       {
         path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]
