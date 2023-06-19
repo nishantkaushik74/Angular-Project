@@ -1,23 +1,22 @@
 <div class="modal-overlay">
   <div class="modal-container">
     <button type="button" class="btn-close" (click)="closeBox()"></button>
-    <div class="card-container ">
+    <div class="card-container">
       <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
         <h3>{{ data.h1 }}</h3>
         <label for="actName">{{ data.h2 }}</label>
-        <input type="text" ngModel required id="actName" name="variant" />
+        <input type="text" [(ngModel)]="variant" required id="actName" name="variant" />
         <div *ngIf="receivedData == 1">
           <h6>{{ data.h3 }}</h6>
-
           <textarea
             type="text"
-            ngModel
+            [(ngModel)]="variant2"
             required
             id="actName"
             name="variant2"
           ></textarea>
         </div>
-        <button>Enter</button>
+        <button class="btn btn-primary" [disabled]="!variant">Enter</button>
       </form>
     </div>
     <ng-content></ng-content>

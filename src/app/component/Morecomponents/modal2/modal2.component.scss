@@ -1,0 +1,89 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+  border: 1px solid rgb(7, 57, 97);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.card-container {
+
+  border: 2px solid rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 8px;
+  color: #000000;
+  min-height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // position: relative; /* Add this line */
+
+}
+
+/* Styles for .modal-container */
+.modal-container label {
+  font-weight: bold;
+}
+
+.modal-container input[type="text"],
+.modal-container input[type="date"]{
+  width: 100%;
+  padding: 5px;
+  border: 1px solid gray;
+}
+.text-areaDiv{
+  height: 85%;
+}
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 80%;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Apply additional styles for focus and hover effects */
+textarea:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.7);
+}
+
+textarea:hover {
+  border-color: #999;
+}
+
+
+@media (max-width: 600px) {
+  .modal-container .column {
+    flex-basis: 100%;
+    padding-right: 0;
+  }
+}
+.button2 {
+  // position: absolute;
+}
+.validation-error {
+  margin-top: 0;
+  color: red;
+}
+

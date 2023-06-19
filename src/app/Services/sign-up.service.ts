@@ -141,6 +141,46 @@ export class SignUPService {
       return data
     }
   }
+  async getTableDataOnEndPoint(tableName: string,endPoint:any): Promise<any> {
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .select("*")
+      .eq('description', endPoint)
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
+  }
+  
+  async updateModuleInfoTable(tableName: any, subject: any, id: any): Promise<any> {
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .upsert({ moduleid: id, Name: subject.addedValue,data:subject.variant2 })
+      .select()
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
+  }
+  async getModuleInfoTableData(tableName: string,moduleid:any,parentId:any): Promise<any> { 
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .select("*")
+      .eq('moduleid', moduleid)
+      .is('parentid',parentId)
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
+  }
 }
 
 
