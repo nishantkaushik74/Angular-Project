@@ -28,6 +28,7 @@ import { ChangePasswordComponent } from './component/change-password/change-pass
 import { CaseLawsComponent } from './component/case-laws/case-laws.component';
 import { NotificationsComponent } from './component/notifications/notifications.component';
 import { CBICComponent } from './component/cbic/cbic.component';
+import { BlogComponent } from './component/blog/blog.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
@@ -100,6 +101,9 @@ const routes: Routes = [
       },
       {
         component: CBICComponent, path: 'gst/cbicfaqs'
+      },
+      {
+        component: BlogComponent, path: 'gst/blog'
       },
       {
         path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]

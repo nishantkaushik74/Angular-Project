@@ -82,6 +82,8 @@ import { Modal3Component } from './component/Morecomponents/modal3/modal3.compon
 import { Card3Component } from './component/Morecomponents/card3/card3.component';
 import { NotificationsComponent } from './component/notifications/notifications.component';
 import { CBICComponent } from './component/cbic/cbic.component';
+import { BlogComponent } from './component/blog/blog.component';
+import { Card4Component } from './component/Morecomponents/card4/card4.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -127,6 +129,8 @@ const APP_CONTAINERS = [
     Card3Component,
     NotificationsComponent,
     CBICComponent,
+    BlogComponent,
+    Card4Component,
   ],
   imports: [
     AngularToastifyModule,

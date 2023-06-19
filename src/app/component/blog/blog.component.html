@@ -1,0 +1,23 @@
+<button class="btn btn-primary" (click)="openModal()">Add Blog</button>
+<div>
+  <ng-container *ngIf="isDocDisplayOpen">
+    <app-doc-display
+      (closeDisplayDoc)="closeDisplayDoc()"
+      [Docdata]="Docdata"
+    ></app-doc-display>
+  </ng-container>
+</div>
+<div>
+  <ng-container *ngIf="isModalOpen">
+    <app-modal2
+      class="card-container"
+      (closeModal)="closeModal()"
+      (receiveData)="receiveData($event)"
+      [data]="data"
+    >
+    </app-modal2>
+  </ng-container>
+</div>
+<br />
+<app-card4 [CardData]="CardData" [heading]="heading" (receiveCardData)="receiveCardData($event)">
+</app-card4>
