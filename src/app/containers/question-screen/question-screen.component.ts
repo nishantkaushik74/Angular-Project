@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { QuestionScreenService } from '../../Services/question-screen.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { ToastService } from 'angular-toastify';
 @Component({
   selector: 'app-question-screen',
   templateUrl: './question-screen.component.html',
@@ -27,7 +28,7 @@ export class QuestionScreenComponent {
   currentRoute!: string;
   router: any;
 
-  constructor(private _questionscreen: QuestionScreenService, private route: ActivatedRoute) {
+  constructor(private _questionscreen: QuestionScreenService, private route: ActivatedRoute,  private toastService: ToastService) {
     (async () => {
       try {
         let id = '';
