@@ -80,6 +80,8 @@ import { FormsComponent } from './component/forms/forms.component';
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
 import { Modal3Component } from './component/Morecomponents/modal3/modal3.component';
 import { Card3Component } from './component/Morecomponents/card3/card3.component';
+import { NotificationsComponent } from './component/notifications/notifications.component';
+import { CBICComponent } from './component/cbic/cbic.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -123,6 +125,8 @@ const APP_CONTAINERS = [
     ChangePasswordComponent,
     Modal3Component,
     Card3Component,
+    NotificationsComponent,
+    CBICComponent,
   ],
   imports: [
     AngularToastifyModule,

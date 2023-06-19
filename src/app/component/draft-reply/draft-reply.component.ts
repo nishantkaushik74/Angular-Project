@@ -27,9 +27,6 @@ export class DraftReplyComponent {
     console.log(data);
     
   }
-
-
-
   //Other variables declared
   data = {
     h1: "Add Draft",
@@ -69,11 +66,11 @@ export class DraftReplyComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    console.log("🚀 ~ file: draft-reply.component.ts:71 ~ DraftReplyComponent ~ receiveCardData ~ subject:", subject)
     this.openDisplayDoc(subject.data)
   }
 
   receiveData(subject: any) {
+    subject["addedValue"] =subject.variant
     try {
       const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()

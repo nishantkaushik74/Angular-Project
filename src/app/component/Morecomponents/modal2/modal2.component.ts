@@ -9,28 +9,27 @@ export class Modal2Component {
   variant: any;
   variant2: any;
   variant3: any;
+  //openAndClose 
 
-  @Input() receivedData: any;
   @Input() data: any;
   showDate = false;
 
-  //openAndClose 
   @Output() closeModal = new EventEmitter<void>();
-  closeBox() {
-    this.closeModal.emit();
-  }
-  //Other variables declared
   @Output() receiveData = new EventEmitter<void>();
+
+  //Other variables declared
 
   //Constructor
   //ngOnIt
   ngOnInit() {
-    
+
   }
   //ngOnIt Called function
 
   //other Function
-
+  closeBox() {
+    this.closeModal.emit();
+  }
   onsubmit(form: NgForm) {
     this.receiveData.emit(form.value)
   }
