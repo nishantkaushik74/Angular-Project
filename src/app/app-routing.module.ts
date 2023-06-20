@@ -24,6 +24,11 @@ import { DraftReplyComponent } from './component/draft-reply/draft-reply.compone
 import { CouncilMeetingsComponent } from './component/council-meetings/council-meetings.component';
 import { ArticlesComponent } from './component/articles/articles.component';
 import { FormsComponent } from './component/forms/forms.component';
+import { ChangePasswordComponent } from './component/change-password/change-password.component';
+import { CaseLawsComponent } from './component/case-laws/case-laws.component';
+import { NotificationsComponent } from './component/notifications/notifications.component';
+import { CBICComponent } from './component/cbic/cbic.component';
+import { BlogComponent } from './component/blog/blog.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
@@ -84,6 +89,21 @@ const routes: Routes = [
       },
       {
         component: FormsComponent, path: 'gst/forms'
+      },
+      {
+        component: ChangePasswordComponent, path: 'changepassword'
+      },
+      {
+        component: CaseLawsComponent, path: 'gst/caselaws'
+      },
+      {
+        component: NotificationsComponent, path: 'gst/notifications'
+      },
+      {
+        component: CBICComponent, path: 'gst/cbicfaqs'
+      },
+      {
+        component: BlogComponent, path: 'gst/blog'
       },
       {
         path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]

@@ -1,23 +1,28 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
 @Component({
-  selector: 'app-modal2',
-  templateUrl: './modal2.component.html',
-  styleUrls: ['./modal2.component.scss']
+  selector: 'app-modal3',
+  templateUrl: './modal3.component.html',
+  styleUrls: ['./modal3.component.scss']
 })
-export class Modal2Component {
+export class Modal3Component {
+
   variant: any;
   variant2: any;
   variant3: any;
-  //openAndClose 
 
+  @Input() receivedData: any;
   @Input() data: any;
   showDate = false;
 
+  //openAndClose 
   @Output() closeModal = new EventEmitter<void>();
-  @Output() receiveData = new EventEmitter<void>();
-
+  closeBox() {
+    this.closeModal.emit();
+  }
   //Other variables declared
+  @Output() receiveData = new EventEmitter<void>();
 
   //Constructor
   //ngOnIt
@@ -27,9 +32,7 @@ export class Modal2Component {
   //ngOnIt Called function
 
   //other Function
-  closeBox() {
-    this.closeModal.emit();
-  }
+
   onsubmit(form: NgForm) {
     this.receiveData.emit(form.value)
   }

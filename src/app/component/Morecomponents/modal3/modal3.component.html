@@ -1,0 +1,110 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <button type="button" class="btn-close" (click)="closeBox()"></button>
+    <div class="card-container">
+      <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
+        <h3>{{ data.Title }}</h3>
+        <div  *ngIf="data.h1">
+          <label for="date">{{ data.h1 }}</label>
+          <input
+            type="date"
+            ngModel
+            
+            id="date"
+            name="variant"
+            #variant="ngModel"
+          />
+        </div>
+        <div *ngIf="data.h2">
+          <label for="Appellant">{{ data.h2 }}</label>
+          <input
+            type="text"
+            ngModel
+            
+            id="Appellant"
+            name="variant3"
+            #variant="ngModel"
+          />
+        </div>
+        <div *ngIf="data.h3">
+          <label for="Respondent">{{ data.h3 }}</label>
+          <input
+            type="text"
+            ngModel
+            
+            id="Respondent"
+            name="variant4"
+            #variant="ngModel"
+          />
+        </div>
+        <div *ngIf="data.h4">
+          <label for="CourtName">{{ data.h4 }}</label>
+          <input
+            type="text"
+            ngModel
+            
+            id="CourtName"
+            name="variant5"
+            #variant="ngModel"
+          />
+        </div>
+        <div *ngIf="data.h5">
+          <label for="SectionNo">{{ data.h5 }}</label>
+          <input
+            type="text"
+            ngModel
+            
+            id="SectionNo"
+            name="variant6"
+            #variant="ngModel"
+          />
+        </div>
+        <div *ngIf="data.h6">
+          <label for="Subject">{{ data.h6 }}</label>
+          <input
+            type="text"
+            ngModel
+            
+            id="Subject"
+            name="variant7"
+            #variant="ngModel"
+          />
+        </div>
+        <div *ngIf="data.h7">
+          <label for="Briefing">{{ data.h7 }}</label>
+          <input
+            type="text"
+            ngModel
+            
+            id="Briefing"
+            name="variant8"
+            #variant="ngModel"
+          />
+        </div>
+        <div *ngIf="data.DataEnter">
+          <label for="data">{{ data.DataEnter }}</label>
+
+          <textarea
+            type="text"
+            ngModel
+            
+            id="data"
+            name="variant2"
+            #variant2="ngModel"
+          ></textarea>
+        </div>
+
+        <button
+          class="btn btn-primary button2"
+          type="submit"
+          [disabled]="!act1question.valid"
+
+        >
+
+          Enter
+        </button>
+      </form>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>

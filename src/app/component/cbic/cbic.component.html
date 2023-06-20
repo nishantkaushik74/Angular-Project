@@ -1,4 +1,4 @@
-<button class="btn btn-primary" (click)="openModal()">Add Case Laws</button>
+<button class="btn btn-primary" (click)="openModal()">Add CBIC FAQ's</button>
 <div>
   <ng-container *ngIf="isDocDisplayOpen">
     <app-doc-display
@@ -9,15 +9,15 @@
 </div>
 <div>
   <ng-container *ngIf="isModalOpen">
-    <app-modal3
+    <app-modal2
       class="card-container"
       (closeModal)="closeModal()"
       (receiveData)="receiveData($event)"
       [data]="data"
     >
-    </app-modal3>
+    </app-modal2>
   </ng-container>
 </div>
 <br />
-<app-card3 [CardData]="CardData" [heading]="heading" (receiveCardData)="receiveCardData($event)">
-</app-card3>
+<app-card2 [CardData]="CardData" [heading]="heading" (receiveCardData)="receiveCardData($event)">
+</app-card2>

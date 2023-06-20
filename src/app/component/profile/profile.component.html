@@ -53,12 +53,8 @@
       id="email"
       name="email"
       [(ngModel)]="ngemail"
-      required
-      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+      readonly      
     />
-    <!-- <span class="error-message" *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched">
-      Please enter a valid email address.
-    </span> -->
   </div>
   
 
@@ -95,6 +91,6 @@
 
   <div>
     <button type="submit" [disabled]="!profileForm.valid" class="save-profile-button">Save Profile</button>
-    <button type="button">Change Password</button>
+    <button type="button" routerLink="/changepassword">Change Password</button>
   </div>
 </form>
