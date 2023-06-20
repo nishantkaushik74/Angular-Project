@@ -59,7 +59,7 @@ export class LoginService {
   async resetPasswordForEmail(subject: any): Promise<any> {
 
     const { data, error } = await this.supabase.auth.resetPasswordForEmail(subject.email, {
-      redirectTo: 'http://localhost:3000/resetPassword',
+      redirectTo: 'http://localhost:4200/resetPassword',
       
     })
     if (error) {

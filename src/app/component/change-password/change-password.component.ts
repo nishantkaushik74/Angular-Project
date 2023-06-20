@@ -25,5 +25,9 @@ export class ChangePasswordComponent {
   }
   async changePassword(formvalue: any) {
     const a = await this._apiService.UpdatePsswordAuthUser(formvalue)
+    if (a) {
+      this.router.navigate(['login']);
+    }
+
   }
 }
