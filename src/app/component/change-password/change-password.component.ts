@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { SignUPService } from 'src/app/Services/sign-up.service';
+
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',

@@ -29,9 +29,14 @@ import { CaseLawsComponent } from './component/case-laws/case-laws.component';
 import { NotificationsComponent } from './component/notifications/notifications.component';
 import { CBICComponent } from './component/cbic/cbic.component';
 import { BlogComponent } from './component/blog/blog.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 const routes: Routes = [
+  { component: ChangePasswordComponent, path: 'resetPassword' },
+
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
+  { component: ForgotPasswordComponent, path: 'forgotpassword' },
+
   { component: LoginComponent, path: 'login' },
   { component: Page404Component, path: '404', data: { title: 'Page 404' } },
   { component: Page500Component, path: '500', data: { title: 'Page 500' } },

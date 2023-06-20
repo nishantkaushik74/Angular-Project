@@ -84,6 +84,7 @@ import { NotificationsComponent } from './component/notifications/notifications.
 import { CBICComponent } from './component/cbic/cbic.component';
 import { BlogComponent } from './component/blog/blog.component';
 import { Card4Component } from './component/Morecomponents/card4/card4.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -99,6 +100,8 @@ const APP_CONTAINERS = [
 
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS, SignupComponent,
+
+    ForgotPasswordComponent,
     LoginComponent,
     SubjectComponent,
     AddQuestionsComponent,
@@ -163,6 +166,7 @@ const APP_CONTAINERS = [
   ],
   providers: [
     {
+
       provide: LocationStrategy,
       useClass: HashLocationStrategy,
     },
@@ -170,9 +174,11 @@ const APP_CONTAINERS = [
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+
     IconSetService,
     Title,
-     ToastService
+    ToastService
   ],
   bootstrap: [AppComponent],
 })
