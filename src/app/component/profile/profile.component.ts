@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
       this._toastService.success("Profile updated successfully");
     } catch (error) {
       console.error("An error occurred while updating profile:", error);
-      this._toastService.error("Failed to update profile");
+      this._toastService.error("Failed to update profile"+error);
     }
   }
 }
