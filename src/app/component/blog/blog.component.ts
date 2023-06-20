@@ -4,12 +4,12 @@ import { log } from 'console';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 @Component({
-  selector: 'app-case-laws',
-  templateUrl: './case-laws.component.html',
-  styleUrls: ['./case-laws.component.scss']
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.scss']
 })
-export class CaseLawsComponent {
-  //openAndClose 
+export class BlogComponent {
+
   //openAndClose 
   isDocDisplayOpen = false;
   isModalOpen = false
@@ -25,34 +25,20 @@ export class CaseLawsComponent {
   openDisplayDoc(data: any) {
     this.isDocDisplayOpen = true
     this.Docdata = data;
+    console.log(data);
+    
   }
   //Other variables declared
   data = {
-    Title: "Enter Case Law",
-    h1: "Date",
-    h2: "Appellant",
-    h3: "Respondent",
-    h4: "Court Name",
-    h5: "Section No.",
-    h6: "Subject",
-    h7: "Briefing",
-    DataEnter: "Case law",
-
+    h1: "Add Blog",
+    h2: "Name the Blog you want to add ?",
+    h3: "Blog details",
   }
   endPoint: any;
   ModulesTable: any;
   CardData: any;
-  Docdata: any;
-  heading = {
-    h1: "Date :",
-    h2: "Appellant :",
-    h3: "Respondent :",
-    h4: "Court Name :",
-    h5: "Section No :",
-    h6: "Subject :",
-    h7: "Briefing :",
-  }
-
+  Docdata:any
+  heading={h2:"Title"}
   //Constructor
   constructor(
     private _apiService: SignUPService,
@@ -66,23 +52,18 @@ export class CaseLawsComponent {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
     this.CardData.map((data: any) => {
-      const [Date, Appellant,Respondent,CourtName, SectionNo,Subject,Briefing] = data.Name.split(',');
-       data["h1"]= Date
-       data["h2"]= Appellant
-       data["h3"]= Respondent
-       data["h4"]= CourtName
-       data["h5"]= SectionNo
-       data["h6"]= Subject
-       data["h7"]= Briefing
+      if (data.data == null || data.data == "null" || data.data == undefined) {
+        data["icon"] = false; data["date"] = false
+        return data
+      }
+      else data["icon"] = true; data["date"] = false
 
     })
-    console.log("🚀 ~ file: case-laws.component.ts:80 ~ CaseLawsComponent ~ this.CardData.map ~ this.CardData:", this.CardData)
   }
   //ngOnIt
   ngOnInit() {
     this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
     this.getData()
-
   }
   //receive data from child
   receiveCardData(subject: any) {
@@ -90,11 +71,12 @@ export class CaseLawsComponent {
   }
 
   receiveData(subject: any) {
-
-    subject["addedValue"] = subject.variant + "," + subject.variant3 + "," + subject.variant4 + "," + subject.variant5 + "," + subject.variant6 + "," + subject.variant7 + "," + subject.variant8
-    const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
-    this.getData()
-    this.closeModal()
-
+    subject["addedValue"] =subject.variant
+    try {
+      const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+      this.getData()
+      this.closeModal()
+    }
+    catch (error) { console.log(error) }
   }
 }

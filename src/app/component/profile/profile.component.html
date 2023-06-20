@@ -8,7 +8,7 @@
       id="name"
       name="name"
       [(ngModel)]="ngname"
-      required
+      
     />
     <small class="error-message" *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched">
       Please enter a valid name.
@@ -22,7 +22,7 @@
       id="mobile"
       name="mobile"
       [(ngModel)]="ngmobile"
-      required
+      
       intlTelInput
     />
     <small class="error-message" *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
@@ -68,7 +68,7 @@
       id="state"
       name="state"
       [(ngModel)]="ngstate"
-      required
+      
     />
     <small class="error-message" *ngIf="profileForm.controls['state'].invalid && profileForm.controls['state'].touched">
       Please enter a valid state.
@@ -83,7 +83,7 @@
       name="pincode"
       [(ngModel)]="ngpincode"
       pattern="[0-9]{6}"
-      required
+      
     />
     <small class="error-message" *ngIf="profileForm.controls['pincode'].invalid && profileForm.controls['pincode'].touched">
       Please enter a valid pincode (6 digits only).

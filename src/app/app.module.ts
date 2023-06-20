@@ -77,6 +77,13 @@ import { Modal2Component } from './component/Morecomponents/modal2/modal2.compon
 import { CouncilMeetingsComponent } from './component/council-meetings/council-meetings.component';
 import { ArticlesComponent } from './component/articles/articles.component';
 import { FormsComponent } from './component/forms/forms.component';
+import { ChangePasswordComponent } from './component/change-password/change-password.component';
+import { Modal3Component } from './component/Morecomponents/modal3/modal3.component';
+import { Card3Component } from './component/Morecomponents/card3/card3.component';
+import { NotificationsComponent } from './component/notifications/notifications.component';
+import { CBICComponent } from './component/cbic/cbic.component';
+import { BlogComponent } from './component/blog/blog.component';
+import { Card4Component } from './component/Morecomponents/card4/card4.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -117,6 +124,13 @@ const APP_CONTAINERS = [
     CouncilMeetingsComponent,
     ArticlesComponent,
     FormsComponent,
+    ChangePasswordComponent,
+    Modal3Component,
+    Card3Component,
+    NotificationsComponent,
+    CBICComponent,
+    BlogComponent,
+    Card4Component,
   ],
   imports: [
     AngularToastifyModule,

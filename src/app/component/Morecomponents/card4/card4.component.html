@@ -1,0 +1,14 @@
+<div>
+  <div class="card" *ngFor="let item of CardData">
+    <h2 class="title">{{ item.Name }}</h2>
+    <p class="content">{{ item.data }}</p>
+    <button
+      *ngIf="item.data.length > 100"
+      (click)="sendItem(item)"
+      class="read-more"
+      class="btn btn-primary"
+    >
+      Read More
+    </button>
+  </div>
+</div>

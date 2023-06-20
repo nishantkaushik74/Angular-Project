@@ -4,11 +4,11 @@ import { log } from 'console';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 @Component({
-  selector: 'app-case-laws',
-  templateUrl: './case-laws.component.html',
-  styleUrls: ['./case-laws.component.scss']
+  selector: 'app-notifications',
+  templateUrl: './notifications.component.html',
+  styleUrls: ['./notifications.component.scss']
 })
-export class CaseLawsComponent {
+export class NotificationsComponent {
   //openAndClose 
   //openAndClose 
   isDocDisplayOpen = false;
@@ -29,14 +29,12 @@ export class CaseLawsComponent {
   //Other variables declared
   data = {
     Title: "Enter Case Law",
-    h1: "Date",
-    h2: "Appellant",
-    h3: "Respondent",
-    h4: "Court Name",
-    h5: "Section No.",
-    h6: "Subject",
-    h7: "Briefing",
-    DataEnter: "Case law",
+    h1: "Date of issue",
+    h2: "Government S.No",
+    h4: "Subject",
+    h5: "Briefing",
+    h7: "Types",
+    DataEnter: "Notification Details",
 
   }
   endPoint: any;
@@ -44,13 +42,11 @@ export class CaseLawsComponent {
   CardData: any;
   Docdata: any;
   heading = {
-    h1: "Date :",
-    h2: "Appellant :",
-    h3: "Respondent :",
-    h4: "Court Name :",
-    h5: "Section No :",
-    h6: "Subject :",
-    h7: "Briefing :",
+    h1: "Date of issue :",
+    h2: "Government S.No :",
+    h3: "Subject :",
+    h5: "Briefing :",
+    h6: "Types :",
   }
 
   //Constructor
@@ -65,18 +61,17 @@ export class CaseLawsComponent {
   async getData() {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
+    // console.log("🚀 ~ file: notifications.component.ts:66 ~ NotificationsComponent ~ getData ~ this.CardData:", this.CardData)
     this.CardData.map((data: any) => {
-      const [Date, Appellant,Respondent,CourtName, SectionNo,Subject,Briefing] = data.Name.split(',');
+      const [Date, Government,Subject, Briefing,Types] = data.Name.split(',');
        data["h1"]= Date
-       data["h2"]= Appellant
-       data["h3"]= Respondent
-       data["h4"]= CourtName
-       data["h5"]= SectionNo
-       data["h6"]= Subject
-       data["h7"]= Briefing
+       data["h2"]= Government
+       data["h3"]= Subject
+       data["h5"]= Briefing
+       data["h6"]= Types
+
 
     })
-    console.log("🚀 ~ file: case-laws.component.ts:80 ~ CaseLawsComponent ~ this.CardData.map ~ this.CardData:", this.CardData)
   }
   //ngOnIt
   ngOnInit() {
@@ -91,10 +86,14 @@ export class CaseLawsComponent {
 
   receiveData(subject: any) {
 
-    subject["addedValue"] = subject.variant + "," + subject.variant3 + "," + subject.variant4 + "," + subject.variant5 + "," + subject.variant6 + "," + subject.variant7 + "," + subject.variant8
+    subject["addedValue"] = subject.variant + "," + subject.variant3 + "," + subject.variant5 + "," + subject.variant6 + "," + subject.variant8
+    console.log("🚀 ~ file: notifications.component.ts:93 ~ NotificationsComponent ~ receiveData ~ subject:", subject.addedValue)
+
     const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+
     this.getData()
     this.closeModal()
 
   }
+
 }

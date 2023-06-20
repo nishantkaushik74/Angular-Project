@@ -19,9 +19,8 @@ export class SignupComponent {
     private formBuilder: FormBuilder,
     private _apiService: SignUPService,
     private routerA: Router,
-    private _toastService: ToastService
+    private toastService: ToastService
   ) { }
-
 
   ngOnInit(): void {
     this.formsignup = this.formBuilder.group({
@@ -31,29 +30,25 @@ export class SignupComponent {
     });
   }
 
-  addData() {
+  async addData() {
     if (this.formsignup.invalid) {
-      this._toastService.error('Invalid data. Please fill in all fields correctly.');
+      this.toastService.error("Please ensure that all fields are filled correctly.");
       return;
     }
-    else {
-      this._apiService
-        .signUp(this.formsignup.value)
-        .then((data) => {
-          console.log('Sign up successful!', data);
-          localStorage.setItem('userinformation', JSON.stringify(data));
-          this._toastService.success('Sign up successful!');
-          setTimeout(() => {
-            
-            this.routerA.navigateByUrl('/login');
-          }, 2000);
-        })
-        .catch((error) => {
-          console.log(error);
-          console.log('Error occurred while signing up. Please try again later.');
-        });
+
+    try {
+      const data = await this._apiService.signUp(this.formsignup.value)
+      console.log('Sign up successful!', data);
+      localStorage.setItem('userinformation', JSON.stringify(data));
+      this.toastService.success('Sign up successful!');
+      setTimeout(() => {
+        this.routerA.navigateByUrl('/login');
+      }, 2000);
+    } catch (error) {
+    this.toastService.error("User already exists");
     }
   }
+
 
   storeUserId(userId: string) {
     this.routerA.navigate(['/comment'], { queryParams: { userid: userId } });
