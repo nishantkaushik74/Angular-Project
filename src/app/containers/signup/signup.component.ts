@@ -5,6 +5,7 @@ import { SignUPService } from '../../Services/sign-up.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -19,7 +20,7 @@ export class SignupComponent {
     private _apiService: SignUPService,
     private routerA: Router,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formsignup = this.formBuilder.group({
@@ -29,27 +30,27 @@ export class SignupComponent {
     });
   }
 
-  addData() {
+  async addData() {
     if (this.formsignup.invalid) {
-      this.toastService.error('Invalid data. Please fill in all fields correctly.');
+      this.toastService.error("Please ensure that all fields are filled correctly.");
       return;
     }
 
-    this._apiService
-      .signUp(this.formsignup.value)
-      .then((data) => {
-        console.log('Sign up successful!', data);
-        localStorage.setItem('userinformation', JSON.stringify(data));
-        this.toastService.success('Sign up successful!');
+    try {
+      const data = await this._apiService.signUp(this.formsignup.value)
+      console.log('Sign up successful!', data);
+      localStorage.setItem('userinformation', JSON.stringify(data));
+      this.toastService.success('Sign up successful!');
+      setTimeout(() => {
         this.routerA.navigateByUrl('/login');
-      })
-      .catch(error => {
-        console.log(error);
-        this.toastService.error('Error occurred while signing up. Please try again later.');
-      });
+      }, 2000);
+    } catch (error) {
+    this.toastService.error("User already exists");
+    }
   }
 
+
   storeUserId(userId: string) {
-    this.routerA.navigate(['/comment'], { queryParams: { userid: userId }});
+    this.routerA.navigate(['/comment'], { queryParams: { userid: userId } });
   }
 }

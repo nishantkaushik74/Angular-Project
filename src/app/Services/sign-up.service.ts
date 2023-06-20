@@ -23,32 +23,27 @@ export class SignUPService {
   //   //  this._toastService.info('Login successful')
   // }
   async signUp(model: SignUpModel): Promise<any> {
-    try {
-      const { data, error } = await this.supabase.auth.signUp({
-        email: model.email,
-        password: model.password,
-      });
-      if (data != null) {
-        const response = await this.supabase
-          .from('Profile')
-          .insert([{ fullName: model.fullName, userid: data.user?.id }]);
-        if (response.data) {
-          console.log(response.data);
-        }
-        if (response.error) {
-          console.log('Error inserting user profile:', response.error);
-          return;
-        }
-
-        console.log('Signup and profile insert successful');
-      }
-      if (error) {
-        console.log('Error signing up:', error);
-        return;
-      }
-    } catch (error) {
-      console.log('Error:', error);
+    const { data, error } = await this.supabase.auth.signUp({
+      email: model.email,
+      password: model.password,
+    });
+    if (error) {
+      throw new Error(error.message);
     }
+    if (data != null) {
+      const response = await this.supabase
+        .from('Profile')
+        .insert([{ fullName: model.fullName, userid: data.user?.id }]);
+      if (response.error) {
+        console.log('Error inserting user profile:', response.error);
+        return response.error;
+      }
+      if (response.data) {
+        return response.data
+      }
+
+    }
+    else return data
   }
   async updatingProfileData(form: any): Promise<any> {
     // this.showToast()
