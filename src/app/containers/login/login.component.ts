@@ -40,7 +40,7 @@ export class LoginComponent {
         console.log("🚀 ~ file: login.component.ts:41 ~ LoginComponent ~ login ~ token:", token)
         localStorage.setItem('token', token); // Store the token in local storage
         localStorage.setItem('user', JSON.stringify(data));
-        window.location.href = 'comment';
+        // window.location.href = '/profile';
       } else if (error) {
       }
     } catch (error) {

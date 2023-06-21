@@ -3,11 +3,19 @@
     <button type="button" class="btn-close" (click)="closeBox()"></button>
     <div class="card-container">
       <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
-        <h3>{{ data.h1 }}</h3>
-        <label for="actName">{{ data.h2 }}</label>
-        <input type="text" [(ngModel)]="variant" required id="actName" name="variant" />
-        <div *ngIf="receivedData == 1">
-          <h6>{{ data.h3 }}</h6>
+        <h3>{{ data.Title }}</h3>
+        <div  *ngIf="data.h1">
+          <label for="actName">{{ data.h1 }}</label>
+          <input
+            type="text"
+            [(ngModel)]="variant"
+            required
+            id="actName"
+            name="variant"
+          />
+        </div>
+        <div *ngIf=" data.DataEnter">
+          <label for="data">{{ data.DataEnter }}</label>
           <textarea
             type="text"
             [(ngModel)]="variant2"

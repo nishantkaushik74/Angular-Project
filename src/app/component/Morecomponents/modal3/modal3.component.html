@@ -4,12 +4,12 @@
     <div class="card-container">
       <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
         <h3>{{ data.Title }}</h3>
-        <div  *ngIf="data.h1">
+
+        <div *ngIf="data.h1">
           <label for="date">{{ data.h1 }}</label>
           <input
             type="date"
             ngModel
-            
             id="date"
             name="variant"
             #variant="ngModel"
@@ -20,7 +20,6 @@
           <input
             type="text"
             ngModel
-            
             id="Appellant"
             name="variant3"
             #variant="ngModel"
@@ -31,7 +30,6 @@
           <input
             type="text"
             ngModel
-            
             id="Respondent"
             name="variant4"
             #variant="ngModel"
@@ -42,7 +40,6 @@
           <input
             type="text"
             ngModel
-            
             id="CourtName"
             name="variant5"
             #variant="ngModel"
@@ -53,7 +50,6 @@
           <input
             type="text"
             ngModel
-            
             id="SectionNo"
             name="variant6"
             #variant="ngModel"
@@ -64,7 +60,6 @@
           <input
             type="text"
             ngModel
-            
             id="Subject"
             name="variant7"
             #variant="ngModel"
@@ -75,32 +70,44 @@
           <input
             type="text"
             ngModel
-            
             id="Briefing"
             name="variant8"
             #variant="ngModel"
           />
         </div>
+
         <div *ngIf="data.DataEnter">
           <label for="data">{{ data.DataEnter }}</label>
-
+        
           <textarea
             type="text"
             ngModel
-            
             id="data"
             name="variant2"
             #variant2="ngModel"
+            [(ngModel)]="variant2Value"
+            [disabled]="fileUploaded"
           ></textarea>
         </div>
+        
+        <div>
+          <label for="text">Upload PDF</label>
+          <br/>
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            name="pdfFile"
+            accept=".pdf"
+            [disabled]="textAreaDisabled"
+          />
+        </div>
+        
 
         <button
           class="btn btn-primary button2"
           type="submit"
           [disabled]="!act1question.valid"
-
         >
-
           Enter
         </button>
       </form>

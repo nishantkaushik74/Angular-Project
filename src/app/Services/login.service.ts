@@ -40,7 +40,7 @@ export class LoginService {
       localStorage.setItem('user', JSON.stringify(data));
       this.isAuthenticated = true;
       setTimeout(() => {
-        this.router.navigate(['/comment']);
+        this.router.navigate(['/gst/act']);
       }, 1000);
       this.showToast(0)
       return data

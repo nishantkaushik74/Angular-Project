@@ -10,8 +10,8 @@ export class RulesComponent {
 
   //openAndClose 
   data = {
-    h1: "Add Act",
-    h2: "Name the rule you want to add ?"
+    Title : "Add Rules",
+    h1 : "Name the rule you want to add ?"
   }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }

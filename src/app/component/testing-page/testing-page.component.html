@@ -1,0 +1,4 @@
+<form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
+  <input type="file" accept=".pdf" (change)="onFileSelected($event)" />
+  <button type="submit">Upload PDF</button>
+</form>

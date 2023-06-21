@@ -10,7 +10,6 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 })
 export class NotificationsComponent {
   //openAndClose 
-  //openAndClose 
   isDocDisplayOpen = false;
   isModalOpen = false
   openModal() {
@@ -63,12 +62,12 @@ export class NotificationsComponent {
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
     // console.log("🚀 ~ file: notifications.component.ts:66 ~ NotificationsComponent ~ getData ~ this.CardData:", this.CardData)
     this.CardData.map((data: any) => {
-      const [Date, Government,Subject, Briefing,Types] = data.Name.split(',');
-       data["h1"]= Date
-       data["h2"]= Government
-       data["h3"]= Subject
-       data["h5"]= Briefing
-       data["h6"]= Types
+      const [Date, Government, Subject, Briefing, Types] = data.Name.split(',');
+      data["h1"] = Date
+      data["h2"] = Government
+      data["h3"] = Subject
+      data["h5"] = Briefing
+      data["h6"] = Types
 
 
     })
@@ -87,13 +86,9 @@ export class NotificationsComponent {
   receiveData(subject: any) {
 
     subject["addedValue"] = subject.variant + "," + subject.variant3 + "," + subject.variant5 + "," + subject.variant6 + "," + subject.variant8
-    console.log("🚀 ~ file: notifications.component.ts:93 ~ NotificationsComponent ~ receiveData ~ subject:", subject.addedValue)
-
     const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
-
     this.getData()
     this.closeModal()
-
   }
 
 }

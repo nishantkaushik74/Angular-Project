@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { log } from 'console';
 import { SignUPService } from 'src/app/Services/sign-up.service';
+
 
 @Component({
   selector: 'app-acts1',
@@ -9,27 +11,31 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 })
 export class Acts1Component {
   //openAndClose 
-  data = {
-    h1: "Add Act",
-    h2: "Name the Act you want to add ?"
-  }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }
   closeModal() { this.isModalOpen = false }
   //Other variables declared
+  endPoint:any
   ModuleInfoTable: any;
   ModulesTable: any;
   ActData: any;
+  data = {
+    Title: "Add Act",
+    h1: "Name the Act you want to add ?"
+  }
+
   //Constructor
   constructor(
-    private _apiService: SignUPService, private router: Router
+    private _apiService: SignUPService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
   //NGonIt Called function
   async getData() {
     try {
-      this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
-      this.ModulesTable = await this._apiService.getTableData("Modules")
-      this.ActData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid == 1)).map((act: any, index: number) => {
+      this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
+      this.ModulesTable = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
+      this.ActData = this.ModulesTable.map((act: any, index: number) => {
         act['sno'] = index + 1;
         return act;
       })
@@ -38,7 +44,9 @@ export class Acts1Component {
     }
   }
   //ngOnIt
-  ngOnInit() { this.getData() }
+  ngOnInit() { 
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
+    this.getData() }
   //Route function Function
   roteToSubjectSelect(act: any) {
     this.router.navigate(['gst/act/section/', { id: act.id, name: act.Name, parentID: act.parentid, moduleid: act.moduleid }]);

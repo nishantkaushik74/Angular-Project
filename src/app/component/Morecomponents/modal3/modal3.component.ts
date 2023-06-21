@@ -11,6 +11,9 @@ export class Modal3Component {
   variant: any;
   variant2: any;
   variant3: any;
+  variant2Value = '';
+  fileUploaded = false;
+  textAreaDisabled = false;
 
   @Input() receivedData: any;
   @Input() data: any;
@@ -33,7 +36,38 @@ export class Modal3Component {
 
   //other Function
 
-  onsubmit(form: NgForm) {
-    this.receiveData.emit(form.value)
+    
+  formData: FormData = new FormData();
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.fileUploaded = true;
+
+    if (this.fileUploaded === true) {
+      this.variant2Value = ''; 
+    }
+    this.textAreaDisabled = true;
+    this.formData.append('pdfFile', file);
   }
+
+  onsubmit(form: NgForm) {
+    console.log("🚀 ~ file: modal3.component.ts:54 ~ Modal3Component ~ onsubmit ~ form:", form)
+    // const file = this.formData.get('pdfFile');
+    // form.value["PDF_file"] =file
+    // this.receiveData.emit(form.value)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }

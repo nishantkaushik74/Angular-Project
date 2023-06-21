@@ -23,9 +23,9 @@ export class SectionComponent {
   }
   dataToSend = 1;
   data = {
-    h1: "Add Section",
-    h2: "Name the Section you want to add ?",
-    h3: "Section details"
+    Title : "Add Section",
+    h1 : "Name the Section you want to add ?",
+    DataEnter: "Section details"
   }
   //Other variables declared
   URLdata: any;

@@ -27,9 +27,9 @@ export class SubSectionComponent {
   ModuleInfoTable: any;
   dataToSend = 1;
   data = {
-    h1: "Add Sub Section",
-    h2: "Name the Sub Section you want to add ?",
-    h3: "Sub Section details"
+    Title: "Add Sub Section",
+    h1: "Name the Sub Section you want to add ?",
+    DataEnter: "Sub Section details"
   }
   Docdata: any
 

@@ -85,6 +85,7 @@ import { CBICComponent } from './component/cbic/cbic.component';
 import { BlogComponent } from './component/blog/blog.component';
 import { Card4Component } from './component/Morecomponents/card4/card4.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { TestingPageComponent } from './component/testing-page/testing-page.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -134,6 +135,7 @@ const APP_CONTAINERS = [
     CBICComponent,
     BlogComponent,
     Card4Component,
+    TestingPageComponent,
   ],
   imports: [
     AngularToastifyModule,

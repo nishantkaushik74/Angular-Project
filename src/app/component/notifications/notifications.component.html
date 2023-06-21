@@ -1,4 +1,5 @@
-<button class="btn btn-primary" (click)="openModal()">Add Notification  </button>
+<button class="btn btn-primary" (click)="openModal()">Add Notification</button>
+
 <div>
   <ng-container *ngIf="isDocDisplayOpen">
     <app-doc-display
@@ -19,5 +20,9 @@
   </ng-container>
 </div>
 <br />
-<app-card3 [CardData]="CardData" [heading]="heading" (receiveCardData)="receiveCardData($event)">
+<app-card3
+  [CardData]="CardData"
+  [heading]="heading"
+  (receiveCardData)="receiveCardData($event)"
+>
 </app-card3>

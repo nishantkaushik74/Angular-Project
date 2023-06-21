@@ -11,8 +11,8 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 export class RcmComponent {
   //openAndClose 
   data = {
-    h1: "Add Act",
-    h2: "Name the RCM you want to add ?"
+    Title : "Add RCM",
+    h1: "Name the RCM you want to add ?"
   }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }

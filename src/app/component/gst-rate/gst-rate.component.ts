@@ -10,8 +10,8 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 export class GstRateComponent {
   //openAndClose 
   data = {
-    h1: "Add Act",
-    h2: "Name the GST rate you want to add ?"
+    Title : "Add GST",
+    h1 : "Name the GST rate you want to add ?"
   }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }

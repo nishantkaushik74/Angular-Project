@@ -158,16 +158,30 @@ export class SignUPService {
   }
 
   async updateModuleInfoTable(tableName: any, subject: any, id: any): Promise<any> {
-    const { data, error } = await this.supabase
-      .from(tableName)
-      .upsert({ moduleid: id, Name: subject.addedValue, data: subject.variant2 })
-      .select()
-    if (error) {
-      throw new Error(error.message);
+    const path = `uploads/${subject.PDF_file.name}`
+    const response = await this.supabase.storage
+      .from('Test')
+      .upload(path, subject.PDF_file)
+    if (response.error) {
+      console.error('Error uploading file:', response.error.message);
+      return; // Exit the function if there was an error
     }
-    if (data) {
-      return data
+    if (response.data && response.data!==null) {
+      const pdf_Url = `https://gluifbolndyftekyypbl.supabase.co/storage/v1/object/public/Test/${response?.data?.path}`;
+      let { data, error } = await this.supabase
+        .from(tableName)
+        .upsert({ moduleid: id, Name: subject.addedValue, data: subject.variant2, URL: pdf_Url })
+        .select()
+      if (error) {
+        console.log("🚀 ~ file: sign-up.service.ts:176 ~ SignUPService ~ updateModuleInfoTable ~ error:", error)
+        throw new Error(error.message);
+      }
+      if (data) {
+        console.log("🚀 ~ file: sign-up.service.ts:181 ~ SignUPService ~ updateModuleInfoTable ~ data:", data)
+        return data
+      }
     }
+
   }
   async getModuleInfoTableData(tableName: string, moduleid: any, parentId: any): Promise<any> {
     const { data, error } = await this.supabase
@@ -184,16 +198,16 @@ export class SignUPService {
     }
   }
   async UpdatePsswordAuthUser(subject: any): Promise<any> {
-    if (subject.newPassword===subject.confirmPassword) {
-          const { data, error } = await this.supabase.auth.updateUser({ password:subject.confirmPassword })
-          if (error) {
-            console.log("🚀 ~ file: sign-up.service.ts:195 ~ SignUPService ~ UpdatePsswordAuthUser ~ error:", error)
-            throw new Error(error.message);
-          }
-          if (data) {
-            console.log("🚀 ~ file: sign-up.service.ts:198 ~ SignUPService ~ UpdatePsswordAuthUser ~ data:", data)
-            return data
-          }
+    if (subject.newPassword === subject.confirmPassword) {
+      const { data, error } = await this.supabase.auth.updateUser({ password: subject.confirmPassword })
+      if (error) {
+        console.log("🚀 ~ file: sign-up.service.ts:195 ~ SignUPService ~ UpdatePsswordAuthUser ~ error:", error)
+        throw new Error(error.message);
+      }
+      if (data) {
+        console.log("🚀 ~ file: sign-up.service.ts:198 ~ SignUPService ~ UpdatePsswordAuthUser ~ data:", data)
+        return data
+      }
     }
     else alert("Not equal")
   }

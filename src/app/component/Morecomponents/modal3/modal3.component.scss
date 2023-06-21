@@ -41,6 +41,9 @@
     // position: relative; /* Add this line */
   
   }
+  h3 {
+    font-size: 1.1rem;
+  }
   
 
   
@@ -49,10 +52,10 @@
   .modal-container textarea[type="text"]
   {
     width: 100%;
-    padding: 5px;
     border: 1px solid gray;
   }
   .modal-container label {
+    font-size: 15px;
     font-weight: bold;
   }
 

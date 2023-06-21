@@ -30,17 +30,21 @@ import { NotificationsComponent } from './component/notifications/notifications.
 import { CBICComponent } from './component/cbic/cbic.component';
 import { BlogComponent } from './component/blog/blog.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { TestingPageComponent } from './component/testing-page/testing-page.component';
 const routes: Routes = [
-  { component: ChangePasswordComponent, path: 'resetPassword' },
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { component: SignupComponent, path: 'signup' },
+  
   { component: ForgotPasswordComponent, path: 'forgotpassword' },
+  { component: TestingPageComponent, path: 'testing' },
 
   { component: LoginComponent, path: 'login' },
   { component: Page404Component, path: '404', data: { title: 'Page 404' } },
   { component: Page500Component, path: '500', data: { title: 'Page 500' } },
   { component: LoginComponent, path: 'login', data: { title: 'Login Page' } },
+  { component: ChangePasswordComponent, path: 'resetPassword' },
+
   {
     path: '', component: DefaultLayoutComponent, data: { title: 'Home' },
     // canActivate: [AuthGuard]
@@ -48,9 +52,9 @@ const routes: Routes = [
       {
         component: ProfileComponent, path: 'profile',
       },
-      {
-        component: CommentComponent, path: 'comment',
-      },
+      // {
+      //   component: CommentComponent, path: 'comment',
+      // },
       {
         component: QuestionScreenComponent, path: 'questionScreen/:id'
       },
