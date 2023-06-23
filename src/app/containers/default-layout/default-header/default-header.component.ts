@@ -1,8 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { LoginService } from '../../../Services/login.service';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../../app/component/profile/shared/image.service';
+import { Subscription } from 'rxjs';
+
 
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
@@ -11,7 +14,9 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular';
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
 })
-export class DefaultHeaderComponent extends HeaderComponent {
+export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy {
+  public imageSrc: any;
+  private subscription: Subscription;
 
   @Input() sidebarId: string = "sidebar";
 
@@ -19,8 +24,21 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
 
-  constructor(private classToggler: ClassToggleService, private loginService: LoginService, private router: Router) {
+  constructor(
+    private classToggler: ClassToggleService,
+    private loginService: LoginService,
+    private router: Router,
+    private sharedService: SharedService
+  ) {
     super();
+    this.subscription = this.sharedService.image$.subscribe(
+      (imageUrl: string) => {
+        this.imageSrc = imageUrl;
+      }
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   logout() {

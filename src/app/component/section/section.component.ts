@@ -22,15 +22,16 @@ export class SectionComponent {
     this.isDocDisplayOpen = false
   }
   dataToSend = 1;
-  data = {
-    Title : "Add Section",
-    h1 : "Name the Section you want to add ?",
-    DataEnter: "Section details"
-  }
+  cardHeadings: any;
+
+  data: any;
+ 
   //Other variables declared
   URLdata: any;
   ModuleInfoTable: any;
   Docdata: any
+  moduleID: any;
+  
   //Constructor
   constructor(
     private route: ActivatedRoute,
@@ -42,13 +43,24 @@ export class SectionComponent {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      const moduleid = params.get('moduleid');
+      this.moduleID = params.get('moduleid');
       const name = params.get('name');
       const parentId = params.get('parentID');
-      this.URLdata = { id, name, parentId, moduleid };
+      this.URLdata = { id, name, parentId, moduleid: this.moduleID };
       this.getData()
     })
+
+    if (this.moduleID == 1) this.cardHeadings = ["Subject:", "Section:"];
+    else if (this.moduleID == 2) this.cardHeadings = ["Rule:", "Subject:"];
+    
+    this.data = {
+      Title: "Add Section",
+      h1: "Name the Section you want to add?",
+      h2: this.cardHeadings || null,
+      DataEnter: "Section details"
+    };
   }
+
   //ngOnIt Called function
   async getData() {
     try {
@@ -66,7 +78,7 @@ export class SectionComponent {
   //Route function Function
   roteToSubSection(subject: any) {
     console.log("🚀 ~ file: section.component.ts:44 ~ SectionComponent ~ roteToSubSection ~ subject:", subject)
-    this.router.navigate(['gst/act/section/subsection', {
+    this.router.navigate(['section/subsection', {
       id: subject.id,
       name: subject.Name,
       parentID: subject.parentid,
@@ -75,6 +87,7 @@ export class SectionComponent {
   }
   //receive data from child
   receiveData(subject: any) {
+    subject['variant'] = subject.variant + "," + subject.variant3;
     try {
       const a = this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
     } catch (error) {
@@ -83,6 +96,7 @@ export class SectionComponent {
     this.ngOnInit()
     this.getData()
     this.closeModal()
+
   }
   goBack(): void {
     this.location.back();

@@ -35,7 +35,6 @@ export class SignUPService {
         .from('Profile')
         .insert([{ fullName: model.fullName, userid: data.user?.id }]);
       if (response.error) {
-        console.log('Error inserting user profile:', response.error);
         return response.error;
       }
       if (response.data) {
@@ -45,28 +44,41 @@ export class SignUPService {
     }
     else return data
   }
+  pdf_Url: any
   async updatingProfileData(form: any): Promise<any> {
-    // this.showToast()
-
+    if (form.profilePicture) {
+      const path = `ProfilePictures/${form.profilePicture.name}`
+      const response = await this.supabase.storage
+        .from('Test')
+        .upload(path, form.profilePicture)
+      if (response.error) {
+        console.error('Error uploading file:', response.error.message);
+        return; // Exit the function if there was an error
+      }
+      this.pdf_Url = `https://gluifbolndyftekyypbl.supabase.co/storage/v1/object/public/Test/${response?.data?.path}`
+    }
     if (form.email) {
-      const { data, error } = await this.supabase.auth.updateUser({ email: form.email })
-    }
-    const { data, error } = await this.supabase.from('Profile')
-      .update({
-        fullName: form.name,
-        state: form.state,
-        phoneNumber: form.mobile,
-        gstn: form.gstin,
-        pincode: form.pincode,
-      })
-      .eq('userid', this.userIdString.user.id)
+      const updated = await this.supabase.from('Profile')
+        .update({
+          fullName: form.name,
+          state: form.state,
+          phoneNumber: form.mobile,
+          gstn: form.gstin,
+          pincode: form.pincode,
+          profilePicture: this.pdf_Url,
+        })
+        .eq('userid', this.userIdString.user.id)
 
+      if (updated.error) {
+        console.log(updated);
+        throw updated.error.message;
+      }
+      if (updated.error == null) {
+        console.log(updated);
+      }
 
-    if (error) {
-      throw error.message;
     }
-    if (error == null) {
-    }
+
   }
   async userInfo(): Promise<any> {
     const { data: { user } } = await this.supabase.auth.getUser()
@@ -78,7 +90,6 @@ export class SignUPService {
   async profileData(): Promise<any> {
     const userIdString = JSON.parse(localStorage.getItem("sb-gluifbolndyftekyypbl-auth-token") ?? '[]');
 
-    console.log("this.userIdString.user.id", userIdString.user.id);
 
     const { data, error } = await this.supabase.from('Profile').select('*')
       .eq('userid', userIdString.user.id)
@@ -118,10 +129,9 @@ export class SignUPService {
   async updateActTable(tableName: any, subject: any, inputValue: any): Promise<any> {
     const { data, error } = await this.supabase
       .from(tableName)
-      .upsert({ moduleid: inputValue.id, Name: subject.variant })
+      .upsert({ moduleid: inputValue, Name: subject.variant })
       .select()
     if (error) {
-      console.log("🚀 ~ file: sign-up.service.ts:120 ~ SignUPService ~ updateActTable ~ error:", error.message)
       throw new Error(error.message);
     }
     if (data) {
@@ -129,14 +139,11 @@ export class SignUPService {
     }
   }
   async updateModuleInfo(tableName: any, subject: any, inputValue: any): Promise<any> {
-    console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ inputValue:", inputValue)
-    console.log("🚀 ~ file: sign-up.service.ts:115 ~ SignUPService ~ updateActTable ~ subject:", subject)
     const { data, error } = await this.supabase
       .from(tableName)
       .upsert({ moduleid: inputValue.moduleid, Name: subject.variant, parentid: inputValue.id, data: subject.variant2 })
       .select()
     if (error) {
-      console.log("🚀 ~ file: sign-up.service.ts:120 ~ SignUPService ~ updateActTable ~ error:", error.message)
       throw new Error(error.message);
     }
     if (data) {
@@ -166,18 +173,16 @@ export class SignUPService {
       console.error('Error uploading file:', response.error.message);
       return; // Exit the function if there was an error
     }
-    if (response.data && response.data!==null) {
+    if (response.data && response.data !== null) {
       const pdf_Url = `https://gluifbolndyftekyypbl.supabase.co/storage/v1/object/public/Test/${response?.data?.path}`;
       let { data, error } = await this.supabase
         .from(tableName)
         .upsert({ moduleid: id, Name: subject.addedValue, data: subject.variant2, URL: pdf_Url })
         .select()
       if (error) {
-        console.log("🚀 ~ file: sign-up.service.ts:176 ~ SignUPService ~ updateModuleInfoTable ~ error:", error)
         throw new Error(error.message);
       }
       if (data) {
-        console.log("🚀 ~ file: sign-up.service.ts:181 ~ SignUPService ~ updateModuleInfoTable ~ data:", data)
         return data
       }
     }
@@ -201,11 +206,9 @@ export class SignUPService {
     if (subject.newPassword === subject.confirmPassword) {
       const { data, error } = await this.supabase.auth.updateUser({ password: subject.confirmPassword })
       if (error) {
-        console.log("🚀 ~ file: sign-up.service.ts:195 ~ SignUPService ~ UpdatePsswordAuthUser ~ error:", error)
         throw new Error(error.message);
       }
       if (data) {
-        console.log("🚀 ~ file: sign-up.service.ts:198 ~ SignUPService ~ UpdatePsswordAuthUser ~ data:", data)
         return data
       }
     }

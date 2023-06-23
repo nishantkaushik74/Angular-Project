@@ -17,7 +17,6 @@ export class QuestionService {
   // async getQuestions(): Promise<any> {
   //   const { data = [], error } = await this.supabaseClient.from('Questions').select('*');
   //   if (error) {
-  //     console.log(error);
   //   } else {
   //     return data as Question[];
   //   }

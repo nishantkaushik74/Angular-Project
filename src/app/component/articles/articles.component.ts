@@ -55,7 +55,6 @@ export class ArticlesComponent {
   async getData() {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
-    console.log("🚀 ~ file: council-meetings.component.ts:54 ~ CouncilMeetingsComponent ~ getData ~ this.CardData:", this.CardData)
     this.CardData.map((data: any) => {
       if (data.data == null || data.data == "null" || data.data == undefined) {
         data["icon"] = false; data["date"] = false;
@@ -68,18 +67,16 @@ export class ArticlesComponent {
         data["samay"] = date
         data["Name"] = Name
       }
-      console.log("🚀 ~ file: council-meetings.component.ts:56 ~ CouncilMeetingsComponent ~ this.CardData.map ~ data:", data)
 
     })
   }
   //ngOnIt
   ngOnInit() {
-    this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
     this.getData()
   }
   //receive data from child
   receiveCardData(subject: any) {
-    console.log("🚀 ~ file: council-meetings.component.ts:78 ~ CouncilMeetingsComponent ~ receiveCardData ~ subject:", subject)
     this.openDisplayDoc(subject.data)
   }
 

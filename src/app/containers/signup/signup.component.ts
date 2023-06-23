@@ -38,7 +38,6 @@ export class SignupComponent {
 
     try {
       const data = await this._apiService.signUp(this.formsignup.value)
-      console.log('Sign up successful!', data);
       localStorage.setItem('userinformation', JSON.stringify(data));
       this.toastService.success('Sign up successful!');
       setTimeout(() => {

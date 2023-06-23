@@ -56,15 +56,12 @@ export class QuestionScreenComponent {
     this.modelAnswer.userid = userData.user.id;
     this.modelAnswer.id = uuidv4();
     this.modelAnswer.questionid = JSON.parse(localStorage.getItem("questionId")!);
-    console.log(this.modelAnswer.questionid)
     this._questionscreen.postAnswers(this.modelAnswer)
       .then((data) => {
-        console.log('Answer added', data);
         alert('Answer Added!!!');
         window.history.back();
       })
       .catch(error => {
-        console.log(error);
         alert('Error occurred while comment added. Please try again later.');
       });
   }

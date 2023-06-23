@@ -27,7 +27,6 @@ export class Card2Component {
   //receive data from child
   ngOnChanges() {
     if (this.CardData) {
-      console.log("🚀 ~ file: card2.component.ts:15 ~ Card2Component ~ CardData:", this.CardData)
     }
   }
   sendItem(data: any) {

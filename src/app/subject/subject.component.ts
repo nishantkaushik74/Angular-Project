@@ -14,25 +14,10 @@ export class SubjectComponent  implements OnInit
   SubjectModelObj:SubjectModel=new SubjectModel()
    details:any;
   
-
-
-//   userform: FormGroup<Subjects> | undefined;
-//   userForm = new FormGroup({
-//     Id:new FormControl(),
-//     subCode: new FormControl(),
-//     subName: new FormControl()
-// }); 
   
 constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceService){debugger;
   
-//  this._Service.getAllSubject().subscribe({next:(sub)=>{
-//   this.subject=sub;
-//   console.log(sub);
-//  },
-// error:(Response)=>{
-// console.log(Response);
-// }
-//   });
+
 }
   ngOnInit(): void {
     this.userForm=this.formBuilder.group({
@@ -49,7 +34,6 @@ constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceServi
    this.SubjectModelObj.subCode=this.userForm.value.subCode ;
 
    this._Service.postSubject(this.SubjectModelObj).subscribe({next:(res)=>{
-    console.log(res);
     alert("Subject Added Successfully");
     this.getAllSubject();
     let ref=document.getElementById('cancel')
@@ -57,7 +41,6 @@ constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceServi
     this.userForm.reset();
    },
    error:(Response)=>{
-    console.log(Response)
     alert("Something went wrong");
    }
   })
@@ -66,21 +49,17 @@ constructor(private formBuilder:FormBuilder,private _Service:SubjectServiceServi
 getAllSubject(){
   this._Service.getSubject().subscribe({next:(res)=>{
       this.subjectData=res;
-      console.log(res);
      },
     error:(Response)=>{
-    console.log(Response);
     }
   });
 }
 deleteSubject(details:any){
 this._Service.deleteSubject(details.id).subscribe({next:(res)=>{
-  console.log(res);
   alert("Something went wrong");
  this.getAllSubject();
  },
  error:(Response)=>{
-  console.log(Response)
   alert("Subject Deleted  Successfully");
   
  }

@@ -26,7 +26,6 @@ export class TestingPageComponent {
       // Replace the following code with your actual HTTP request
       // this.http.post('your-upload-url', formData).subscribe(
       //   response => {
-      //     console.log('Upload successful');
       //   },
       //   error => {
       //     console.error('Upload error:', error);

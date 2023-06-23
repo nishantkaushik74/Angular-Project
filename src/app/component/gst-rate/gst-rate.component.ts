@@ -41,7 +41,7 @@ export class GstRateComponent {
   ngOnInit() { this.getData() }
   //Route function Function
   roteToSubjectSelect(act: any) {
-    this.router.navigate(['gst/act/section/', { id: act.id, name: act.Name, parentID: act.parentid, moduleid: act.moduleid }]);
+    this.router.navigate(['gstrateandhsncode/section/', { id: act.id, name: act.Name, parentID: act.parentid, moduleid: act.moduleid }]);
   }
   //receive data from child
   receiveData(subject: any) {

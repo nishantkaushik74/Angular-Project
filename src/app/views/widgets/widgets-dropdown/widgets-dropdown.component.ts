@@ -231,7 +231,6 @@ export class ChartSample implements AfterViewInit {
       // @ts-ignore
       const before = this.chartComponent?.chart?.data.datasets.length;
       console.log('before', before);
-      // console.log('datasets, labels', datasets, labels)
       // @ts-ignore
       // this.data = data()
       this.data = {
@@ -247,7 +246,6 @@ export class ChartSample implements AfterViewInit {
       // @ts-ignore
       setTimeout(() => {
         const after = this.chartComponent?.chart?.data.datasets.length;
-        console.log('after', after);
       });
     }, 5000);
   }

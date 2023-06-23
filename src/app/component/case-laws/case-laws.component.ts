@@ -76,11 +76,10 @@ export class CaseLawsComponent {
        data["h7"]= Briefing
 
     })
-    console.log("🚀 ~ file: case-laws.component.ts:80 ~ CaseLawsComponent ~ this.CardData.map ~ this.CardData:", this.CardData)
   }
   //ngOnIt
   ngOnInit() {
-    this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
     this.getData()
 
   }

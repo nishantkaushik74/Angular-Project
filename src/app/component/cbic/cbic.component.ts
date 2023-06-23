@@ -62,7 +62,7 @@ export class CBICComponent {
   }
   //ngOnIt
   ngOnInit() {
-    this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
     this.getData()
   }
   //receive data from child

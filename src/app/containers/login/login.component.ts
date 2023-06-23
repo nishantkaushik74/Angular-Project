@@ -12,6 +12,13 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  //Toggle Password
+  passwordVisible: boolean = false;
+
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
+  //
   data1: any;
   formLogin: FormGroup;
   loginModel: SignInModel = {
@@ -33,14 +40,17 @@ export class LoginComponent {
   }
 
   async login() {
+
     try {
       const { data, error } = await this.loginService.loginData(this.loginModel);
       if (data && data?.session) {
         const token = await data.session.access_token; // Extract the token value from the session object
-        console.log("🚀 ~ file: login.component.ts:41 ~ LoginComponent ~ login ~ token:", token)
         localStorage.setItem('token', token); // Store the token in local storage
         localStorage.setItem('user', JSON.stringify(data));
         // window.location.href = '/profile';
+        const passwordInput = document.getElementById('pwd') as HTMLInputElement;
+        passwordInput.type = this.passwordVisible ? 'text' : 'password';
+      
       } else if (error) {
       }
     } catch (error) {

@@ -60,7 +60,6 @@ export class NotificationsComponent {
   async getData() {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
-    // console.log("🚀 ~ file: notifications.component.ts:66 ~ NotificationsComponent ~ getData ~ this.CardData:", this.CardData)
     this.CardData.map((data: any) => {
       const [Date, Government, Subject, Briefing, Types] = data.Name.split(',');
       data["h1"] = Date
@@ -74,7 +73,7 @@ export class NotificationsComponent {
   }
   //ngOnIt
   ngOnInit() {
-    this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
     this.getData()
 
   }

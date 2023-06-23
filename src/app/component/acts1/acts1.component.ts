@@ -34,8 +34,8 @@ export class Acts1Component {
   async getData() {
     try {
       this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
-      this.ModulesTable = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
-      this.ActData = this.ModulesTable.map((act: any, index: number) => {
+      this.ModuleInfoTable = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
+      this.ActData = this.ModuleInfoTable.map((act: any, index: number) => {
         act['sno'] = index + 1;
         return act;
       })
@@ -45,15 +45,16 @@ export class Acts1Component {
   }
   //ngOnIt
   ngOnInit() { 
-    this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
-    this.getData() }
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
+    this.getData() 
+  }
   //Route function Function
   roteToSubjectSelect(act: any) {
-    this.router.navigate(['gst/act/section/', { id: act.id, name: act.Name, parentID: act.parentid, moduleid: act.moduleid }]);
+    this.router.navigate(['section/', { id: act.id, name: act.Name, parentID: act.parentid, moduleid: act.moduleid }]);
   }
   //receive data from child
   receiveData(subject: any) {
-    const inputValue = this.ModulesTable[0]
+    const inputValue = this.ModulesTable[0].id
     try {
       const a = this._apiService.updateActTable("ModuleInfo", subject, inputValue)
     } catch (error) {

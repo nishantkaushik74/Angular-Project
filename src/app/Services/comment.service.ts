@@ -22,7 +22,6 @@ export class CommentService {
    async getQuestions(): Promise<any> {
     const { data = [], error } = await this.supabaseClient.from('Questions').select('*');
     if (error) {
-      console.log(error);
     } else {
       return data as Question[];
     }
@@ -32,7 +31,6 @@ export class CommentService {
     debugger
     const { data = [], error } = await this.supabaseClient.from('Answers').select('*');
     if (error) {
-      console.log(error);
     } else {
       return data as Answer[];
     }

@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 export class ModalComponent {
   variant: string = "";
   variant2: string= "";
+  variant3: string= "";
   @Input() receivedData: any;
   @Input() data: any;
 
@@ -28,8 +29,6 @@ export class ModalComponent {
   //other Function
 
   onsubmit(form: NgForm) {
-    console.log("🚀 ~ file: modal.component.ts:23 ~ ModalComponent ~ ngOnIt ~ receivedData:", this.receivedData)
-
     this.receiveData.emit(form.value)
   }
 

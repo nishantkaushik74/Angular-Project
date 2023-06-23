@@ -1,16 +1,20 @@
 <h1>Welcome to Your Profile Page</h1>
 <lib-toastify-toast-container></lib-toastify-toast-container>
-<form #profileForm="ngForm" (ngSubmit)="onsubmit(profileForm)">
+<form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
+  <!-- Existing code... -->
+
+  <!-- Existing code... -->
+
   <div>
     <label for="name">Name:</label>
-    <input
-      type="text"
-      id="name"
-      name="name"
-      [(ngModel)]="ngname"
-      
-    />
-    <small class="error-message" *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched">
+    <input type="text" id="name" name="name" [(ngModel)]="ngname" />
+    <small
+      class="error-message"
+      *ngIf="
+        profileForm.controls['name'].invalid &&
+        profileForm.controls['name'].touched
+      "
+    >
       Please enter a valid name.
     </small>
   </div>
@@ -22,28 +26,32 @@
       id="mobile"
       name="mobile"
       [(ngModel)]="ngmobile"
-      
       intlTelInput
     />
-    <small class="error-message" *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
+    <small
+      class="error-message"
+      *ngIf="
+        profileForm.controls['mobile'].invalid &&
+        profileForm.controls['mobile'].touched
+      "
+    >
       Please enter a valid mobile number (10 digits only).
     </small>
   </div>
 
   <div>
     <label for="gstin">GSTIN:</label>
-    <input
-      type="text"
-      id="gstin"
-      name="gstin"
-      [(ngModel)]="nggstin"
-
-    />
-    <small class="error-message" *ngIf="profileForm.controls['gstin'].invalid && profileForm.controls['gstin'].touched">
+    <input type="text" id="gstin" name="gstin" [(ngModel)]="nggstin" />
+    <small
+      class="error-message"
+      *ngIf="
+        profileForm.controls['gstin'].invalid &&
+        profileForm.controls['gstin'].touched
+      "
+    >
       Please enter a valid GSTIN.
     </small>
   </div>
-  
 
   <div>
     <label for="email">Email:</label>
@@ -52,25 +60,30 @@
       id="email"
       name="email"
       [(ngModel)]="ngemail"
-      readonly      
-      readonly      
+      readonly
+      readonly
     />
-    <small class="error-message" *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched">
+    <small
+      class="error-message"
+      *ngIf="
+        profileForm.controls['email'].invalid &&
+        profileForm.controls['email'].touched
+      "
+    >
       Please enter a valid email address.
     </small>
   </div>
-  
 
   <div>
     <label for="state">State:</label>
-    <input
-      type="text"
-      id="state"
-      name="state"
-      [(ngModel)]="ngstate"
-      
-    />
-    <small class="error-message" *ngIf="profileForm.controls['state'].invalid && profileForm.controls['state'].touched">
+    <input type="text" id="state" name="state" [(ngModel)]="ngstate" />
+    <small
+      class="error-message"
+      *ngIf="
+        profileForm.controls['state'].invalid &&
+        profileForm.controls['state'].touched
+      "
+    >
       Please enter a valid state.
     </small>
   </div>
@@ -83,17 +96,43 @@
       name="pincode"
       [(ngModel)]="ngpincode"
       pattern="[0-9]{6}"
-      
     />
-    <small class="error-message" *ngIf="profileForm.controls['pincode'].invalid && profileForm.controls['pincode'].touched">
+    <small
+      class="error-message"
+      *ngIf="
+        profileForm.controls['pincode'].invalid &&
+        profileForm.controls['pincode'].touched
+      "
+    >
       Please enter a valid pincode (6 digits only).
     </small>
   </div>
 
   <!-- Add more input fields as needed -->
-
   <div>
-    <button type="submit" [disabled]="!profileForm.valid" class="save-profile-button">Save Profile</button>
+    <label for="profilePicture">Profile Picture:</label>
+    <input
+      type="file"
+      id="profilePicture"
+      name="profilePicture"
+      accept=".jpg"
+      (change)="onProfilePictureChange($event)"
+    />
+  </div>
+  <div>
+    <button
+      type="submit"
+      [disabled]="!profileForm.valid"
+      class="save-profile-button"
+    >
+      Save Profile
+    </button>
     <button type="button" routerLink="/changepassword">Change Password</button>
   </div>
 </form>
+<div>
+  <label for="mobile">Profile Picture</label>
+  <div class="profile-image">
+    <img [src]="image" alt="Profile Picture">
+  </div>
+</div>

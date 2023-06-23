@@ -1,29 +1,68 @@
-<div class="card center card" style="width: 25rem;">
-  <div class="card-body card-header" >
-    <h3 style="text-align: center; font-family: 'Times New Roman', Times, serif;">
-       <mat-icon>account_circle</mat-icon> <br> Log In 
+<div class="card center card" style="width: 25rem">
+  <div class="card-body card-header">
+    <h3
+      style="text-align: center; font-family: 'Times New Roman', Times, serif"
+    >
+      <mat-icon>account_circle</mat-icon> <br />
+      Log In
       <!-- <img src="\src\assets\img\brand\usericon.png"><br>Log In -->
     </h3>
   </div>
-  <lib-toastify-toast-container position='top-right'></lib-toastify-toast-container>
+  <lib-toastify-toast-container
+    position="top-right"
+  ></lib-toastify-toast-container>
 
   <div class="card-body">
     <form [formGroup]="formLogin">
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" formControlName="email" id="email" [(ngModel)]="loginModel.email"
-          placeholder="Enter email">
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          id="email"
+          [(ngModel)]="loginModel.email"
+          placeholder="Enter email"
+        />
       </div>
       <div class="form-group">
         <label for="pwd">Password:</label>
-        <input type="password" class="form-control" formControlName="password" id="pwd"
-          [(ngModel)]="loginModel.password" placeholder="Enter password">
-      </div><br>
+        <div class="password-input-container">
+          <input
+            type="{{ passwordVisible ? 'text' : 'password' }}"
+            class="form-control"
+            formControlName="password"
+            id="pwd"
+            [(ngModel)]="loginModel.password"
+            placeholder="Enter password"
+            style="padding-right: 2.5rem"
+          />
+          <i
+            class="material-icons password-toggle-icon"
+            (click)="togglePasswordVisibility()"
+            style="
+              position: absolute;
+              top: 55%;
+              right: 2rem;
+              transform: translateY(-50%);
+              cursor: pointer;
+            "
+          >
+            {{ passwordVisible ? "visibility_off" : "visibility" }}
+          </i>
+        </div>
+      </div>
+
+      <br />
       <!-- <a routerLink="/comment"> </a>-->
-      <button type="login" class="btn btn-primary" (click)="login()">Log In</button><br><br>
-      If you have not an account.Please <a class="signup-link" routerLink="/signup">Registration here</a>
-      <br>
-      If you have forgot password <a class="signup-link" routerLink="/forgotpassword">Forgot Password</a>
+      <button type="login" class="btn btn-primary" (click)="login()">
+        Log In</button
+      ><br /><br />
+      If you have not an account.Please
+      <a class="signup-link" routerLink="/signup">Registration here</a>
+      <br />
+      If you have forgot password
+      <a class="signup-link" routerLink="/forgotpassword">Forgot Password</a>
     </form>
   </div>
 </div>

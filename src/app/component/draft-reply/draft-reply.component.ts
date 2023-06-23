@@ -24,7 +24,6 @@ export class DraftReplyComponent {
   openDisplayDoc(data: any) {
     this.isDocDisplayOpen = true
     this.Docdata = data;
-    console.log(data);
     
   }
   //Other variables declared
@@ -61,7 +60,7 @@ export class DraftReplyComponent {
   }
   //ngOnIt
   ngOnInit() {
-    this.endPoint = this.route.snapshot.url.join('/').split("/")[1];
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
     this.getData()
   }
   //receive data from child

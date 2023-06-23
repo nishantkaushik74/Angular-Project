@@ -8,7 +8,16 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent {
+  passwordVisible: boolean = false;
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
 
+  confirmPasswordVisible : boolean = false;
+  toggleConfirmPasswordVisibility () {
+    this.confirmPasswordVisible = !this.confirmPasswordVisible;
+  }
+  
   currentPassword: string = "";
   newPassword: string = "";
   confirmPassword: string = "";

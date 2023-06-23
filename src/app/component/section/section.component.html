@@ -1,8 +1,8 @@
 <div>
   <div class="headButton">
     <button type="button" class="btn btn-primary" (click)="openModal()">
-      Add Section
-    </button>{{"  "}}
+      Add Section</button
+    >{{ "  " }}
     <button class="btn btn-primary" (click)="goBack()">Back</button>
   </div>
   <div>
@@ -35,8 +35,16 @@
         <div class="card_div2">
           <h2>{{ section.sno }}.</h2>
           <h2>
-            <ng-container *ngFor="let value of section.Name.split(',')">
-              {{ value }}<br />
+            <ng-container
+              *ngFor="
+                let value of section.Name.split(',') as values;
+                let i = index
+              "
+            >
+              <div style="display: flex;">
+                <div style="width: 10rem;">{{ cardHeadings[i] }}</div>
+                <div style="display: flex;">{{ value }}</div>
+              </div>
             </ng-container>
           </h2>
         </div>

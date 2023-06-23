@@ -40,7 +40,7 @@ export class LoginService {
       localStorage.setItem('user', JSON.stringify(data));
       this.isAuthenticated = true;
       setTimeout(() => {
-        this.router.navigate(['/gst/act']);
+        this.router.navigate(['profile']);
       }, 1000);
       this.showToast(0)
       return data
@@ -63,11 +63,9 @@ export class LoginService {
       
     })
     if (error) {
-      console.log("🚀 ~ error:", error)
       throw new Error(error.message);
     }
     if (data) {
-      console.log("🚀 ~  data:", data)
 
       return data
     }

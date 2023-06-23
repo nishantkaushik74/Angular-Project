@@ -51,10 +51,9 @@ export class Modal3Component {
   }
 
   onsubmit(form: NgForm) {
-    console.log("🚀 ~ file: modal3.component.ts:54 ~ Modal3Component ~ onsubmit ~ form:", form)
-    // const file = this.formData.get('pdfFile');
-    // form.value["PDF_file"] =file
-    // this.receiveData.emit(form.value)
+    const file = this.formData.get('pdfFile');
+    form.value["PDF_file"] =file
+    this.receiveData.emit(form.value)
   }
 
 

@@ -26,7 +26,7 @@ export class DefaultLayoutComponent {
       this.modules = await this._apiService.getTableData('Modules');
       for (let i = 0; i < this.modules.length; i++) {
         // this.j = { name: this.modules[i].description, url: `gst/${this.modules[i].description.toLowerCase()}` }
-        this.j = { name: this.modules[i].name, url: `gst/${this.modules[i].description.toLowerCase().replace(/\s+/g, '')}` }
+        this.j = { name: this.modules[i].name, url: `${this.modules[i].description.toLowerCase().replace(/\s+/g, '')}` }
 
         this.Navbar.push(this.j)
       }

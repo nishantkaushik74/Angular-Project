@@ -4,17 +4,32 @@
     <div class="card-container">
       <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
         <h3>{{ data.Title }}</h3>
-        <div  *ngIf="data.h1">
-          <label for="actName">{{ data.h1 }}</label>
-          <input
-            type="text"
-            [(ngModel)]="variant"
-            required
-            id="actName"
-            name="variant"
-          />
+        <div *ngIf="data.h1" class="inputFiels">
+          <div>
+            <label for="actName">{{ data.h1 }}</label>
+          </div>
+          <div>
+            <label *ngIf = "data.h2" for="">{{data.h2[0]}}</label>
+            <input
+              type="text"
+              [(ngModel)]="variant"
+              required
+              id="actName"
+              name="variant"
+            />
+            <label *ngIf = "data.h2" for="">{{data.h2[1]}}</label>
+
+            <input
+             *ngIf = "data.h2"
+              type="text"
+              [(ngModel)]="variant3"
+              required
+              id="section"
+              name="variant3"
+            />
+          </div>
         </div>
-        <div *ngIf=" data.DataEnter">
+        <div *ngIf="data.DataEnter">
           <label for="data">{{ data.DataEnter }}</label>
           <textarea
             type="text"
