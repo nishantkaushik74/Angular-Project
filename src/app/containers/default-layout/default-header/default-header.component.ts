@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 import { SharedService } from '../../../../app/component/profile/shared/image.service';
 import { Subscription } from 'rxjs';
 
-
+import { NgForm } from '@angular/forms';
+import { ToastService } from 'angular-toastify';
+import { SignUPService } from 'src/app/Services/sign-up.service';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 
@@ -17,7 +19,8 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy {
   public imageSrc: any;
   private subscription: Subscription;
-
+  image: any;
+  profileData: any;
   @Input() sidebarId: string = "sidebar";
 
   public newMessages = new Array(4)
@@ -28,7 +31,9 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy
     private classToggler: ClassToggleService,
     private loginService: LoginService,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private _apiService: SignUPService,
+
   ) {
     super();
     this.subscription = this.sharedService.image$.subscribe(
@@ -40,7 +45,22 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  ngOnInit() {
+    this.getData();
 
+
+  }
+  async getData() {
+    try {
+      const user = await this._apiService.userInfo();
+
+      this.profileData = await this._apiService.profileData();
+      this.image = this.profileData.profilePicture;
+      console.log("🚀 ~ file: default-h:", this.image)
+    } catch (error) {
+      // console.error("An error occurred while fetching user info:", error);
+    }
+  }
   logout() {
     try {
       this.loginService.logout().then(({ error }) => {
