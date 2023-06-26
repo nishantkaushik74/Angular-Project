@@ -9,6 +9,9 @@ export class Card4Component {
   @Input() CardData: any;
   @Input() heading: any;
   @Output() receiveCardData = new EventEmitter<void>();
+  currentPage = 1;
+  itemsPerPage = 5; // Set your desired number of items per page
+
   ngOnInit() {
 
   }
@@ -20,4 +23,18 @@ export class Card4Component {
     this.receiveCardData.emit(data);
   }
 
+  getPaginatedData(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.CardData.slice(startIndex, endIndex);
+  }
+
+  goToPage(pageNumber: number) {
+    this.currentPage = pageNumber;
+  }
+
+  getPaginationRange(): number[] {
+    const pageCount = Math.ceil(this.CardData.length / this.itemsPerPage);
+    return Array(pageCount).fill(0).map((_, i) => i + 1);
+  }
 }

@@ -1,14 +1,27 @@
 <div>
-  <div class="card" *ngFor="let item of CardData">
-    <h2 class="title">{{ item.Name }}</h2>
-    <p class="content">{{ item.data }}</p>
-    <button
-      *ngIf="item.data.length > 100"
-      (click)="sendItem(item)"
-      class="read-more"
-      class="btn btn-primary"
-    >
-      Read More
-    </button>
+  <div *ngFor="let item of getPaginatedData(); let i = index">
+    <div class="card">
+      <h2 class="title">{{ item.Name }}</h2>
+      <p class="content">{{ item.data }}</p>
+      <button
+        *ngIf="item.data.length > 100"
+        (click)="sendItem(item)"
+        class="read-more btn btn-primary"
+      >
+        Read More
+      </button>
+    </div>
+    <br>
   </div>
+</div>
+
+<div class="pagination">
+  <button
+    *ngFor="let page of getPaginationRange()"
+    [class.active]="page === currentPage"
+    (click)="goToPage(page)"
+    style="margin-left: 4px"
+  >
+    {{ page }}
+  </button>
 </div>

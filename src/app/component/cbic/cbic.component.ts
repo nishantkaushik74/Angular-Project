@@ -58,7 +58,7 @@ export class CBICComponent {
       }
       else data["icon"] = true; data["date"] = false
 
-    })
+    })  
   }
   //ngOnIt
   ngOnInit() {

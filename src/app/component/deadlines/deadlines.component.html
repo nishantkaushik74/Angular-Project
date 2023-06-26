@@ -1,0 +1,32 @@
+<div>
+  <ng-container *ngIf="isModalOpen">
+    <app-datemodal
+      class="card-container"
+      (closeModal)="closeModal()"
+      [data]="data"
+    >
+    </app-datemodal>
+  </ng-container>
+</div>
+<div class="calendar">
+  <br />
+
+  <div class="header">
+    <button (click)="previousMonth()">&lt;</button>
+    <h2>{{ currentMonth | date : "MMMM yyyy" }}</h2>
+    <button (click)="nextMonth()">&gt;</button>
+  </div>
+  <div class="days">
+    <div *ngFor="let day of daysOfWeek" class="day">{{ day }}</div>
+  </div>
+  <div class="cells">
+    <div
+      *ngFor="let cell of calendarCells"
+      class="cell"
+      (click)="handleDateClick(cell)"
+      [ngClass]="getCellClass(cell)"
+      >
+      {{ cell }}
+    </div>
+  </div>
+</div>

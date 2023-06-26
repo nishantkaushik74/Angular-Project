@@ -165,7 +165,14 @@ export class SignUPService {
   }
 
   async updateModuleInfoTable(tableName: any, subject: any, id: any): Promise<any> {
-    const path = `uploads/${subject.PDF_file.name}`
+    let path: any;
+    debugger
+    if (subject.PDF_file.name || subject.PDF_file.name !== undefined) {
+      console.log("working");
+
+      path = `uploads/${subject.PDF_file.name}`;
+    }
+
     const response = await this.supabase.storage
       .from('Test')
       .upload(path, subject.PDF_file)
@@ -173,7 +180,7 @@ export class SignUPService {
       console.error('Error uploading file:', response.error.message);
       return; // Exit the function if there was an error
     }
-    if (response.data && response.data !== null) {
+    if (subject) {
       const pdf_Url = `https://gluifbolndyftekyypbl.supabase.co/storage/v1/object/public/Test/${response?.data?.path}`;
       let { data, error } = await this.supabase
         .from(tableName)
@@ -214,7 +221,35 @@ export class SignUPService {
     }
     else alert("Not equal")
   }
+  async updatetableee(tableName: any, subject: any, id: any): Promise<any> {
+    let { data, error } = await this.supabase
+      .from(tableName)
+      .upsert({ moduleid: id, Name: subject.date, data: subject.variant2})
+      .select()
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
 
+  }
+
+  async getModuleInfoTableDataa(tableName: string, moduleid: any, parentId: any): Promise<any> {
+    console.log("🚀 ~ file: sign-up.service.ts:239 ~ SignUPService ~ getModuleInfoTableDataa ~ parentId:", parentId)
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .select("*")
+      .eq('moduleid', moduleid)
+      .eq('Name', parentId)
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    if (data) {
+      return data
+    }
+  }
 }
 
 

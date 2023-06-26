@@ -31,6 +31,7 @@ import { CBICComponent } from './component/cbic/cbic.component';
 import { BlogComponent } from './component/blog/blog.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { TestingPageComponent } from './component/testing-page/testing-page.component';
+import { DeadlinesComponent } from './component/deadlines/deadlines.component';
 const routes: Routes = [
   { component: SignupComponent, path: 'signup' },
 
@@ -47,6 +48,9 @@ const routes: Routes = [
     children: [
       {
         component: ProfileComponent, path: 'profile',
+      },
+      {
+        component: DeadlinesComponent, path: 'deadlines',
       },
       {
         component: CommentComponent, path: 'comment',

@@ -78,7 +78,7 @@
 
         <div *ngIf="data.DataEnter">
           <label for="data">{{ data.DataEnter }}</label>
-        
+
           <textarea
             type="text"
             ngModel
@@ -89,10 +89,10 @@
             [disabled]="fileUploaded"
           ></textarea>
         </div>
-        
-        <div>
+
+        <div *ngIf="data.DataEnter">
           <label for="text">Upload PDF</label>
-          <br/>
+          <br />
           <input
             type="file"
             (change)="onFileSelected($event)"
@@ -101,7 +101,7 @@
             [disabled]="textAreaDisabled"
           />
         </div>
-        
+
 
         <button
           class="btn btn-primary button2"

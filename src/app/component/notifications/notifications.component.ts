@@ -67,8 +67,6 @@ export class NotificationsComponent {
       data["h3"] = Subject
       data["h5"] = Briefing
       data["h6"] = Types
-
-
     })
   }
   //ngOnIt
