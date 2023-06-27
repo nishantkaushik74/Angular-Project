@@ -32,6 +32,8 @@ import { BlogComponent } from './component/blog/blog.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { TestingPageComponent } from './component/testing-page/testing-page.component';
 import { DeadlinesComponent } from './component/deadlines/deadlines.component';
+import { LoaderComponent } from './component/modal/loader/loader.component';
+
 const routes: Routes = [
   { component: SignupComponent, path: 'signup' },
 
@@ -114,6 +116,7 @@ const routes: Routes = [
       {
         component: BlogComponent, path: 'blog'
       },
+      {component:LoaderComponent,path:'loader'},
       {
         path: 'widgets', loadChildren: () => import('./views/widgets/widgets.module').then((m) => m.WidgetsModule), canActivate: [AuthGuard]
       },

@@ -88,6 +88,7 @@ import { ForgotPasswordComponent } from './component/forgot-password/forgot-pass
 import { TestingPageComponent } from './component/testing-page/testing-page.component';
 import { DeadlinesComponent } from './component/deadlines/deadlines.component';
 import { DatemodalComponent } from './component/Morecomponents/datemodal/datemodal.component';
+import { LoaderComponent } from './component/modal/loader/loader.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -140,6 +141,7 @@ const APP_CONTAINERS = [
     TestingPageComponent,
     DeadlinesComponent,
     DatemodalComponent,
+    LoaderComponent,
   ],
   imports: [
     AngularToastifyModule,
