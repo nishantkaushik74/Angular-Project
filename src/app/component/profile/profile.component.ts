@@ -11,6 +11,10 @@ import { SharedService } from './shared/image.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  onMobileInputChange(event: any) {
+    this.ngmobile = event.target.value.replace(/\s/g, ''); // Remove spaces from input
+    
+  }
   ngname: any = "";
   ngmobile: any = "";
   ngemail: any = "";
@@ -18,7 +22,7 @@ export class ProfileComponent implements OnInit {
   ngpincode: any = "";
   nggstin: any = "";
   profileData: any = "";
-  image: any="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+  image: any = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   ProfilePicture: FormData = new FormData();
 
   constructor(
@@ -38,8 +42,9 @@ export class ProfileComponent implements OnInit {
     try {
       const user = await this._apiService.userInfo();
       this.ngemail = user.email;
-
       this.profileData = await this._apiService.profileData();
+      console.log("profileData", this.profileData);
+
       this.ngname = this.profileData.fullName;
       this.ngmobile = this.profileData.phoneNumber;
       this.nggstin = this.profileData.gstn;
@@ -52,13 +57,15 @@ export class ProfileComponent implements OnInit {
       this.sharedService.setImageSource(this.image);
 
     } catch (error) {
-      // console.error("An error occurred while fetching user info:", error);
+      console.error("An error occurred while fetching user info:", error);
     }
   }
 
   async onSubmit(form: NgForm) {
     const file = this.ProfilePicture.get('profilePicture');
     form.value["profilePicture"] = file;
+    console.log(form.value);
+
     try {
       const data = await this._apiService.updatingProfileData(form.value);
       this.getData();

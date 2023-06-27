@@ -22,9 +22,22 @@
       </div>
       <div class="form-group">
         <label for="pwd">Password:</label>
-        <input type="password" class="form-control" formControlName="password" id="pwd" placeholder="Enter Password" />
+        <input type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control" formControlName="password" id="pwd" placeholder="Enter Password" />
         <div *ngIf="formsignup.controls['password'].invalid && formsignup.controls['password'].touched"
           class="text-danger">Password is required (minimum 6 characters)</div>
+          <i
+          class="material-icons password-toggle-icon"
+          (click)="togglePasswordVisibility()"
+          style="
+            position: absolute;
+            top: 68%;
+            right: 2rem;
+            transform: translateY(-50%);
+            cursor: pointer;
+          "
+        >
+          {{ passwordVisible ? "visibility_off" : "visibility" }}
+        </i>
       </div>
       <button type="submit" class="card-header2 button1 btn btn-primary button2" (click)="addData()">Submit</button>&nbsp;
       <button type="reset" class="btn btn-secondary button1">Reset</button><br /><br />

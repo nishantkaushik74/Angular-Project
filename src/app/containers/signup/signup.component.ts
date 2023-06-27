@@ -12,6 +12,11 @@ import { ToastService } from 'angular-toastify';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+  passwordVisible: boolean = false;
+
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
   formsignup!: FormGroup;
   signUpModelObj: SignUpModel = new SignUpModel();
 
