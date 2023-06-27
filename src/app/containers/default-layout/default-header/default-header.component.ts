@@ -19,7 +19,7 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy {
   public imageSrc: any;
   private subscription: Subscription;
-  image: any;
+  image: any="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   profileData: any;
   @Input() sidebarId: string = "sidebar";
 
@@ -55,7 +55,10 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy
       const user = await this._apiService.userInfo();
 
       this.profileData = await this._apiService.profileData();
-      this.image = this.profileData.profilePicture;
+      if (this.profileData.profilePicture) {
+        this.image = this.profileData.profilePicture;
+
+      }
       console.log("🚀 ~ file: default-h:", this.image)
     } catch (error) {
       // console.error("An error occurred while fetching user info:", error);

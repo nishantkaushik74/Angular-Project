@@ -78,7 +78,7 @@ export class SectionComponent {
   //Route function Function
   roteToSubSection(subject: any) {
     console.log("🚀 ~ file: section.component.ts:44 ~ SectionComponent ~ roteToSubSection ~ subject:", subject)
-    this.router.navigate(['section/subsection', {
+    this.router.navigate(['subsection', {
       id: subject.id,
       name: subject.Name,
       parentID: subject.parentid,

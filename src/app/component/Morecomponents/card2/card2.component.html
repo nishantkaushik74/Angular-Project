@@ -4,22 +4,22 @@
       <div class="card-inner">
         <div>
           <div class="card-title" *ngIf="item.date || item.Subject">
-            <h3>{{ heading.h1 }}:</h3>
+            <h5>{{ heading.h1 }}:</h5>
           </div>
 
           <div class="card-title">
-            <h3>{{ heading.h2 }}:</h3>
+            <h5>{{ heading.h2 }}:</h5>
           </div>
         </div>
         <div>
           <div class="card-content" *ngIf="item.date">
-            <h3>{{ item.samay }}</h3>
+            <h5>{{ item.samay }}</h5>
           </div>
           <div class="card-content" *ngIf="item.Subject">
-            <h3>{{ item.Subject }}</h3>
+            <h5>{{ item.Subject }}</h5>
           </div>
           <div class="card-content">
-            <h3>{{ item.Name }}</h3>
+            <h5>{{ item.Name }}</h5>
           </div>
         </div>
 

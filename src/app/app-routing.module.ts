@@ -85,7 +85,7 @@ const routes: Routes = [
         component: SectionComponent, path: 'section'
       },
       {
-        component: SubSectionComponent, path: 'section/subsection'
+        component: SubSectionComponent, path: 'subsection'
       },
       {
         component: DraftReplyComponent, path: 'draftreply'

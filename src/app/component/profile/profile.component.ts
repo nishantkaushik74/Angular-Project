@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   ngpincode: any = "";
   nggstin: any = "";
   profileData: any = "";
-  image: any;
+  image: any="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   ProfilePicture: FormData = new FormData();
 
   constructor(
@@ -45,7 +45,10 @@ export class ProfileComponent implements OnInit {
       this.nggstin = this.profileData.gstn;
       this.ngstate = this.profileData.state;
       this.ngpincode = this.profileData.pincode;
-      this.image = this.profileData.profilePicture;
+      if (this.profileData.profilePicture) {
+        this.image = this.profileData.profilePicture;
+
+      }
       this.sharedService.setImageSource(this.image);
 
     } catch (error) {

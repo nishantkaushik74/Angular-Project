@@ -28,24 +28,21 @@
   </div>
   <br />
   <div *ngFor="let section of ModuleInfoTable">
-    <app-card>
+    <app-card (click)="openDisplayDoc(section.data)">
       <div class="card_div">
         <div class="card_div2">
-          <h2>{{ section.sno }}.</h2>
+          <h5>{{ section.sno }}.</h5>
 
-          <h2>
+          <h5>
             <ng-container *ngFor="let value of section.Name.split(',')">
               {{ value }}<br />
             </ng-container>
-          </h2>
+          </h5>
         </div>
-
         <div
           *ngIf="section.data"
           class="icon-container"
-          (click)="openDisplayDoc(section.data)"
         >
-          <i class="fa-solid fa-file"></i>
         </div>
       </div>
     </app-card>

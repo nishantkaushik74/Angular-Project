@@ -25,10 +25,10 @@ input[type="text"],
 input[type="email"],
 input[type="number"],
 input[type="tel"] {
-  width: 100%;
+  width: 90%;
   padding: 8px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 4px;
 }
 
@@ -75,3 +75,4 @@ input[readonly] {
   height: 100%;
   object-fit: cover; /* Maintain aspect ratio and cover the container */
 }
+.button-div{}

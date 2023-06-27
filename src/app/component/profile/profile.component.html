@@ -1,5 +1,11 @@
 <h1>Welcome to Your Profile Page</h1>
 <lib-toastify-toast-container></lib-toastify-toast-container>
+<div>
+  <label for="mobile">Profile Picture</label>
+  <div class="profile-image">
+    <img [src]="image" alt="Profile Picture" />
+  </div>
+</div>
 <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
   <!-- Existing code... -->
 
@@ -119,7 +125,7 @@
       (change)="onProfilePictureChange($event)"
     />
   </div>
-  <div>
+  <div class="button-div">
     <button
       type="submit"
       [disabled]="!profileForm.valid"
@@ -130,9 +136,3 @@
     <button type="button" routerLink="/changepassword">Change Password</button>
   </div>
 </form>
-<div>
-  <label for="mobile">Profile Picture</label>
-  <div class="profile-image">
-    <img [src]="image" alt="Profile Picture">
-  </div>
-</div>
