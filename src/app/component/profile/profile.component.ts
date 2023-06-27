@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
         this.image = this.profileData.profilePicture;
 
       }
-      this.sharedService.setImageSource(this.image);
+      this.sharedService.setImageSource(this.image)
 
     } catch (error) {
       // console.error("An error occurred while fetching user info:", error);
