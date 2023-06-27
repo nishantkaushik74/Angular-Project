@@ -11,6 +11,7 @@ import { SharedService } from './shared/image.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  isLoading:boolean=true;
   ngname: any = "";
   ngmobile: any = "";
   ngemail: any = "";
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async getData() {
+    this.isLoading= true; 
     try {
       const user = await this._apiService.userInfo();
       this.ngemail = user.email;
@@ -45,6 +47,7 @@ export class ProfileComponent implements OnInit {
       this.nggstin = this.profileData.gstn;
       this.ngstate = this.profileData.state;
       this.ngpincode = this.profileData.pincode;
+
       if (this.profileData.profilePicture) {
         this.image = this.profileData.profilePicture;
 
@@ -54,6 +57,7 @@ export class ProfileComponent implements OnInit {
     } catch (error) {
       // console.error("An error occurred while fetching user info:", error);
     }
+    this.isLoading= false
   }
 
   async onSubmit(form: NgForm) {

@@ -8,6 +8,7 @@
           <div>
             <label for="actName">{{ data.h1 }}</label>
           </div>
+         
           <div>
             <label *ngIf = "data.h2" for="">{{data.h2[0]}}</label>
             <input
@@ -42,6 +43,7 @@
         <button class="btn btn-primary" [disabled]="!variant">Enter</button>
       </form>
     </div>
+    <app-loader></app-loader>
     <ng-content></ng-content>
   </div>
 </div>
