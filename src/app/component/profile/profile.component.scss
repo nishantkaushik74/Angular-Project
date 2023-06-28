@@ -45,6 +45,7 @@ button {
 img {
   max-width: 200px;
   max-height: 200px;
+
 }
 
 
@@ -64,10 +65,17 @@ input[readonly] {
   cursor: not-allowed;
 }
 .profile-image {
-  width: 150px; /* Adjust the width as needed */
-  height: 150px; /* Adjust the height as needed */
+  width: 180px; /* Adjust the width as needed */
+  height: 180px; /* Adjust the height as needed */
   border-radius: 50%; /* Make the image round */
   overflow: hidden; /* Hide any overflowing content */
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.profile-image:hover {
+  border: 5px solid rgb(158, 199, 218);
+
 }
 
 .profile-image img {
@@ -75,4 +83,15 @@ input[readonly] {
   height: 100%;
   object-fit: cover; /* Maintain aspect ratio and cover the container */
 }
-.button-div{}
+.profile-picture{
+  display: flex;
+}
+.upload-imagebutton{
+  margin-top: 40px;
+  align-self: center;
+  justify-content: flex-start;
+}
+.image-div{
+  max-width: 200px;
+  padding: 0px;
+}

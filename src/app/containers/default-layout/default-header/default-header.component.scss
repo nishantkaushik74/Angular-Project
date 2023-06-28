@@ -1,0 +1,29 @@
+
+
+button {
+    position: relative; /* Set the button as the positioning context */
+    overflow: hidden; /* Hide any content that exceeds the button's boundaries */
+  }
+  
+  c-avatar {
+    position: absolute; /* Position the avatar absolutely within the button */
+    top: 50%; /* Align the top of the avatar to the middle of the button */
+    left: 50%; /* Align the left side of the avatar to the middle of the button */
+    transform: translate(-50%, -50%); /* Center the avatar using translate */
+  }
+  
+  /* Optional: Adjust the z-index if necessary */
+  button {
+    z-index: 1;
+  }
+  
+  /* Optional: Add a padding or margin to the button to create space */
+  button {
+    padding: 10px;
+  }
+  .avatar-img {
+    width: 77%;
+    height: 42px;
+    border-radius: 156em;
+}
+  

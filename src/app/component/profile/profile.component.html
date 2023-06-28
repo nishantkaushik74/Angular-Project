@@ -1,15 +1,28 @@
 <h1>Welcome to Your Profile Page</h1>
 <lib-toastify-toast-container></lib-toastify-toast-container>
-<app-loader *ngIf="isLoading" ></app-loader>
-<div>
-  <label for="mobile">Profile Picture</label>
-  <div class="profile-image">
-    <img [src]="image" alt="Profile Picture" />
-  </div>
-</div>
+<app-loader *ngIf="isLoading"></app-loader>
+
 <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
   <!-- Existing code... -->
+  <div class="profile-picture">
+    <div class="image-div">
+      <div class="profile-image">
+        <img [src]="image" alt="Profile Picture" />
+      </div>
+    </div>
+    <div class="upload-imagebutton">
+      <label for="profilePicture">Change Profile</label>
 
+      <input
+        type="file"
+        id="profilePicture"
+        name="profilePicture"
+        accept=".jpg"
+        (change)="onProfilePictureChange($event)"
+      />
+    </div>
+  </div>
+  <div></div>
   <!-- Existing code... -->
 
   <div>
@@ -44,7 +57,6 @@
       Please enter a valid mobile number (10 digits only).
     </small>
   </div>
-  
 
   <div>
     <label for="gstin">GSTIN:</label>
@@ -116,16 +128,7 @@
   </div>
 
   <!-- Add more input fields as needed -->
-  <div>
-    <label for="profilePicture">Profile Picture:</label>
-    <input
-      type="file"
-      id="profilePicture"
-      name="profilePicture"
-      accept=".jpg"
-      (change)="onProfilePictureChange($event)"
-    />
-  </div>
+
   <div class="button-div">
     <button
       type="submit"
