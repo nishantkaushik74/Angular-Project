@@ -54,6 +54,7 @@ export class Acts1Component {
   }
   //receive data from child
   receiveData(subject: any) {
+    // console.log("🚀 ~ file: acts1.component.ts:57 ~ Acts1Component ~ receiveData ~ subject:", subject)
     const inputValue = this.ModulesTable[0].id
     try {
       const a = this._apiService.updateActTable("ModuleInfo", subject, inputValue)

@@ -1,11 +1,11 @@
 <button class="btn btn-primary" (click)="openModal()">Add Notification</button>
 
 <div>
-  <ng-container *ngIf="isDocDisplayOpen">
-    <app-doc-display
-      (closeDisplayDoc)="closeDisplayDoc()"
+  <ng-container *ngIf="isViewerOpen">
+    <app-viewer
+      (closeViewer)="closeViewer()"
       [Docdata]="Docdata"
-    ></app-doc-display>
+    ></app-viewer>
   </ng-container>
 </div>
 <div>

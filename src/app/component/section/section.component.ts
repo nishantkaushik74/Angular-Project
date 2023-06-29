@@ -11,9 +11,12 @@ import { Location } from '@angular/common';
 export class SectionComponent {
   //openAndClose 
   isModalOpen = false;
-  isDocDisplayOpen = false;
   openModal() { this.isModalOpen = true }
   closeModal() { this.isModalOpen = false }
+
+
+  isDocDisplayOpen = false;
+
   openDisplayDoc(data: any) {
     this.isDocDisplayOpen = true
     this.Docdata = data
@@ -21,17 +24,36 @@ export class SectionComponent {
   closeDisplayDoc() {
     this.isDocDisplayOpen = false
   }
+
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
+
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
+
+
   dataToSend = 1;
   cardHeadings: any;
 
   data: any;
- 
+
   //Other variables declared
   URLdata: any;
   ModuleInfoTable: any;
   Docdata: any
   moduleID: any;
-  
+
   //Constructor
   constructor(
     private route: ActivatedRoute,
@@ -51,8 +73,9 @@ export class SectionComponent {
     })
 
     if (this.moduleID == 1) this.cardHeadings = ["Subject:", "Section:"];
-    else if (this.moduleID == 2) this.cardHeadings = ["Rule:", "Subject:"];
-    
+    if (this.moduleID == 2) this.cardHeadings = ["Rule:", "Subject:"];
+    if (this.moduleID == 5) this.cardHeadings = [""];
+
     this.data = {
       Title: "Add Section",
       h1: "Name the Section you want to add?",
@@ -77,7 +100,6 @@ export class SectionComponent {
 
   //Route function Function
   roteToSubSection(subject: any) {
-    console.log("🚀 ~ file: section.component.ts:44 ~ SectionComponent ~ roteToSubSection ~ subject:", subject)
     this.router.navigate(['subsection', {
       id: subject.id,
       name: subject.Name,
@@ -86,17 +108,21 @@ export class SectionComponent {
     }]);
   }
   //receive data from child
-  receiveData(subject: any) {
+  async receiveData(subject: any) {
+    debugger
     subject['variant'] = subject.variant + "," + subject.variant3;
     try {
-      const a = this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
+      const a =await this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
+      console.log("🚀 ~ file: section.component.ts:116 ~ SectionComponent ~ receiveData ~ a:", a)
+      this.ngOnInit()
+      this.getData()
+
     } catch (error) {
       console.log(error)
     }
     this.ngOnInit()
     this.getData()
     this.closeModal()
-
   }
   goBack(): void {
     this.location.back();

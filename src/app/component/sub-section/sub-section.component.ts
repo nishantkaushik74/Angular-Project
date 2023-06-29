@@ -10,10 +10,11 @@ import { Location } from '@angular/common';
 })
 export class SubSectionComponent {
   //openAndClose
-  isDocDisplayOpen = false;
   isModalOpen = false;
   openModal() { this.isModalOpen = true }
   closeModal() { this.isModalOpen = false }
+
+  isDocDisplayOpen = false;
   openDisplayDoc(data: any) {
     console.log("🚀 ~ file: section.component.ts:17 ~ SectionComponent ~ openDisplayDoc ~ data:", data)
     this.isDocDisplayOpen = true
@@ -22,16 +23,39 @@ export class SubSectionComponent {
   closeDisplayDoc() {
     this.isDocDisplayOpen = false
   }
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
+
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
+
   //Other variables declared
+  cardHeadings= ["Subject:","Section:"]
+
   URLdata: any;
   ModuleInfoTable: any;
   dataToSend = 1;
   data = {
     Title: "Add Sub Section",
     h1: "Name the Sub Section you want to add ?",
-    DataEnter: "Sub Section details"
+    h2:["Add Section","Add Subject"],
+    DataEnter: "Sub Section details",
+    identity:"sub-section"
   }
+
   Docdata: any
+
 
   //Constructor
   constructor(
@@ -65,9 +89,11 @@ export class SubSectionComponent {
   }
   //other Function
   //receive data from child
-  receiveData(subject: any) {
+  async receiveData(subject: any) {
+    subject['variant'] = subject.variant + "," + subject.variant3;
+    console.log("🚀 ~ file: sub-section.component.ts:81 ~ SubSectionComponent ~ receiveData ~ subject:", subject)
     try {
-      const a = this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
+      const a = await this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
     } catch (error) {
       console.log(error)
     }
@@ -75,6 +101,7 @@ export class SubSectionComponent {
     this.getData()
     this.closeModal()
   }
+
   goBack(): void {
     this.location.back();
   }

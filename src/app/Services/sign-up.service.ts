@@ -139,16 +139,46 @@ export class SignUPService {
     }
   }
   async updateModuleInfo(tableName: any, subject: any, inputValue: any): Promise<any> {
-    const { data, error } = await this.supabase
-      .from(tableName)
-      .upsert({ moduleid: inputValue.moduleid, Name: subject.variant, parentid: inputValue.id, data: subject.variant2 })
-      .select()
-    if (error) {
-      throw new Error(error.message);
+    debugger;
+    let path: any;
+    if (subject.PDF_file!==null) {
+      path = `uploads/${subject.PDF_file.name}`;
+      const response = await this.supabase.storage
+        .from('Test')
+        .upload(path, subject.PDF_file)
+      if (response.error) {
+        console.error('Error uploading file:', response.error.message);
+        return; // Exit the function if there was an error
+      }
+      else {
+        const pdf_Url = `https://gluifbolndyftekyypbl.supabase.co/storage/v1/object/public/Test/${response?.data?.path}`;
+        const { data, error } = await this.supabase
+          .from(tableName)
+          .upsert({ moduleid: inputValue.moduleid, Name: subject.variant, parentid: inputValue.id, data: subject.variant2, URL: pdf_Url })
+          .select()
+        if (error) {
+          throw new Error(error.message);
+        }
+        if (data) {
+          return data
+        }
+      }
     }
-    if (data) {
-      return data
+    else {
+      const { data, error } = await this.supabase
+        .from(tableName)
+        .upsert({ moduleid: inputValue.moduleid, Name: subject.variant, parentid: inputValue.id, data: subject.variant2 })
+        .select()
+      if (error) {
+        throw new Error(error.message);
+      }
+      if (data) {
+        return data
+      }
+
     }
+
+
   }
   async getTableDataOnEndPoint(tableName: string, endPoint: any): Promise<any> {
     const { data, error } = await this.supabase
@@ -166,7 +196,6 @@ export class SignUPService {
 
   async updateModuleInfoTable(tableName: any, subject: any, id: any): Promise<any> {
     let path: any;
-    debugger
     if (subject.PDF_file.name || subject.PDF_file.name !== undefined) {
       console.log("working");
 
@@ -224,7 +253,7 @@ export class SignUPService {
   async updatetableee(tableName: any, subject: any, id: any): Promise<any> {
     let { data, error } = await this.supabase
       .from(tableName)
-      .upsert({ moduleid: id, Name: subject.date, data: subject.variant2})
+      .upsert({ moduleid: id, Name: subject.date, data: subject.variant2 })
       .select()
     if (error) {
       throw new Error(error.message);

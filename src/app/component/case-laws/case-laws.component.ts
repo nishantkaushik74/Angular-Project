@@ -11,7 +11,6 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 export class CaseLawsComponent {
   //openAndClose 
   //openAndClose 
-  isDocDisplayOpen = false;
   isModalOpen = false
   openModal() {
     this.isModalOpen = true
@@ -19,6 +18,8 @@ export class CaseLawsComponent {
   closeModal() {
     this.isModalOpen = false
   }
+  isDocDisplayOpen = false;
+
   closeDisplayDoc() {
     this.isDocDisplayOpen = false
   }
@@ -26,6 +27,24 @@ export class CaseLawsComponent {
     this.isDocDisplayOpen = true
     this.Docdata = data;
   }
+
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
+
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
+
   //Other variables declared
   data = {
     Title: "Enter Case Law",
@@ -66,16 +85,17 @@ export class CaseLawsComponent {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
     this.CardData.map((data: any) => {
-      const [Date, Appellant,Respondent,CourtName, SectionNo,Subject,Briefing] = data.Name.split(',');
-       data["h1"]= Date
-       data["h2"]= Appellant
-       data["h3"]= Respondent
-       data["h4"]= CourtName
-       data["h5"]= SectionNo
-       data["h6"]= Subject
-       data["h7"]= Briefing
+      const [Date, Appellant, Respondent, CourtName, SectionNo, Subject, Briefing] = data.Name.split(',');
+      data["h1"] = Date
+      data["h2"] = Appellant
+      data["h3"] = Respondent
+      data["h4"] = CourtName
+      data["h5"] = SectionNo
+      data["h6"] = Subject
+      data["h7"] = Briefing
 
     })
+    console.log("🚀 ~ file: case-laws.co", this.CardData)
   }
   //ngOnIt
   ngOnInit() {
@@ -85,13 +105,13 @@ export class CaseLawsComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    this.openDisplayDoc(subject.data)
+    this.openViewer(subject)
   }
 
-  receiveData(subject: any) {
+  async receiveData(subject: any) {
 
     subject["addedValue"] = subject.variant + "," + subject.variant3 + "," + subject.variant4 + "," + subject.variant5 + "," + subject.variant6 + "," + subject.variant7 + "," + subject.variant8
-    const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+    const a =await this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
     this.getData()
     this.closeModal()
 

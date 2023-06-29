@@ -1,0 +1,28 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <div class="buttons">
+      <button type="button" class="btn-close" (click)="closeBox()"></button>
+      <div class="icon">
+        <img
+          (click)="downloadFile()"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADIElEQVR4nO2bTUwTQRTH39a2hENpL3LAgxwsHm1JKGoiF5tGo2DbRIsXbRpNoKBy01SrEg4q0fjBwYNSKSY11gh+FeUjauQgEcXEg8ZDUQMIygjlwPlpSbcpdfkoXcrO7rzkn2y6m+n8f5l5M7OzA8CChZixDgBCANAJABfXWCcAQA05DBUAdAEASkjOXJpvTf3zgoICNBgMOZder08F4MmFeQ4AbqbTHxh8jyQ2k3N9jQ7nFACXar6oaIOiAHCp5o0lm9HnP58xgLuhEB5vaMDvo2NUAeDSzT+OdGPThUsZA8jPz597vvnyFWoAcELmX/a/XREA/vlzjY1UAOAWMq8EANxi5uUOgFvKvJwBqAHgNV/o+sJCPOw5gkdrvP/Jtmu3LAE0rWQa+u7DkGwAnMrUfJnFguOTRDYAPHyB8cLFqCQDEGMtAFkXiLEcgCwJxtgogGwYBDYPQDYRAjYTRDYVbpT5WuC0/yzWeutwZHxiWWuBe/fDuN/lwsGhj/QD+PT5S7JSOyoq5kEQAtDaFkS1Wj33e02tl34Ak9MxrKyqEoSQDiDVvE6nw1dv+ukHQGIzc+8H9uytTFZu67bt+GPs5zwAgWA7ajSapPkXvX3yyQFkAQj8dby/Z2te8gCIAAReKpUqa/NUACCLQMjWPDUAiACEvLy8rM1TBYAkIBhLSlCr1eKtQECUMqkCQFZBDEBUIi2gq7sH3R4PHnK7RZPvjB9//ZmiowWYS0sz3k1ajp5EInQAuNbSgpuMRtxYXCyarDbbkl+SSAYAYUlwRtmjQPhhB9odDtxnt4smb139kpuukgFgMptXJQk+evqMDgCBYDtaystxi8kkmlzVB3F0YoIOAETpOYAoHcDtO22id4ED1dX0dAGT0pPgg45OdDid4g6D9cfoGQaJ0nMAUTqAq9dviL4Y2mm14reRUToAmJW+HH7e0yv6C5H4/uLvqWk6ABCl5wBCIQALAAwDwFSaZvkC40fS1uIoXBbH5mYF/EQBoEyUj6KBXp0UAqADAJ/AEdRmAOgDgLAEjsMuV/G69ibqnn7Pl/DKgsU/An8Bld627hZVwkcAAAAASUVORK5CYII="
+        />
+      </div>
+    </div>
+    <pdf-viewer
+      *ngIf="pdfUrl"
+      [src]="url"
+      [render-text]="true"
+      [original-size]="false"
+      style="width: 100%; height: 100%"
+    ></pdf-viewer>
+    <ngx-doc-viewer
+      *ngIf="otherUrl"
+      [url]="url"
+      viewer="google"
+      style="width: 100%; height: 100%"
+    ></ngx-doc-viewer>
+
+    <ng-content></ng-content>
+  </div>
+</div>

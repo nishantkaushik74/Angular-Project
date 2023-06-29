@@ -59,7 +59,6 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy
         this.image = this.profileData.profilePicture;
 
       }
-      console.log("🚀 ~ file: default-h:", this.image)
     } catch (error) {
       // console.error("An error occurred while fetching user info:", error);
     }

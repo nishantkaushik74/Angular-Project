@@ -12,12 +12,9 @@ export class Modal3Component {
   variant2: any;
   variant3: any;
   variant2Value = '';
-  fileUploaded = false;
-  textAreaDisabled = false;
 
   @Input() receivedData: any;
   @Input() data: any;
-  showDate = false;
 
   //openAndClose 
   @Output() closeModal = new EventEmitter<void>();
@@ -37,7 +34,10 @@ export class Modal3Component {
   //other Function
 
     
+  
   formData: FormData = new FormData();
+  fileUploaded = false;
+  textAreaDisabled = false;
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -47,26 +47,14 @@ export class Modal3Component {
       this.variant2Value = ''; 
     }
     this.textAreaDisabled = true;
-    this.formData.append('pdfFile', file);
+    this.formData.append('docx', file);
   }
 
   onsubmit(form: NgForm) {
-    const file = this.formData.get('pdfFile');
+    const file = this.formData.get('docx');
     form.value["PDF_file"] =file
+    console.log("🚀 ~ file: modal3.component.ts:56 ~ Modal3Component ~ onsubmit ~ form.value:", form.value)
     this.receiveData.emit(form.value)
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 }

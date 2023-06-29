@@ -1,6 +1,6 @@
-<div class="modal-overlay">
+<div class="modal-overlay" *ngIf="!data.identity">
   <div class="modal-container">
-    <button type="button" class="btn-close" (click)="closeBox()"></button>
+    <button type="button" class="btn-close " (click)="closeBox()"></button>
     <div class="card-container">
       <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
         <h3>{{ data.Title }}</h3>
@@ -8,9 +8,9 @@
           <div>
             <label for="actName">{{ data.h1 }}</label>
           </div>
-         
+
           <div>
-            <label *ngIf = "data.h2" for="">{{data.h2[0]}}</label>
+            <label *ngIf="data.h2" for="">{{ data.h2[0] }}</label>
             <input
               type="text"
               [(ngModel)]="variant"
@@ -18,10 +18,10 @@
               id="actName"
               name="variant"
             />
-            <label *ngIf = "data.h2" for="">{{data.h2[1]}}</label>
+            <label *ngIf="data.h2" for="">{{ data.h2[1] }}</label>
 
             <input
-             *ngIf = "data.h2"
+              *ngIf="data.h2"
               type="text"
               [(ngModel)]="variant3"
               required
@@ -40,10 +40,85 @@
             name="variant2"
           ></textarea>
         </div>
-        <button class="btn btn-primary" [disabled]="!variant">Enter</button>
+        <div style="margin: 10px" *ngIf="data.DataEnter">
+          <label for="upload">Upload File</label>
+          <br />
+          <input
+            id="upload"
+            type="file"
+            (change)="onFileSelected($event)"
+            name="docx"
+            accept=".pdf,.docx"
+            [disabled]="textAreaDisabled"
+          />
+        </div>
+        <button class="btn btn-primary" [disabled]="!variant ">Submit</button>
       </form>
     </div>
-    <app-loader></app-loader>
+    <ng-content></ng-content>
+  </div>
+</div>
+
+
+<div class="modal-overlay" *ngIf="data.identity">
+  <div class="modal-container">
+    <button type="button" class="btn-close " (click)="closeBox()"></button>
+    <div class="card-container">
+      <form #act1question="ngForm" (ngSubmit)="onsubmit(act1question)">
+        <h3>{{ data.Title }}</h3>
+        <div *ngIf="data.h1" class="inputFiels">
+          <div>
+            <label for="actName">{{ data.h1 }}</label>
+          </div>
+
+          <div>
+            <label *ngIf="data.h2" for="">{{ data.h2[0] }}</label>
+            <input
+              type="text"
+              [(ngModel)]="variant"
+              required
+              id="actName"
+              name="variant"
+              
+            />
+            <label *ngIf="data.h2" for="">{{ data.h2[1] }}</label>
+
+            <input
+              *ngIf="data.h2"
+              type="text"
+              [(ngModel)]="variant3"
+              required
+              id="section"
+              name="variant3"
+            />
+          </div>
+        </div>
+        <div *ngIf="data.DataEnter">
+          <label for="data">{{ data.DataEnter }}</label>
+          <textarea
+            type="text"
+            [(ngModel)]="variant2"
+            required
+            id="actName"
+            name="variant2"
+          ></textarea>
+        </div>
+        <div style="margin: 10px" *ngIf="data.DataEnter">
+          <label for="upload">Upload File</label>
+          <br />
+          <input
+            id="docx"
+            type="file"
+            (change)="onFileSelected($event)"
+            name="docx"
+            accept=".pdf,.docx"
+            [disabled]="textAreaDisabled"
+            required
+          />
+        </div>
+        <button class="btn btn-primary" [disabled]="!variant || !variant3 ||  !isFileSelected()">Submit</button>
+      </form>
+    </div>
     <ng-content></ng-content>
   </div>
 </div>

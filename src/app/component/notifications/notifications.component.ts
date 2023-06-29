@@ -10,7 +10,6 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 })
 export class NotificationsComponent {
   //openAndClose 
-  isDocDisplayOpen = false;
   isModalOpen = false
   openModal() {
     this.isModalOpen = true
@@ -18,13 +17,26 @@ export class NotificationsComponent {
   closeModal() {
     this.isModalOpen = false
   }
-  closeDisplayDoc() {
-    this.isDocDisplayOpen = false
-  }
-  openDisplayDoc(data: any) {
-    this.isDocDisplayOpen = true
+
+  // isDocDisplayOpen = false;
+  // openDisplayDoc(data: any) {
+  //   this.isDocDisplayOpen = true
+  //   this.Docdata = data;
+  // }
+  // closeDisplayDoc() {
+  //   this.isDocDisplayOpen = false
+  // }
+
+  isViewerOpen = false
+  openViewer(data: any) {
+    console.log("🚀 ~ file: notif", data)
+    this.isViewerOpen = true
     this.Docdata = data;
   }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
+
   //Other variables declared
   data = {
     Title: "Enter Case Law",
@@ -70,6 +82,7 @@ export class NotificationsComponent {
 
 
     })
+    console.log("🚀 ~ file: this.CardData.map ~ this.CardData:", this.CardData)
   }
   //ngOnIt
   ngOnInit() {
@@ -79,7 +92,8 @@ export class NotificationsComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    this.openDisplayDoc(subject.data)
+    // this.openDisplayDoc(subject.data)
+    this.openViewer(subject.URL)
   }
 
   receiveData(subject: any) {

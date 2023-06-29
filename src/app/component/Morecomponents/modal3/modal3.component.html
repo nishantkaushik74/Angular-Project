@@ -89,19 +89,20 @@
             [disabled]="fileUploaded"
           ></textarea>
         </div>
-
+        
+<!-- //To upload docx -->
         <div *ngIf="data.DataEnter">
-          <label for="text">Upload PDF</label>
+          <label for="text">Upload File</label>
           <br />
           <input
             type="file"
             (change)="onFileSelected($event)"
-            name="pdfFile"
-            accept=".pdf"
+            name="docx"
+            accept=".pdf,.docx"
             [disabled]="textAreaDisabled"
           />
         </div>
-
+<!-- //To upload docx -->
 
         <button
           class="btn btn-primary button2"

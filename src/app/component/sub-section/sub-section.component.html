@@ -1,10 +1,9 @@
 <div>
   <div>
     <button type="button" class="btn btn-primary" (click)="openModal()">
-      Add Sub Section
-    </button>{{"  "}}
+      Add Sub Section</button
+    >{{ "  " }}
     <button class="btn btn-primary" (click)="goBack()">Back</button>
-
   </div>
   <div>
     <ng-container *ngIf="isModalOpen">
@@ -26,23 +25,36 @@
       ></app-doc-display>
     </ng-container>
   </div>
+
+  <div>
+    <ng-container *ngIf="isViewerOpen">
+      <app-viewer
+        (closeViewer)="closeViewer()"
+        [Docdata]="Docdata"
+      ></app-viewer>
+    </ng-container>
+  </div>
+
   <br />
   <div *ngFor="let section of ModuleInfoTable">
-    <app-card (click)="openDisplayDoc(section.data)">
+    <app-card (click)="openViewer(section)">
       <div class="card_div">
         <div class="card_div2">
           <h5>{{ section.sno }}.</h5>
 
           <h5>
-            <ng-container *ngFor="let value of section.Name.split(',')">
-              {{ value }}<br />
+            <ng-container
+              *ngFor="
+                let value of section.Name.split(',') as values;
+                let i = index
+              "
+            >
+              <div style="display: flex">
+                <div style="width: 10rem">{{ cardHeadings[i] }}</div>
+                <div style="display: flex">{{ value }}</div>
+              </div>
             </ng-container>
           </h5>
-        </div>
-        <div
-          *ngIf="section.data"
-          class="icon-container"
-        >
         </div>
       </div>
     </app-card>

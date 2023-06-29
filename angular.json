@@ -35,9 +35,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+              "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [  "src/assets/pdf-3.5.544-es5.min.js"
+          ],
             "allowedCommonJsDependencies": [
               "chart.js",
               "@coreui/chartjs/dist/js/coreui-chartjs.js"

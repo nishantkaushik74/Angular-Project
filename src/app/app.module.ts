@@ -89,6 +89,10 @@ import { TestingPageComponent } from './component/testing-page/testing-page.comp
 import { DeadlinesComponent } from './component/deadlines/deadlines.component';
 import { DatemodalComponent } from './component/Morecomponents/datemodal/datemodal.component';
 import { LoaderComponent } from './component/modal/loader/loader.component';
+import { ViewerComponent } from './component/Morecomponents/viewer/viewer.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -142,8 +146,12 @@ const APP_CONTAINERS = [
     DeadlinesComponent,
     DatemodalComponent,
     LoaderComponent,
+    ViewerComponent,
   ],
   imports: [
+    PdfViewerModule ,
+    NgxDocViewerModule,
+    NgxExtendedPdfViewerModule,
     AngularToastifyModule,
     BrowserModule,
     BrowserAnimationsModule,
