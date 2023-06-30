@@ -127,6 +127,7 @@ export class SignUPService {
     }
   }
   async updateActTable(tableName: any, subject: any, inputValue: any): Promise<any> {
+    debugger
     const { data, error } = await this.supabase
       .from(tableName)
       .upsert({ moduleid: inputValue, Name: subject.variant })
@@ -139,9 +140,8 @@ export class SignUPService {
     }
   }
   async updateModuleInfo(tableName: any, subject: any, inputValue: any): Promise<any> {
-    debugger;
     let path: any;
-    if (subject.PDF_file!==null) {
+    if (subject.PDF_file !== null) {
       path = `uploads/${subject.PDF_file.name}`;
       const response = await this.supabase.storage
         .from('Test')
@@ -196,24 +196,33 @@ export class SignUPService {
 
   async updateModuleInfoTable(tableName: any, subject: any, id: any): Promise<any> {
     let path: any;
-    if (subject.PDF_file.name || subject.PDF_file.name !== undefined) {
-      console.log("working");
-
+    if (subject.PDF_file !== null) {
       path = `uploads/${subject.PDF_file.name}`;
+      const response = await this.supabase.storage
+        .from('Test')
+        .upload(path, subject.PDF_file)
+      if (response.error) {
+        console.error('Error uploading file:', response.error.message);
+        return; // Exit the function if there was an error
+      }
+      if (subject) {
+        const pdf_Url = `https://gluifbolndyftekyypbl.supabase.co/storage/v1/object/public/Test/${response?.data?.path}`;
+        let { data, error } = await this.supabase
+          .from(tableName)
+          .upsert({ moduleid: id, Name: subject.addedValue, data: subject.variant2, URL: pdf_Url })
+          .select()
+        if (error) {
+          throw new Error(error.message);
+        }
+        if (data) {
+          return data
+        }
+      }
     }
-
-    const response = await this.supabase.storage
-      .from('Test')
-      .upload(path, subject.PDF_file)
-    if (response.error) {
-      console.error('Error uploading file:', response.error.message);
-      return; // Exit the function if there was an error
-    }
-    if (subject) {
-      const pdf_Url = `https://gluifbolndyftekyypbl.supabase.co/storage/v1/object/public/Test/${response?.data?.path}`;
+    else {
       let { data, error } = await this.supabase
         .from(tableName)
-        .upsert({ moduleid: id, Name: subject.addedValue, data: subject.variant2, URL: pdf_Url })
+        .upsert({ moduleid: id, Name: subject.addedValue, data: subject.variant2 })
         .select()
       if (error) {
         throw new Error(error.message);
@@ -222,7 +231,6 @@ export class SignUPService {
         return data
       }
     }
-
   }
   async getModuleInfoTableData(tableName: string, moduleid: any, parentId: any): Promise<any> {
     const { data, error } = await this.supabase
@@ -265,7 +273,6 @@ export class SignUPService {
   }
 
   async getModuleInfoTableDataa(tableName: string, moduleid: any, parentId: any): Promise<any> {
-    console.log("🚀 ~ file: sign-up.service.ts:239 ~ SignUPService ~ getModuleInfoTableDataa ~ parentId:", parentId)
     const { data, error } = await this.supabase
       .from(tableName)
       .select("*")

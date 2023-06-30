@@ -18,20 +18,27 @@ export class NotificationsComponent {
     this.isModalOpen = false
   }
 
-  // isDocDisplayOpen = false;
-  // openDisplayDoc(data: any) {
-  //   this.isDocDisplayOpen = true
-  //   this.Docdata = data;
-  // }
-  // closeDisplayDoc() {
-  //   this.isDocDisplayOpen = false
-  // }
+  isDocDisplayOpen = false;
+  openDisplayDoc(data: any) {
+    this.isDocDisplayOpen = true
+    this.Docdata = data;
+  }
+  closeDisplayDoc() {
+    this.isDocDisplayOpen = false
+  }
 
   isViewerOpen = false
   openViewer(data: any) {
-    console.log("🚀 ~ file: notif", data)
-    this.isViewerOpen = true
-    this.Docdata = data;
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
+
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
   }
   closeViewer() {
     this.isViewerOpen = false
@@ -93,7 +100,7 @@ export class NotificationsComponent {
   //receive data from child
   receiveCardData(subject: any) {
     // this.openDisplayDoc(subject.data)
-    this.openViewer(subject.URL)
+    this.openViewer(subject)
   }
 
   receiveData(subject: any) {

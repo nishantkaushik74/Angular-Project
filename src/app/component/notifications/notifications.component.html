@@ -2,10 +2,15 @@
 
 <div>
   <ng-container *ngIf="isViewerOpen">
-    <app-viewer
-      (closeViewer)="closeViewer()"
+    <app-viewer (closeViewer)="closeViewer()" [Docdata]="Docdata"></app-viewer>
+  </ng-container>
+</div>
+<div>
+  <ng-container *ngIf="isDocDisplayOpen">
+    <app-doc-display
+      (closeDisplayDoc)="closeDisplayDoc()"
       [Docdata]="Docdata"
-    ></app-viewer>
+    ></app-doc-display>
   </ng-container>
 </div>
 <div>
