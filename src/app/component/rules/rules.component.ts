@@ -11,7 +11,9 @@ export class RulesComponent {
   //openAndClose 
   data = {
     Title : "Add Rules",
-    h1 : "Name the rule you want to add ?"
+    h1 : [""],
+    h2:["Name the rule you want to add ?"]
+
   }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }

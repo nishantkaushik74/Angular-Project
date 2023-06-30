@@ -27,14 +27,29 @@ export class CouncilMeetingsComponent {
     this.Docdata = data;
   }
 
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
 
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
 
   //Other variables declared
   data = {
-    h1: "Add council-meetings",
+    Title: "Add council-meetings",
+    h1:"Add date",
     h2: "Name the council-meetings you want to add ?",
-    h3: "Council-meetings details",
-    date: true,
+    DataEnter: "Council-meetings details",
   }
   endPoint: any;
   ModulesTable: any;
@@ -75,16 +90,16 @@ export class CouncilMeetingsComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    this.openDisplayDoc(subject.data)
+    this.openViewer(subject)
   }
 
-  receiveData(subject: any) {
+  async receiveData(subject: any) {
 
     const variantText = subject.variant;
     const variant3Text = subject.variant3;
     subject["addedValue"] = variant3Text + "," + variantText
     try {
-      const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+      const a =await this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()
       this.closeModal()
     }

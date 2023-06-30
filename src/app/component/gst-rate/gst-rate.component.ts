@@ -20,7 +20,7 @@ export class GstRateComponent {
   ModuleInfoTable: any;
   ModulesTable: any;
   GstRateData: any;
-  endPoint:any
+  endPoint: any
   //Constructor
   constructor(
     private _apiService: SignUPService, private router: Router,
@@ -41,7 +41,8 @@ export class GstRateComponent {
     }
   }
   //ngOnIt
-  ngOnInit() { this.getData() 
+  ngOnInit() {
+    this.getData()
     this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
   }
   //Route function Function
@@ -53,7 +54,7 @@ export class GstRateComponent {
     const inputValue = this.ModulesTable[0].id
     console.log("🚀 ~ file: gst-rate.component.ts:49 ~ GstRateComponent ~ receiveData ~ inputValue:", inputValue)
     try {
-      const a =await this._apiService.updateActTable("ModuleInfo", subject, inputValue)
+      const a = await this._apiService.updateActTable("ModuleInfo", subject, inputValue)
     } catch (error) {
       console.log(error)
 

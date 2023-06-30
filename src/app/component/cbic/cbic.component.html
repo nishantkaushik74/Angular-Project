@@ -8,16 +8,21 @@
   </ng-container>
 </div>
 <div>
+  <ng-container *ngIf="isViewerOpen">
+    <app-viewer (closeViewer)="closeViewer()" [Docdata]="Docdata"></app-viewer>
+  </ng-container>
+</div>
+<div>
   <ng-container *ngIf="isModalOpen">
-    <app-modal2
+    <app-modal3
       class="card-container"
       (closeModal)="closeModal()"
       (receiveData)="receiveData($event)"
       [data]="data"
     >
-    </app-modal2>
+    </app-modal3>
   </ng-container>
 </div>
 <br />
-<app-card2 [CardData]="CardData" [heading]="heading" (receiveCardData)="receiveCardData($event)">
-</app-card2>
+<app-card3 [CardData]="CardData" [heading]="heading" (receiveCardData)="receiveCardData($event)">
+</app-card3>

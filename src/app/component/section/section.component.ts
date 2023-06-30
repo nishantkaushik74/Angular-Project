@@ -75,6 +75,8 @@ export class SectionComponent {
     if (this.moduleID == 1) this.cardHeadings = ["Subject:", "Section:"];
     if (this.moduleID == 2) this.cardHeadings = ["Rule:", "Subject:"];
     if (this.moduleID == 5) this.cardHeadings = [""];
+    if (this.moduleID == 9) this.cardHeadings = ["Particular"];
+
 
     this.data = {
       Title: "Add Section",
@@ -110,7 +112,10 @@ export class SectionComponent {
   //receive data from child
   async receiveData(subject: any) {
     debugger
-    subject['variant'] = subject.variant + "," + subject.variant3;
+    if (subject.variant3 != undefined)
+        subject['variant'] = subject.variant + "," + subject.variant3;
+    else 
+        subject['variant'] = subject.variant;
     try {
       const a =await this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
       console.log("🚀 ~ file: section.component.ts:116 ~ SectionComponent ~ receiveData ~ a:", a)

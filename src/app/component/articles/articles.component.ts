@@ -28,20 +28,37 @@ export class ArticlesComponent {
 
 
 
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
+
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
+
+
   //Other variables declared
   data = {
-    h1: "Add articles",
+    Title: "Add articles",
+    h1: "Add Date",
     h2: "Name the articles you want to add ?",
-    h3: "Articles details",
+    DataEnter: "Articles details",
     date: true,
-    title:" Subject"
-
   }
   endPoint: any;
   ModulesTable: any;
   CardData: any;
   Docdata: any;
-  heading={h1:"Date",h2:"Subject"}
+  heading = { h1: "Date", h2: "Subject" }
 
   //Constructor
   constructor(
@@ -77,16 +94,15 @@ export class ArticlesComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    this.openDisplayDoc(subject.data)
+    this.openViewer(subject)
   }
 
-  receiveData(subject: any) {
+  async receiveData(subject: any) {
 
-    const variantText = subject.variant;
-    const variant3Text = subject.variant3;
-    subject["addedValue"] = variant3Text + "," + variantText
+    subject["addedValue"] = subject.variant3 + "," + subject.variant;
+    console.log("🚀 ~ file: articles.component.ts:86 ~ ArticlesComponent ~ receiveData ~ subject:", subject)
     try {
-      const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+      const a = await this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()
       this.closeModal()
     }

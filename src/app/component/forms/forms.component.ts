@@ -27,17 +27,30 @@ export class FormsComponent {
     this.isDocDisplayOpen = true
     this.Docdata = data;
   }
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
 
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
 
 
   //Other variables declared
   data = {
-    h1: "Add Form",
+    Title:"Add Form",
     h2: "Subject of the the form you want to add ?",
-    h3: "Form details",
-    optional:"Name of the form?",
-    date: false,
-    form: true
+    DataEnter: "Form details",
+    h3:"Name of the form?",
   }
   endPoint: any;
   ModulesTable: any;
@@ -72,16 +85,15 @@ export class FormsComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    this.openDisplayDoc(subject.data)
+    this.openViewer(subject)
   }
 
-  receiveData(subject: any) {
+  async receiveData(subject: any) {
+  console.log("🚀 ~ file: forms.component.ts:77 ~ FormsComponent ~ receiveData ~ subject:", subject)
 
-    const variantText = subject.variant;
-    const variant3Text = subject.variant3;
-    subject["addedValue"] = variant3Text + "," + variantText
+    subject["addedValue"] = subject.variant4 + "," + subject.variant3
     try {
-      const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+      const a =await this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()
       this.closeModal()
     }
@@ -89,3 +101,4 @@ export class FormsComponent {
   }
 
 }
+ 

@@ -24,19 +24,37 @@ export class DraftReplyComponent {
   openDisplayDoc(data: any) {
     this.isDocDisplayOpen = true
     this.Docdata = data;
-    
   }
+
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
+
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
+  }
+
+
   //Other variables declared
   data = {
-    h1: "Add Draft",
+    Title: "Add Draft",
     h2: "Name the Draft you want to add ?",
-    h3: "Draft details",
+    DataEnter: "Draft Details",
   }
   endPoint: any;
   ModulesTable: any;
   CardData: any;
-  Docdata:any
-  heading={h2:"Subject"}
+  Docdata: any
+  heading = { h2: "Subject" }
   //Constructor
   constructor(
     private _apiService: SignUPService,
@@ -50,14 +68,12 @@ export class DraftReplyComponent {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
     this.CardData.map((data: any) => {
-      if (data.data == null || data.data == "null" || data.data == undefined) {
-        data["icon"] = false; data["date"] = false
-        return data
-      }
-      else data["icon"] = true; data["date"] = false
-
+      data["h2"] = data.Name;
     })
+    console.log("🚀 ~ file: draft-reply.component.ts:52 ~ DraftReplyComponent ~ getData ~ this.CardData:", this.CardData)
+
   }
+
   //ngOnIt
   ngOnInit() {
     this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
@@ -65,13 +81,14 @@ export class DraftReplyComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    this.openDisplayDoc(subject.data)
+    this.openViewer(subject)
   }
 
-  receiveData(subject: any) {
-    subject["addedValue"] =subject.variant
+  async receiveData(subject: any) {
+    console.log("🚀 ~ file: draft-reply.component.ts:72 ~ DraftReplyComponent ~ receiveData ~ subject:", subject)
+    subject["addedValue"] = subject.variant3
     try {
-      const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+      const a =await this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()
       this.closeModal()
     }

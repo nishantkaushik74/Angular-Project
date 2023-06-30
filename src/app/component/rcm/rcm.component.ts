@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { SignUPService } from 'src/app/Services/sign-up.service';
 
 
@@ -11,7 +11,7 @@ import { SignUPService } from 'src/app/Services/sign-up.service';
 export class RcmComponent {
   //openAndClose 
   data = {
-    Title : "Add RCM",
+    Title: "Add RCM",
     h1: "Name the RCM you want to add ?"
   }
   isModalOpen = false;
@@ -21,15 +21,19 @@ export class RcmComponent {
   ModuleInfoTable: any;
   ModulesTable: any;
   RCMData: any;
+  endPoint: any
+
   //Constructor
   constructor(
-    private _apiService: SignUPService, private router: Router
+    private _apiService: SignUPService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
   //NGonIt Called function
   async getData() {
     try {
       this.ModuleInfoTable = await this._apiService.getTableData("ModuleInfo")
-      this.ModulesTable = await this._apiService.getTableData("Modules")
+      this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
       this.RCMData = this.ModuleInfoTable.filter((acts: any) => (acts.parentid == null && acts.moduleid === 9)).map((act: any, index: number) => {
         act['sno'] = index + 1;
         return act;
@@ -39,17 +43,19 @@ export class RcmComponent {
     }
   }
   //ngOnIt
-  ngOnInit() { this.getData() }
+  ngOnInit() {
+    this.getData()
+    this.endPoint = this.route.snapshot.url.join('/').split("/")[0];
+  }
   //Route function Function
   roteToSubjectSelect(act: any) {
     this.router.navigate(['section/', { id: act.id, name: act.Name, parentID: act.parentid, moduleid: act.moduleid }]);
   }
   //receive data from child
-  receiveData(subject: any) {
-    const inputValue = this.ModulesTable[8]
-    console.log("🚀 ~ file: rcm.component.ts:47 ~ RcmComponent ~ receiveData ~ inputValue:", inputValue)
+  async receiveData(subject: any) {
+    const inputValue = this.ModulesTable[0].id
     try {
-      const a = this._apiService.updateActTable("ModuleInfo", subject, inputValue)
+      const a = await this._apiService.updateActTable("ModuleInfo", subject, inputValue)
     } catch (error) {
       console.log(error)
     }

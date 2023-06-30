@@ -21,7 +21,8 @@ export class Acts1Component {
   ActData: any;
   data = {
     Title: "Add Act",
-    h1: "Name the Act you want to add ?"
+    h1:[ ""],
+    h2:["Name the Act you want to add ?"]
   }
 
   //Constructor
@@ -32,6 +33,8 @@ export class Acts1Component {
   ) { }
   //NGonIt Called function
   async getData() {
+    console.log("working");
+    
     try {
       this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
       this.ModuleInfoTable = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)

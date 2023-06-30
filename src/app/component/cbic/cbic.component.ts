@@ -26,19 +26,38 @@ export class CBICComponent {
     this.isDocDisplayOpen = true
     this.Docdata = data;
     console.log(data);
-    
+
+  }
+
+
+  isViewerOpen = false
+  openViewer(data: any) {
+    if (data.URL) {
+      this.isViewerOpen = true
+      this.Docdata = data.URL;
+
+    }
+    else if (data.data) {
+      this.isDocDisplayOpen = true;
+      this.Docdata = data.data;
+
+    }
+  }
+  closeViewer() {
+    this.isViewerOpen = false
   }
   //Other variables declared
-  data = {
-    h1: "Add CBIC FAQ's",
+  data = {  
+    Title: "Add CBIC FAQ's",
     h2: "Name the CBIC FAQ you want to add ?",
-    h3: "CBIC FAQ's details",
+    DataEnter: "CBIC FAQ's details",
   }
+
   endPoint: any;
   ModulesTable: any;
   CardData: any;
-  Docdata:any
-  heading={h2:"Subject"}
+  Docdata: any
+  heading = { h2: "Subject" }
   //Constructor
   constructor(
     private _apiService: SignUPService,
@@ -52,13 +71,9 @@ export class CBICComponent {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
     this.CardData.map((data: any) => {
-      if (data.data == null || data.data == "null" || data.data == undefined) {
-        data["icon"] = false; data["date"] = false
-        return data
-      }
-      else data["icon"] = true; data["date"] = false
+      data["h2"] = data.Name;
 
-    })  
+    })
   }
   //ngOnIt
   ngOnInit() {
@@ -67,13 +82,14 @@ export class CBICComponent {
   }
   //receive data from child
   receiveCardData(subject: any) {
-    this.openDisplayDoc(subject.data)
+    this.openViewer(subject)
   }
 
-  receiveData(subject: any) {
-    subject["addedValue"] =subject.variant
+  async receiveData(subject: any) {
+    console.log("🚀 ~ file: cbic.component.ts:74 ~ CBICComponent ~ receiveData ~ subject:", subject)
+    subject["addedValue"] =subject.variant3
     try {
-      const a = this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
+      const a =await this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()
       this.closeModal()
     }

@@ -140,8 +140,9 @@ export class SignUPService {
     }
   }
   async updateModuleInfo(tableName: any, subject: any, inputValue: any): Promise<any> {
+    debugger
     let path: any;
-    if (subject.PDF_file !== null) {
+    if (subject.PDF_file && subject.PDF_file !== null ) {
       path = `uploads/${subject.PDF_file.name}`;
       const response = await this.supabase.storage
         .from('Test')
@@ -195,8 +196,9 @@ export class SignUPService {
   }
 
   async updateModuleInfoTable(tableName: any, subject: any, id: any): Promise<any> {
+    debugger
     let path: any;
-    if (subject.PDF_file !== null) {
+    if (subject.PDF_file || subject.PDF_file !== null) {
       path = `uploads/${subject.PDF_file.name}`;
       const response = await this.supabase.storage
         .from('Test')
