@@ -73,18 +73,9 @@ export class ArticlesComponent {
     this.ModulesTable = await this._apiService.getTableDataOnEndPoint("Modules", this.endPoint)
     this.CardData = await this._apiService.getModuleInfoTableData("ModuleInfo", this.ModulesTable[0]?.id, null)
     this.CardData.map((data: any) => {
-      if (data.data == null || data.data == "null" || data.data == undefined) {
-        data["icon"] = false; data["date"] = false;
-        return data
-      }
-      else {
-        data["icon"] = true;
-        data["date"] = true
-        const [date, Name] = data.Name.split(',');
-        data["samay"] = date
-        data["Name"] = Name
-      }
-
+      const [Date,subject] = data.Name.split(',');
+      data["h1"] = Date
+      data["h2"] = subject
     })
   }
   //ngOnIt
@@ -99,8 +90,7 @@ export class ArticlesComponent {
 
   async receiveData(subject: any) {
 
-    subject["addedValue"] = subject.variant3 + "," + subject.variant;
-    console.log("🚀 ~ file: articles.component.ts:86 ~ ArticlesComponent ~ receiveData ~ subject:", subject)
+    subject["addedValue"] = subject.variant + "," + subject.variant3;
     try {
       const a = await this._apiService.updateModuleInfoTable("ModuleInfo", subject, this.ModulesTable[0]?.id)
       this.getData()

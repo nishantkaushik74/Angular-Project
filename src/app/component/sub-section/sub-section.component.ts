@@ -16,7 +16,6 @@ export class SubSectionComponent {
 
   isDocDisplayOpen = false;
   openDisplayDoc(data: any) {
-    console.log("🚀 ~ file: section.component.ts:17 ~ SectionComponent ~ openDisplayDoc ~ data:", data)
     this.isDocDisplayOpen = true
     this.Docdata = data
   }

@@ -12,8 +12,9 @@
     <pdf-viewer
       *ngIf="pdfUrl"
       [src]="url"
-      [render-text]="true"
-      [original-size]="false"
+      [render-text]="false"
+      [render-text-mode]="0"
+      [original-size]="true"
       style="width: 100%; height: 100%"
     ></pdf-viewer>
     <ngx-doc-viewer
