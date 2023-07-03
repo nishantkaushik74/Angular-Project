@@ -74,7 +74,7 @@ export class SectionComponent {
 
     if (this.moduleID == 1) this.cardHeadings = ["Subject:", "Section:"];
     if (this.moduleID == 2) this.cardHeadings = ["Rule:", "Subject:"];
-    if (this.moduleID == 5) this.cardHeadings = [""];
+    if (this.moduleID == 5) this.cardHeadings = ["GST Rate "];
     if (this.moduleID == 9) this.cardHeadings = ["Particular"];
 
 
