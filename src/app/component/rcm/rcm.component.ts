@@ -12,7 +12,9 @@ export class RcmComponent {
   //openAndClose 
   data = {
     Title: "Add RCM",
-    h1: "Name the RCM you want to add ?"
+    h1: "Name the RCM you want to add ?",
+    h2: [" "],
+
   }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }
