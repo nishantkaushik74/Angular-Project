@@ -53,7 +53,8 @@ export class SectionComponent {
   ModuleInfoTable: any;
   Docdata: any
   moduleID: any;
-
+  id: any
+  name: any
   //Constructor
   constructor(
     private route: ActivatedRoute,
@@ -65,22 +66,27 @@ export class SectionComponent {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
+
+      this.id = params.get('id');
       this.moduleID = params.get('moduleid');
+      this.name =  params.get('name');
       const name = params.get('name');
       const parentId = params.get('parentID');
       this.URLdata = { id, name, parentId, moduleid: this.moduleID };
       this.getData()
     })
-
     if (this.moduleID == 1) this.cardHeadings = ["Subject:", "Section:"];
     if (this.moduleID == 2) this.cardHeadings = ["Rule:", "Subject:"];
-    if (this.moduleID == 5) this.cardHeadings = ["GST Rate "];
+    if (this.moduleID == 2 && this.id==236) this.cardHeadings = ["State: "];
+
+    if (this.moduleID == 5) this.cardHeadings = ["GST:"];
+    if (this.moduleID == 5 && this.id == 457) this.cardHeadings = ["Heading:", "Notification no:"];
+
     if (this.moduleID == 9) this.cardHeadings = ["Particular"];
 
 
     this.data = {
-      Title: "Add Section",
-      h1: "Name the Section you want to add?",
+      h1: "ADD Name?",
       h2: this.cardHeadings || null,
       DataEnter: "Section details"
     };
@@ -113,11 +119,11 @@ export class SectionComponent {
   async receiveData(subject: any) {
     debugger
     if (subject.variant3 != undefined)
-        subject['variant'] = subject.variant + "," + subject.variant3;
-    else 
-        subject['variant'] = subject.variant;
+      subject['variant'] = subject.variant + "," + subject.variant3;
+    else
+      subject['variant'] = subject.variant;
     try {
-      const a =await this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
+      const a = await this._apiService.updateModuleInfo("ModuleInfo", subject, this.URLdata)
       console.log("🚀 ~ file: section.component.ts:116 ~ SectionComponent ~ receiveData ~ a:", a)
       this.ngOnInit()
       this.getData()
