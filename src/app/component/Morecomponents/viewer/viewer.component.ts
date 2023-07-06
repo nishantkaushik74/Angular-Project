@@ -20,13 +20,9 @@ export class ViewerComponent {
     this.url = this.Docdata.replace(/ /g, "%20");
     if (this.url.endsWith(".pdf")) {
       this.pdfUrl = this.url;
-      console.log("PDF URL:", this.pdfUrl);
     } else {
       this.otherUrl = this.url;
-      console.log("Other URL:", this.otherUrl);
     }
-
-    console.log("🚀 ~ file: viewer.component.ts:12 ~ ViewerComponent ~ replacedStr:", this.url);
   }
 
   closeBox() {

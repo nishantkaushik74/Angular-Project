@@ -11,7 +11,8 @@ export class GstRateComponent {
   //openAndClose 
   data = {
     Title: "Add GST",
-    h1: "Name the GST rate you want to add ?"
+    h1:[ ""],
+    h2:["Name the GST rate you want to add ?"]
   }
   isModalOpen = false;
   openModal() { this.isModalOpen = true }

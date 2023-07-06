@@ -16,7 +16,6 @@ export class SubSectionComponent {
 
   isDocDisplayOpen = false;
   openDisplayDoc(data: any) {
-    console.log("🚀 ~ file: section.component.ts:17 ~ SectionComponent ~ openDisplayDoc ~ data:", data)
     this.isDocDisplayOpen = true
     this.Docdata = data
   }
@@ -41,7 +40,7 @@ export class SubSectionComponent {
   }
 
   //Other variables declared
-  cardHeadings= ["Subject:","Section:"]
+  cardHeadings = ["Subject:", "Section:"]
 
   URLdata: any;
   ModuleInfoTable: any;
@@ -49,13 +48,15 @@ export class SubSectionComponent {
   data = {
     Title: "Add Sub Section",
     h1: "Name the Sub Section you want to add ?",
-    h2:["Add Section","Add Subject"],
+    h2: this.cardHeadings,
     DataEnter: "Sub Section details",
-    identity:"sub-section"
+    identity: "sub-section"
   }
-
   Docdata: any
 
+  moduleID: any
+  id: any;
+  name: any
 
   //Constructor
   constructor(
@@ -66,12 +67,26 @@ export class SubSectionComponent {
   //ngOnIt
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
+      this.moduleID = params.get('moduleid');
       const moduleid = params.get('moduleid');
+
+      this.id = params.get('id');
       const id = params.get('id');
+
+
+      this.name = params.get('name');
       const name = params.get('name');
       const parentId = params.get('parentID');
       this.URLdata = { id, name, parentId, moduleid };
       this.getData()
+      if (this.moduleID == 5 && this.id == 458) this.cardHeadings = ["Schedule:", "Percentage:"];
+      if (this.moduleID == 5 && this.id == 459 || 461) this.cardHeadings = ["Particular:", "Date:"];
+      if (this.moduleID == 5 && this.id == 460) this.cardHeadings = ["Chapter No:", "Chapter Name:"];
+      if (this.moduleID == 5 && this.id == 462) this.cardHeadings = ["Particular:"];
+      if (this.moduleID == 5 && this.id == 463) this.cardHeadings = ["Heading No:", "Services"];
+      if (this.moduleID == 2) this.cardHeadings = ["Rules:", "Subject:"];
+      this.data.h2=this.cardHeadings
+
     })
   }
 
